@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { ChevronDownIcon, Menu, Palette, PanelLeft, SlidersHorizontal } from 'lucide-vue-next'
+import { ChevronDownIcon, Menu, Monitor, Moon, Palette, PanelLeft, SlidersHorizontal, Sun, List } from 'lucide-vue-next'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Switch } from '@/components/ui/switch'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Menubar, MenubarContent, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar'
+import { Separator } from '@/components/ui/separator'
 import { useEditorStore } from '@/stores/editor'
 import { useExportStore } from '@/stores/export'
 import { useRenderStore } from '@/stores/render'
 import { useThemeStore } from '@/stores/theme'
 import { useUIStore } from '@/stores/ui'
 import { addPrefix, generatePureHTML, processClipboardContent, store } from '@/utils'
+import { widthOptions } from '@welight/shared/configs'
 import FormatDropdown from './FormatDropdown.vue'
 
 const emit = defineEmits([`startCopy`, `endCopy`])
@@ -19,8 +25,8 @@ const exportStore = useExportStore()
 
 const { editor } = storeToRefs(editorStore)
 const { output } = storeToRefs(renderStore)
-const { primaryColor } = storeToRefs(themeStore)
-const { isOpenRightSlider, isOpenPostSlider } = storeToRefs(uiStore)
+const { primaryColor, previewWidth } = storeToRefs(themeStore)
+const { isOpenRightSlider, isOpenPostSlider, isDark, isPinFloatingToc } = storeToRefs(uiStore)
 
 // Editor refresh function
 function editorRefresh() {
@@ -59,6 +65,22 @@ function handleOpenEditorState() {
 // 切换内容管理侧边栏
 function togglePostSlider() {
   isOpenPostSlider.value = !isOpenPostSlider.value
+}
+
+// 预览模式切换
+function previewWidthChanged(newWidth: string) {
+  themeStore.previewWidth = newWidth
+  editorRefresh()
+}
+
+// 深色模式切换
+function toggleDarkMode() {
+  uiStore.toggleDark()
+}
+
+// 浮动目录切换
+function toggleFloatingToc() {
+  uiStore.togglePinFloatingToc()
 }
 
 const copyMode = store.reactive(addPrefix(`copyMode`), `txt`)
@@ -241,6 +263,52 @@ async function copy() {
           <StyleDropdown />
           <HelpDropdown @open-about="handleOpenAbout" @open-fund="handleOpenFund" />
         </Menubar>
+      </div>
+
+      <!-- 桌面端控制项 -->
+      <div class="hidden md:flex items-center space-x-4 ml-4">
+        <!-- 预览模式 -->
+        <div class="flex items-center space-x-2">
+          <Monitor class="h-4 w-4 text-muted-foreground" />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" class="h-8 px-2">
+                {{ widthOptions.find(w => w.value === previewWidth)?.label || '预览' }}
+                <ChevronDownIcon class="ml-1 h-3 w-3" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem
+                v-for="{ label, value } in widthOptions"
+                :key="value"
+                @click="previewWidthChanged(value)"
+                :class="{ 'bg-accent': previewWidth === value }"
+              >
+                {{ label }}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        <!-- 浮动目录 -->
+        <div class="flex items-center space-x-2">
+          <List class="h-4 w-4 text-muted-foreground" />
+          <Switch
+            :checked="isPinFloatingToc"
+            @update:checked="toggleFloatingToc"
+            class="data-[state=checked]:bg-primary"
+          />
+        </div>
+
+        <!-- 深色模式 -->
+        <div class="flex items-center space-x-2">
+          <component :is="isDark ? Moon : Sun" class="h-4 w-4 text-muted-foreground" />
+          <Switch
+            :checked="isDark"
+            @update:checked="toggleDarkMode"
+            class="data-[state=checked]:bg-primary"
+          />
+        </div>
       </div>
     </div>
 
