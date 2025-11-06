@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChevronDownIcon, Menu, Palette, SlidersHorizontal } from 'lucide-vue-next'
+import { ChevronDownIcon, Menu, Palette, PanelLeft, SlidersHorizontal } from 'lucide-vue-next'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useEditorStore } from '@/stores/editor'
 import { useExportStore } from '@/stores/export'
@@ -20,7 +20,7 @@ const exportStore = useExportStore()
 const { editor } = storeToRefs(editorStore)
 const { output } = storeToRefs(renderStore)
 const { primaryColor } = storeToRefs(themeStore)
-const { isOpenRightSlider } = storeToRefs(uiStore)
+const { isOpenRightSlider, isOpenPostSlider } = storeToRefs(uiStore)
 
 // Editor refresh function
 function editorRefresh() {
@@ -54,6 +54,11 @@ function handleOpenFund() {
 
 function handleOpenEditorState() {
   editorStateDialogVisible.value = true
+}
+
+// 切换内容管理侧边栏
+function togglePostSlider() {
+  isOpenPostSlider.value = !isOpenPostSlider.value
 }
 
 const copyMode = store.reactive(addPrefix(`copyMode`), `txt`)
@@ -213,19 +218,46 @@ async function copy() {
   <header
     class="header-container h-15 flex flex-wrap items-center justify-between px-5 relative"
   >
-    <!-- 桌面端左侧菜单 -->
-    <div class="space-x-2 hidden md:flex">
-      <Menubar class="menubar border-0">
-        <FileDropdown @open-editor-state="handleOpenEditorState" />
-        <FormatDropdown />
-        <EditDropdown />
-        <StyleDropdown />
-        <HelpDropdown @open-about="handleOpenAbout" @open-fund="handleOpenFund" />
-      </Menubar>
+    <!-- 左侧区域 -->
+    <div class="flex items-center space-x-2">
+      <!-- 内容管理侧边栏切换按钮 -->
+      <Button
+        variant="ghost"
+        size="icon"
+        class="hidden md:flex"
+        :class="{ 'bg-accent': isOpenPostSlider }"
+        @click="togglePostSlider"
+        title="切换内容管理"
+      >
+        <PanelLeft class="h-4 w-4" />
+      </Button>
+
+      <!-- 桌面端菜单 -->
+      <div class="hidden md:flex">
+        <Menubar class="menubar border-0">
+          <FileDropdown @open-editor-state="handleOpenEditorState" />
+          <FormatDropdown />
+          <EditDropdown />
+          <StyleDropdown />
+          <HelpDropdown @open-about="handleOpenAbout" @open-fund="handleOpenFund" />
+        </Menubar>
+      </div>
     </div>
 
-    <!-- 移动端汉堡菜单按钮 -->
-    <div class="md:hidden">
+    <!-- 移动端按钮组 -->
+    <div class="md:hidden flex items-center space-x-2">
+      <!-- 内容管理侧边栏切换按钮 -->
+      <Button
+        variant="ghost"
+        size="icon"
+        :class="{ 'bg-accent': isOpenPostSlider }"
+        @click="togglePostSlider"
+        title="切换内容管理"
+      >
+        <PanelLeft class="h-4 w-4" />
+      </Button>
+
+      <!-- 汉堡菜单按钮 -->
       <Menubar class="menubar border-0 p-0">
         <MenubarMenu>
           <MenubarTrigger class="p-0">
