@@ -720,13 +720,18 @@ onUnmounted(() => {
 
               <!-- 主题设置按钮 - 预览区右侧边缘 -->
               <Button
-                v-if="!isMobile && !isOpenRightSlider"
+                v-if="!isMobile"
                 variant="outline"
-                class="fixed right-4 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center justify-center px-2 py-4 h-auto min-h-20 bg-background/80 backdrop-blur-sm border shadow-lg hover:bg-accent transition-all duration-200"
+                :class="[
+                  'fixed top-1/2 -translate-y-1/2 z-40 flex flex-col items-center justify-center px-2 py-4 h-auto min-h-20 bg-background/80 backdrop-blur-sm border shadow-lg hover:bg-accent transition-all duration-200',
+                  isOpenRightSlider ? 'right-80' : 'right-4'
+                ]"
                 @click="isOpenRightSlider = !isOpenRightSlider"
               >
                 <Palette class="size-4 mb-1" />
-                <span class="text-xs font-medium whitespace-nowrap" style="writing-mode: vertical-rl; text-orientation: mixed;">主题设置</span>
+                <span class="text-xs font-medium whitespace-nowrap" style="writing-mode: vertical-rl; text-orientation: mixed;">
+                  {{ isOpenRightSlider ? '关闭设置' : '主题设置' }}
+                </span>
               </Button>
             </div>
             <CssEditor />
