@@ -267,45 +267,12 @@ async function copy() {
 
       <!-- 桌面端控制项 -->
       <div class="hidden md:flex items-center space-x-4 ml-4">
-        <!-- 预览模式 -->
-        <div class="flex items-center space-x-2">
-          <Monitor class="h-4 w-4 text-muted-foreground" />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" class="h-8 px-2">
-                {{ widthOptions.find(w => w.value === previewWidth)?.label || '预览' }}
-                <ChevronDownIcon class="ml-1 h-3 w-3" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              <DropdownMenuItem
-                v-for="{ label, value } in widthOptions"
-                :key="value"
-                @click="previewWidthChanged(value)"
-                :class="{ 'bg-accent': previewWidth === value }"
-              >
-                {{ label }}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-
         <!-- 浮动目录 -->
         <div class="flex items-center space-x-2">
           <List class="h-4 w-4 text-muted-foreground" />
           <Switch
             :checked="isPinFloatingToc"
             @update:checked="toggleFloatingToc"
-            class="data-[state=checked]:bg-primary"
-          />
-        </div>
-
-        <!-- 深色模式 -->
-        <div class="flex items-center space-x-2">
-          <component :is="isDark ? Moon : Sun" class="h-4 w-4 text-muted-foreground" />
-          <Switch
-            :checked="isDark"
-            @update:checked="toggleDarkMode"
             class="data-[state=checked]:bg-primary"
           />
         </div>
@@ -347,6 +314,39 @@ async function copy() {
 
     <!-- 右侧操作区 -->
     <div class="space-x-2 flex flex-wrap items-center mr-5">
+      <!-- 预览模式 -->
+      <div class="hidden md:flex items-center space-x-2">
+        <Monitor class="h-4 w-4 text-muted-foreground" />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" class="h-8 px-2">
+              {{ widthOptions.find(w => w.value === previewWidth)?.label || '预览' }}
+              <ChevronDownIcon class="ml-1 h-3 w-3" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem
+              v-for="{ label, value } in widthOptions"
+              :key="value"
+              @click="previewWidthChanged(value)"
+              :class="{ 'bg-accent': previewWidth === value }"
+            >
+              {{ label }}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      <!-- 深色模式 -->
+      <div class="hidden md:flex items-center space-x-2">
+        <component :is="isDark ? Moon : Sun" class="h-4 w-4 text-muted-foreground" />
+        <Switch
+          :checked="isDark"
+          @update:checked="toggleDarkMode"
+          class="data-[state=checked]:bg-primary"
+        />
+      </div>
+
       <!-- 复制按钮组 -->
       <div
         class="bg-background space-x-1 text-background-foreground flex items-center border rounded-md"
