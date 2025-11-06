@@ -648,6 +648,7 @@ onUnmounted(() => {
             :default-size="15"
             :max-size="isOpenPostSlider ? 20 : 0"
             :min-size="isOpenPostSlider ? 10 : 0"
+            class="transition-all duration-300 ease-in-out"
           >
             <PostSlider />
           </ResizablePanel>

@@ -225,7 +225,7 @@ function handleDragEnd() {
       'fixed top-0 left-0 z-55 bg-background border-r shadow-lg': isMobile,
       'animate': isMobile && enableAnimation,
       // 桌面端样式
-      'border-2 border-[#0000] border-dashed bg-gray/20 transition-colors': !isMobile,
+      'border-2 border-[#0000] border-dashed bg-gray/20 transition-all duration-300 ease-in-out': !isMobile,
       'border-gray-700 bg-gray-400/50 dark:border-gray-200 dark:bg-gray-500/50': !isMobile && dragover,
     }"
     :style="{
@@ -238,8 +238,13 @@ function handleDragEnd() {
     @dragend="handleDragEnd"
   >
     <nav
-      class="h-full flex flex-col transition-transform overflow-hidden"
-      :class="{ 'p-2': isMobile }"
+      class="h-full flex flex-col overflow-hidden"
+      :class="{
+        'p-2': isMobile,
+        'transition-all duration-300 ease-in-out': !isMobile,
+        'opacity-100 translate-x-0': !isMobile && isOpenPostSlider,
+        'opacity-0 -translate-x-4': !isMobile && !isOpenPostSlider,
+      }"
       @dragover="handleDragOver"
       @drop.prevent="handleDrop(null)"
     >
