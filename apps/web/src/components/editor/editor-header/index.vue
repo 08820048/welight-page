@@ -13,6 +13,7 @@ import { useUIStore } from '@/stores/ui'
 import { addPrefix, generatePureHTML, processClipboardContent, store } from '@/utils'
 import { widthOptions } from '@welight/shared/configs'
 import FormatDropdown from './FormatDropdown.vue'
+import SettingsDropdown from './SettingsDropdown.vue'
 
 const emit = defineEmits([`startCopy`, `endCopy`])
 
@@ -56,6 +57,8 @@ function handleOpenAbout() {
 function handleOpenFund() {
   fundDialogVisible.value = true
 }
+
+
 
 function handleOpenEditorState() {
   editorStateDialogVisible.value = true
@@ -265,6 +268,7 @@ async function copy() {
           <FormatDropdown />
           <EditDropdown />
           <StyleDropdown />
+          <SettingsDropdown />
           <HelpDropdown @open-about="handleOpenAbout" @open-fund="handleOpenFund" />
         </Menubar>
       </div>
@@ -299,6 +303,7 @@ async function copy() {
             <FormatDropdown :as-sub="true" />
             <EditDropdown :as-sub="true" />
             <StyleDropdown :as-sub="true" />
+            <SettingsDropdown :as-sub="true" />
             <HelpDropdown :as-sub="true" @open-about="handleOpenAbout" @open-fund="handleOpenFund" />
           </MenubarContent>
         </MenubarMenu>

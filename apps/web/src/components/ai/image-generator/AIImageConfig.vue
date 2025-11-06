@@ -16,6 +16,12 @@ import useAIImageConfigStore from '@/stores/aiImageConfig'
 
 /* -------------------------- 基础数据 -------------------------- */
 
+const props = withDefaults(defineProps<{
+  hideTitle?: boolean
+}>(), {
+  hideTitle: false,
+})
+
 const emit = defineEmits([`saved`])
 
 const AIImageConfigStore = useAIImageConfigStore()
@@ -144,7 +150,7 @@ const styleOptions = [
 
 <template>
   <div class="space-y-4 max-w-full">
-    <div class="text-lg font-semibold border-b pb-2">
+    <div v-if="!hideTitle" class="text-lg font-semibold border-b pb-2">
       AI 图像生成配置
     </div>
 

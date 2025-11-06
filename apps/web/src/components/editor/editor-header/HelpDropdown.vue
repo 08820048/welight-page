@@ -16,6 +16,14 @@ function openAboutDialog() {
 function openFundDialog() {
   emit(`openFund`)
 }
+
+function openWebsite() {
+  window.open('https://waer.ltd/', '_blank')
+}
+
+function openDesktopDownload() {
+  window.open('https://waer.ltd/download', '_blank')
+}
 </script>
 
 <template>
@@ -31,6 +39,12 @@ function openFundDialog() {
       <MenubarCheckboxItem @click="openFundDialog()">
         赞赏
       </MenubarCheckboxItem>
+      <MenubarCheckboxItem @click="openWebsite()">
+        官网
+      </MenubarCheckboxItem>
+      <MenubarCheckboxItem @click="openDesktopDownload()">
+        桌面版下载
+      </MenubarCheckboxItem>
     </MenubarSubContent>
   </MenubarSub>
 
@@ -43,6 +57,12 @@ function openFundDialog() {
       </MenubarCheckboxItem>
       <MenubarCheckboxItem @click="openFundDialog()">
         <span>赞赏</span>
+      </MenubarCheckboxItem>
+      <MenubarCheckboxItem @click="openWebsite()">
+        <span>官网</span>
+      </MenubarCheckboxItem>
+      <MenubarCheckboxItem @click="openDesktopDownload()">
+        <span>桌面版下载</span>
       </MenubarCheckboxItem>
     </MenubarContent>
   </MenubarMenu>

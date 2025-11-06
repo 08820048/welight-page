@@ -7,6 +7,12 @@ import useAIConfigStore from '@/stores/aiConfig'
 
 /* -------------------------- 基础数据 -------------------------- */
 
+const props = withDefaults(defineProps<{
+  hideTitle?: boolean
+}>(), {
+  hideTitle: false,
+})
+
 const emit = defineEmits([`saved`])
 
 const AIConfigStore = useAIConfigStore()
@@ -106,8 +112,8 @@ async function testConnection() {
 </script>
 
 <template>
-  <div class="custom-scroll space-y-4 max-h-[calc(100dvh-10rem)] overflow-y-auto pr-1 text-xs sm:max-h-none sm:text-sm">
-    <div class="font-medium">
+  <div class="space-y-4 text-sm" :class="hideTitle ? '' : 'custom-scroll max-h-[calc(100dvh-10rem)] overflow-y-auto pr-1 text-xs sm:max-h-none sm:text-sm'">
+    <div v-if="!hideTitle" class="font-medium">
       AI 配置
     </div>
 
