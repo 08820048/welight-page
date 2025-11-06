@@ -201,6 +201,13 @@ const formatOptions = ref<Format[]>([`rgb`, `hex`, `hsl`, `hsv`])
           <X class="h-4 w-4" />
         </Button>
       </div>
+
+      <!-- 桌面端标题 -->
+      <div v-if="!isMobile" class="mb-4">
+        <h2 class="text-lg font-semibold">
+          主题设置
+        </h2>
+      </div>
       <div class="space-y-2">
         <h2>主题</h2>
         <div class="grid grid-cols-3 justify-items-center gap-2">
