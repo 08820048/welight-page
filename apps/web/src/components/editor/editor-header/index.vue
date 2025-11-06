@@ -216,15 +216,15 @@ async function copy() {
 
 <template>
   <header
-    class="header-container h-15 flex flex-wrap items-center justify-between px-5 relative"
+    class="header-container h-15 flex flex-wrap items-center justify-between relative"
   >
     <!-- 左侧区域 -->
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center">
       <!-- 内容管理侧边栏切换按钮 -->
       <Button
         variant="ghost"
         size="icon"
-        class="hidden md:flex"
+        class="hidden md:flex ml-2 mr-1"
         :class="{ 'bg-accent': isOpenPostSlider }"
         @click="togglePostSlider"
         title="切换内容管理"
@@ -233,7 +233,7 @@ async function copy() {
       </Button>
 
       <!-- 桌面端菜单 -->
-      <div class="hidden md:flex">
+      <div class="hidden md:flex ml-1">
         <Menubar class="menubar border-0">
           <FileDropdown @open-editor-state="handleOpenEditorState" />
           <FormatDropdown />
@@ -245,11 +245,12 @@ async function copy() {
     </div>
 
     <!-- 移动端按钮组 -->
-    <div class="md:hidden flex items-center space-x-2">
+    <div class="md:hidden flex items-center ml-2">
       <!-- 内容管理侧边栏切换按钮 -->
       <Button
         variant="ghost"
         size="icon"
+        class="mr-2"
         :class="{ 'bg-accent': isOpenPostSlider }"
         @click="togglePostSlider"
         title="切换内容管理"
@@ -277,7 +278,7 @@ async function copy() {
     </div>
 
     <!-- 右侧操作区 -->
-    <div class="space-x-2 flex flex-wrap items-center">
+    <div class="space-x-2 flex flex-wrap items-center mr-5">
       <!-- 复制按钮组 -->
       <div
         class="bg-background space-x-1 text-background-foreground flex items-center border rounded-md"
