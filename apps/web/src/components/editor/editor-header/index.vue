@@ -193,22 +193,8 @@ async function copy() {
 
       clipboardDiv.innerHTML = output.value
 
-      if (copyMode.value === `html`) {
-        await copyContent(temp)
-      }
-      else if (copyMode.value === `html-without-style`) {
-        await copyContent(await generatePureHTML(editor.value!.state.doc.toString()))
-      }
-      else if (copyMode.value === `html-and-style`) {
-        await copyContent(exportStore.editorContent2HTML())
-      }
-
       // 输出提示
-      toast.success(
-        copyMode.value === `html`
-          ? `已复制 HTML 源码，请进行下一步操作。`
-          : `已复制渲染后的内容到剪贴板，可直接到公众号后台粘贴。`,
-      )
+      toast.success(`已复制渲染后的内容到剪贴板，可直接到公众号后台粘贴。`)
       window.dispatchEvent(
         new CustomEvent(`copyToMp`, {
           detail: {
@@ -274,19 +260,10 @@ async function copy() {
               <ChevronDownIcon class="text-secondary-foreground h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" :align-offset="-5" class="w-[220px]">
+          <DropdownMenuContent align="end" :align-offset="-5" class="w-40">
             <DropdownMenuRadioGroup v-model="copyMode">
               <DropdownMenuRadioItem value="txt">
                 公众号格式
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="html">
-                HTML 格式
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="html-without-style">
-                <span class="whitespace-nowrap">HTML 格式（无样式）</span>
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="html-and-style">
-                <span class="whitespace-nowrap">HTML 格式（兼容样式）</span>
               </DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="md">
                 MD 格式
