@@ -6,7 +6,7 @@ import { EditorView } from '@codemirror/view'
 import { highlightPendingBlocks, hljs } from '@welight/core'
 import { markdownSetup, theme } from '@welight/shared/editor'
 import imageCompression from 'browser-image-compression'
-import { Eye, Pen } from 'lucide-vue-next'
+import { Eye, Pen, Palette } from 'lucide-vue-next'
 import { SidebarAIToolbar } from '@/components/ai'
 import {
   ResizableHandle,
@@ -14,6 +14,7 @@ import {
   ResizablePanelGroup,
 } from '@/components/ui/resizable'
 import { SearchTab } from '@/components/ui/search-tab'
+import { Button } from '@/components/ui/button'
 import { useCssEditorStore } from '@/stores/cssEditor'
 import { useEditorStore } from '@/stores/editor'
 import { usePostStore } from '@/stores/post'
@@ -716,6 +717,17 @@ onUnmounted(() => {
               </div>
 
               <FloatingToc />
+
+              <!-- 主题设置按钮 - 预览区右侧边缘 -->
+              <Button
+                v-if="!isMobile && !isOpenRightSlider"
+                variant="outline"
+                class="fixed right-4 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center justify-center px-2 py-4 h-auto min-h-20 bg-background/80 backdrop-blur-sm border shadow-lg hover:bg-accent transition-all duration-200"
+                @click="isOpenRightSlider = !isOpenRightSlider"
+              >
+                <Palette class="size-4 mb-1" />
+                <span class="text-xs font-medium whitespace-nowrap" style="writing-mode: vertical-rl; text-orientation: mixed;">主题设置</span>
+              </Button>
             </div>
             <CssEditor />
             <RightSlider />

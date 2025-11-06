@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChevronDownIcon, Code, Menu, Monitor, Moon, Palette, PanelLeft, Sun, List } from 'lucide-vue-next'
+import { ChevronDownIcon, Code, Menu, Monitor, Moon, PanelLeft, Sun, List } from 'lucide-vue-next'
 import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -382,14 +382,7 @@ async function copy() {
 
 
 
-      <!-- 样式面板 -->
-      <Button
-        variant="outline"
-        size="icon"
-        @click="isOpenRightSlider = !isOpenRightSlider"
-      >
-        <Palette class="size-4" />
-      </Button>
+
     </div>
   </header>
 
