@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ChevronDownIcon, Menu, Monitor, Moon, Palette, PanelLeft, SlidersHorizontal, Sun, List } from 'lucide-vue-next'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { ChevronDownIcon, Code, Menu, Monitor, Moon, Palette, PanelLeft, Sun, List } from 'lucide-vue-next'
 import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -26,7 +25,7 @@ const exportStore = useExportStore()
 const { editor } = storeToRefs(editorStore)
 const { output } = storeToRefs(renderStore)
 const { primaryColor, previewWidth } = storeToRefs(themeStore)
-const { isOpenRightSlider, isOpenPostSlider, isDark, isPinFloatingToc } = storeToRefs(uiStore)
+const { isOpenRightSlider, isOpenPostSlider, isDark, isPinFloatingToc, isShowCssEditor } = storeToRefs(uiStore)
 
 // Editor refresh function
 function editorRefresh() {
@@ -81,6 +80,11 @@ function toggleDarkMode() {
 // 浮动目录切换
 function toggleFloatingToc() {
   uiStore.togglePinFloatingToc()
+}
+
+// CSS编辑器切换
+function toggleCssEditor() {
+  uiStore.toggleShowCssEditor()
 }
 
 const copyMode = store.reactive(addPrefix(`copyMode`), `txt`)
@@ -265,18 +269,7 @@ async function copy() {
         </Menubar>
       </div>
 
-      <!-- 桌面端控制项 -->
-      <div class="hidden md:flex items-center space-x-4 ml-4">
-        <!-- 浮动目录 -->
-        <div class="flex items-center space-x-2">
-          <List class="h-4 w-4 text-muted-foreground" />
-          <Switch
-            :checked="isPinFloatingToc"
-            @update:checked="toggleFloatingToc"
-            class="data-[state=checked]:bg-primary"
-          />
-        </div>
-      </div>
+
     </div>
 
     <!-- 移动端按钮组 -->
@@ -347,6 +340,16 @@ async function copy() {
         />
       </div>
 
+      <!-- CSS编辑器 -->
+      <div class="hidden md:flex items-center space-x-2">
+        <Code class="h-4 w-4 text-muted-foreground" />
+        <Switch
+          :checked="isShowCssEditor"
+          @update:checked="toggleCssEditor"
+          class="data-[state=checked]:bg-primary"
+        />
+      </div>
+
       <!-- 复制按钮组 -->
       <div
         class="bg-background space-x-1 text-background-foreground flex items-center border rounded-md"
@@ -377,17 +380,7 @@ async function copy() {
       <!-- 文章信息（移动端隐藏） -->
       <PostInfo class="hidden md:inline-flex" />
 
-      <!-- 编辑器设置按钮 -->
-      <Popover>
-        <PopoverTrigger as-child>
-          <Button variant="outline" size="icon" class="mr-1">
-            <SlidersHorizontal class="size-4" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent align="end">
-          <ThemeCustomizer />
-        </PopoverContent>
-      </Popover>
+
 
       <!-- 样式面板 -->
       <Button
