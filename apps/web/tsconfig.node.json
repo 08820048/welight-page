@@ -1,0 +1,4 @@
+{
+  "extends": "@welight/config/tsconfig.node.json",
+  "include": ["vite.config.ts", "plugins/**/*.ts"]
+}
