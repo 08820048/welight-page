@@ -8,6 +8,8 @@ import { markdownSetup, theme } from '@welight/shared/editor'
 import imageCompression from 'browser-image-compression'
 import { Eye, Pen, Palette } from 'lucide-vue-next'
 import { SidebarAIToolbar } from '@/components/ai'
+import SelectionMenu from '@/components/editor/SelectionMenu.vue'
+
 import {
   ResizableHandle,
   ResizablePanel,
@@ -669,6 +671,9 @@ onUnmounted(() => {
                 :is-mobile="isMobile"
                 :show-editor="showEditor"
               />
+
+	              <SelectionMenu v-if="codeMirrorView" :editor-view="codeMirrorView as any" :container="codeMirrorWrapper as any" />
+
 
               <EditorContextMenu>
                 <div

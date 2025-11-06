@@ -23,6 +23,9 @@ const props = defineProps<{
   open: boolean
   selectedText: string
   isMobile: boolean
+  presetAction?: 'optimize' | 'summarize' | 'spellcheck' | 'translate-zh' | 'translate-en' | 'custom'
+  autorun?: boolean
+  autoReplace?: boolean
 }>()
 const emit = defineEmits([`update:open`])
 
@@ -47,12 +50,25 @@ const resultContainer = ref<HTMLElement | null>(null)
 /* -------------------- dialog state sync -------------------- */
 watch(() => props.open, (val) => {
   dialogVisible.value = val
-  if (val && props.selectedText.trim()) {
-    currentText.value = props.selectedText
+  if (val) {
+    // 预设动作（来自划词菜单）
+    selectedAction.value = (props.presetAction ?? 'optimize') as typeof selectedAction.value
+    if (props.selectedText.trim()) {
+      currentText.value = props.selectedText
+    }
     resetState()
+    if (props.autorun) {
+      nextTick(() => runAIAction())
+    }
   }
 })
 watch(dialogVisible, val => emit(`update:open`, val))
+// 当外部预设动作变化时，同步选择
+watch(() => props.presetAction, (val) => {
+  if (val)
+    selectedAction.value = val
+})
+
 
 /* -------------------- AI config -------------------- */
 const AIConfigStore = useAIConfigStore()
@@ -239,6 +255,9 @@ async function runAIAction() {
   }
   finally {
     loading.value = false
+    if (props.autoReplace && hasResult.value && !error.value) {
+      replaceText()
+    }
   }
 }
 
