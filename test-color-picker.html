@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>颜色选择器测试</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+        .css-editor {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+        }
+        .description {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        .color-examples {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        .color-examples h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .color-examples code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>CSS 编辑器颜色选择器测试</h1>
+        <div class="description">
+            <p>这是一个测试页面，用于验证美化后的颜色选择器面板。</p>
+            <p><strong>使用方法：</strong></p>
+            <ul>
+                <li>在下面的CSS编辑器中输入包含颜色值的CSS代码</li>
+                <li>点击左侧出现的颜色方块来打开颜色选择器</li>
+                <li>新的颜色选择器采用上下布局：上方是颜色选择区域，下方是颜色值输入框和按钮</li>
+                <li><strong>按钮说明：</strong>"取消"按钮关闭面板不修改颜色，"确定"按钮应用选择的颜色</li>
+            </ul>
+        </div>
+
+        <div id="css-editor" class="css-editor"></div>
+
+        <div class="color-examples">
+            <h3>测试用的颜色值示例：</h3>
+            <p>你可以复制以下代码到编辑器中测试：</p>
+            <pre><code>.example {
+  background-color: #ff6b6b;
+  color: rgb(255, 255, 255);
+  border: 2px solid hsl(200, 100%, 50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gradient {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+.theme {
+  --primary: #3b82f6;
+  --secondary: #10b981;
+  --accent: #f59e0b;
+}</code></pre>
+        </div>
+    </div>
+
+    <script type="module">
+        import { EditorView } from '@codemirror/view'
+        import { EditorState } from '@codemirror/state'
+        import { cssSetup } from './packages/shared/src/editor/css.js'
+        import { theme } from './packages/shared/src/editor/themes/index.js'
+
+        const initialCSS = `.example {
+  background-color: #ff6b6b;
+  color: rgb(255, 255, 255);
+  border: 2px solid hsl(200, 100%, 50%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gradient {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+.theme {
+  --primary: #3b82f6;
+  --secondary: #10b981;
+  --accent: #f59e0b;
+}`
+
+        const state = EditorState.create({
+            doc: initialCSS,
+            extensions: [
+                cssSetup(),
+                theme('default')
+            ]
+        })
+
+        const view = new EditorView({
+            state,
+            parent: document.getElementById('css-editor')
+        })
+
+        // 添加一些说明文字
+        console.log('颜色选择器已加载，点击左侧的颜色方块来测试新的上下布局！')
+    </script>
+</body>
+</html>

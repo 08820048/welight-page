@@ -1,0 +1,136 @@
+/**
+ * 童趣彩虹主题（rainbow）
+ * 活泼可爱的儿童风格，彩虹色彩搭配，适合教育、亲子、儿童相关内容
+ * 注：尽量遵循现有系统变量；如未提供二级/强调色，使用固定色确保观感
+ */
+
+/* 背景：淡蓝网格 */
+.md-container {
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(to right, rgba(135, 206, 235, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(135, 206, 235, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: 0 0;
+}
+
+/* 调整基础排版氛围 */
+p { line-height: 1.8; color: #333; }
+
+/* ===== 标题 ===== */
+h1 {
+  font-size: calc(var(--md-font-size) * 1.4);
+  font-weight: 800;
+  color: #FF69B4; /* 粉色 */
+  margin: 30px 8px 25px;
+  letter-spacing: 0.5px;
+}
+
+h2 {
+  display: inline-block;
+  font-size: calc(var(--md-font-size) * 1.2);
+  font-weight: 700;
+  color: #fff;
+  margin: 25px 8px 20px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #40E0D0 0%, #48D1CC 100%); /* 青绿色胶囊 */
+  box-shadow: 0 3px 10px rgba(64, 224, 208, 0.3);
+}
+
+h3 {
+  font-size: calc(var(--md-font-size) * 1.1);
+  font-weight: 700;
+  color: #2e8b57; /* 绿色文字 */
+  margin: 20px 8px 15px;
+  padding: 6px 0 6px 14px;
+  border-left: 4px solid #FFD700; /* 金黄色左边框 */
+}
+
+h4 {
+  font-size: calc(var(--md-font-size) * 1.05);
+  font-weight: 700;
+  color: #FF69B4;
+  margin: 18px 8px 12px;
+}
+
+h5 {
+  font-size: var(--md-font-size);
+  font-weight: 700;
+  color: #40E0D0;
+  margin: 16px 8px 10px;
+  padding-bottom: 2px;
+  border-bottom: 2px solid rgba(64,224,208,0.3);
+  display: inline-block;
+}
+
+h6 {
+  font-size: calc(var(--md-font-size) * 0.95);
+  font-weight: 700;
+  color: #9370DB; /* 中紫 */
+  margin: 14px 8px 8px;
+}
+
+/* ===== 引用 ===== */
+blockquote {
+  background: linear-gradient(135deg, #F0F8FF 0%, #E6F3FF 100%);
+  color: #4169E1; /* 皇家蓝 */
+  font-style: italic;
+  margin: 20px 8px;
+  padding: 14px 16px;
+  border-left: 4px solid #87CEEB; /* 天蓝 */
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 2px 8px rgba(135, 206, 235, 0.15);
+}
+blockquote > p { margin: 0; color: #4169E1; font-weight: 500; }
+
+/* ===== 列表（去除背景框效果，与公众号一致） ===== */
+ul, ol {
+  margin: 20px 8px;
+  padding-left: 1.2em;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
+/* 使用原生标记（与公众号一致） */
+ul { list-style: disc; }
+ol { list-style: decimal; }
+
+li { margin: 8px 0; }
+
+/* 隐藏渲染器注入的前缀，统一使用原生 marker */
+.md-list-prefix { display: none; }
+
+/* ===== 链接与强调 ===== */
+a {
+  color: #40E0D0;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(64, 224, 208, 0.3);
+  transition: color .2s ease, border-color .2s ease;
+}
+a:hover { color: #FF69B4; border-bottom-color: rgba(255,105,180,0.5); }
+
+strong { color: #FF69B4; }
+em { color: #4169E1; font-style: italic; }
+
+/* ===== 图片与表格、分割线 ===== */
+img { border-radius: 10px; }
+
+hr {
+  border: 0; height: 2px; margin: 28px 0; border-radius: 1px;
+  background: linear-gradient(90deg,
+    #FFB6C1 0%, #87CEEB 25%, #98FB98 50%, #F0E68C 75%, #DDA0DD 100%);
+}
+
+table {
+  width: 100%; border-collapse: collapse; margin: 20px 8px; background: #fff;
+  border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+th {
+  background: linear-gradient(135deg, #FF69B4 0%, #FFB6C1 100%);
+  color: #fff; padding: 12px; text-align: left; font-weight: 700;
+}
+td { padding: 12px; border-bottom: 1px solid #E0E0E0; color: #333; }
+tr:nth-child(even) { background-color: rgba(255,182,193,0.05); }
+

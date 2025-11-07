@@ -2,6 +2,7 @@ import { css } from '@codemirror/lang-css'
 import { EditorView, keymap } from '@codemirror/view'
 import { formatDoc } from '../utils/fileHelpers'
 import { basicSetup } from './basicSetup'
+import { colorSwatchGutter } from './colorSwatch'
 
 /**
  * CSS 格式化处理函数
@@ -31,6 +32,8 @@ export function cssSetup() {
   return [
     basicSetup,
     css(),
+    // 颜色值可视化 + 点击拾色
+    colorSwatchGutter(),
     // 自动换行，禁用横向滚动
     EditorView.lineWrapping,
     // 格式化快捷键

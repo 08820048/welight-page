@@ -154,11 +154,16 @@ blockquote > p {
 pre.code__pre,
 .hljs.code__pre {
   font-size: 90%;
-  overflow-x: auto;
   border-radius: 8px;
   padding: 0 !important;
   line-height: 1.5;
   margin: 10px 8px;
+}
+
+/* 代码块滚动容器样式 - 支持行号模式的水平滚动 */
+pre.code__pre .code-scroll,
+.hljs.code__pre .code-scroll {
+  overflow-x: auto;
 }
 
 /* ==================== 图片 ==================== */
@@ -171,20 +176,24 @@ img {
 
 /* ==================== 列表 ==================== */
 ol {
+  list-style: decimal;
   padding-left: 1em;
   margin-left: 0;
   color: hsl(var(--foreground));
 }
 
 ul {
-  list-style: circle;
+  list-style: disc;
   padding-left: 1em;
   margin-left: 0;
   color: hsl(var(--foreground));
 }
 
+/* 默认主题隐藏渲染器注入的前缀，避免与原生 marker 重复 */
+.md-list-prefix { display: none; }
+
 li {
-  display: block;
+  display: list-item;
   margin: 0.2em 8px;
   color: hsl(var(--foreground));
 }
@@ -237,7 +246,6 @@ pre.code__pre > code,
 .hljs.code__pre > code {
   display: -webkit-box;
   padding: 0.5em 1em 1em;
-  overflow-x: auto;
   text-indent: 0;
   color: inherit;
   background: none;

@@ -71,7 +71,7 @@ const isOpenAddDialog = ref(false)
 
 const addInputVal = ref(``)
 // 新建方案时选择的基础主题
-const baseThemeForNew = ref<'blank' | 'default' | 'grace' | 'simple'>('blank')
+const baseThemeForNew = ref<'blank' | 'default' | 'grace' | 'simple' | 'rainbow' | 'popart'>('blank')
 
 async function addTab() {
   if (!(addInputVal.value).trim()) {
@@ -150,7 +150,7 @@ function addHandler() {
 
 // 查看内置主题功能
 const isOpenViewThemeDialog = ref(false)
-const selectedViewTheme = ref<'default' | 'grace' | 'simple'>('default')
+const selectedViewTheme = ref<'default' | 'grace' | 'simple' | 'rainbow' | 'popart'>('default')
 
 // 打开查看内置主题对话框
 function openViewThemeDialog() {
@@ -349,6 +349,13 @@ function exportCurrentTheme() {
                   <SelectItem value="simple">
                     基于简洁主题
                   </SelectItem>
+                  <SelectItem value="rainbow">
+                    基于童趣彩虹主题
+                  </SelectItem>
+                  <SelectItem value="popart">
+                    基于波普艺术主题
+                  </SelectItem>
+
                 </SelectContent>
               </Select>
               <p class="text-xs text-muted-foreground">
@@ -460,6 +467,14 @@ function exportCurrentTheme() {
               <SelectItem value="simple">
                 {{ themeOptionsMap.simple.label }}
               </SelectItem>
+              <SelectItem value="rainbow">
+                {{ themeOptionsMap.rainbow.label }}
+              </SelectItem>
+              <SelectItem value="popart">
+                {{ themeOptionsMap.popart.label }}
+              </SelectItem>
+
+
             </SelectContent>
           </Select>
         </div>

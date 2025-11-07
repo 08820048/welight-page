@@ -272,9 +272,7 @@ export function initRenderer(opts: IOpts = {}): RendererAPI {
       // 准备下一个
       listCounters[listCounters.length - 1] = idx + 1
 
-      const prefix = ordered
-        ? `${idx}. `
-        : `• `
+      const prefix = ordered ? `${idx}` : `✓`
 
       // 渲染内容：优先 inline，fallback 去掉 <p> 包裹
       let content: string
@@ -287,9 +285,10 @@ export function initRenderer(opts: IOpts = {}): RendererAPI {
           .replace(/^<p(?:\s[^>]*)?>([\s\S]*?)<\/p>/, `$1`)
       }
 
+      // 输出带可控前缀元素，便于主题按需美化或隐藏
       return styledContent(
         `listitem`,
-        `${prefix}${content}`,
+        `<span class=\"md-list-prefix\">${prefix}</span>${content}`,
         `li`,
       )
     },

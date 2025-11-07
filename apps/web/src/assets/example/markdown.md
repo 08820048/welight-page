@@ -84,8 +84,36 @@ Markdown 中的段落就是一行接一行的文本。要创建新段落，只�
 - **行内代码**：用反引号包裹，如 `code`。
 - **代码块**：用三个反引号包裹，并指定语言，如：
 
-```js
-console.log(`Hello, Doocs!`)
+```rust
+fn quick_sort<T: Ord>(arr: &mut [T]) {
+    let len = arr.len();
+    if len <= 1 {
+        return;
+    }
+
+    // 选取最后一个元素作为基准值（pivot）
+    let pivot_index = partition(arr);
+
+    // 对左右两部分递归排序
+    quick_sort(&mut arr[0..pivot_index]);
+    quick_sort(&mut arr[pivot_index + 1..]);
+}
+
+fn partition<T: Ord>(arr: &mut [T]) -> usize {
+    let len = arr.len();
+    let pivot_index = len - 1;
+    let mut i = 0;
+
+    for j in 0..pivot_index {
+        if arr[j] <= arr[pivot_index] {
+            arr.swap(i, j);
+            i += 1;
+        }
+    }
+
+    arr.swap(i, pivot_index);
+    i
+};
 ```
 
 语法高亮让你的代码更易读。

@@ -20,6 +20,16 @@ export const themeOptionsMap = {
     value: `simple`,
     desc: `@okooo5km`,
   },
+  rainbow: {
+    label: `童趣彩虹`,
+    value: `rainbow`,
+    desc: `0703团队`,
+  },
+  popart: {
+    label: `波普艺术`,
+    value: `popart`,
+    desc: `0703团队`,
+  },
 }
 
 export const themeOptions: IConfigOption<ThemeName>[] = [
@@ -38,4 +48,15 @@ export const themeOptions: IConfigOption<ThemeName>[] = [
     value: `simple`,
     desc: `@okooo5km`,
   },
+  {
+    label: `童趣彩虹`,
+    value: `rainbow`,
+    desc: `0703团队`,
+  },
+  {
+    label: `波普艺术`,
+    value: `popart`,
+    desc: `0703团队`,
+  },
+
 ]

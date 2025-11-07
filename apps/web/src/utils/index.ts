@@ -253,9 +253,6 @@ function mergeCss(html: string): string {
   return juice(html, {
     inlinePseudoElements: true,
     preserveImportant: true,
-    // 禁用 CSS 变量解析，避免 juice 处理时的错误
-    // 新主题系统已通过 postcss 处理 CSS 变量
-    resolveCSSVariables: false,
   })
 }
 
@@ -271,6 +268,99 @@ function modifyHtmlStructure(htmlString: string): string {
   return tempDiv.innerHTML
 }
 
+/**
+ * 将复杂嵌套列表转换为简单缩进文本结构（公众号最佳实践）
+ * - 仅在复制为“公众号格式”时对 #output 临时 DOM 生效
+ * - 顶层使用 •，子级使用 ◦，每级缩进 4 个 NBSP
+ * - 保留行内样式/格式（strong/em/code/a...），移除 .md-list-prefix
+ * - 跳过代码块中的列表
+ */
+function convertComplexListsToSimple(container: HTMLElement) {
+  const nbsp = (lv: number) => '&nbsp;'.repeat(lv * 4)
+  const isRootList = (el: Element) => !el.parentElement?.closest('ul,ol')
+  const roots = Array.from(container.querySelectorAll<HTMLElement>('ul,ol'))
+    .filter(list => !list.closest('pre,code') && isRootList(list))
+
+  const collect = (listEl: HTMLElement, level: number, out: HTMLElement[]) => {
+    const listTag = listEl.tagName.toLowerCase()
+    const isOrdered = listTag === 'ol'
+    let idx = isOrdered ? Number.parseInt(listEl.getAttribute('start') || '1', 10) : 0
+
+    Array.from(listEl.children).forEach((child) => {
+      const tag = child.tagName.toLowerCase()
+
+      if (tag === 'li') {
+        // 子列表（先记录，后处理，保证“先文本，后子列表”）
+        const subLists = Array.from(child.querySelectorAll(':scope > ul, :scope > ol')) as HTMLElement[]
+
+        // 取 li 的“行内内容”：克隆后去掉子列表与自定义前缀
+        const c = child.cloneNode(true) as HTMLElement
+        c.querySelectorAll('ul,ol,.md-list-prefix').forEach(n => n.remove())
+
+        // 展开单个 p 包裹，避免不必要的块级换行
+        let inner = c.innerHTML
+        if (c.childElementCount === 1 && c.firstElementChild && c.firstElementChild.tagName.toLowerCase() === 'p') {
+          inner = (c.firstElementChild as HTMLElement).innerHTML
+        }
+
+        // 生成一行 div
+        const line = document.createElement('div')
+        line.setAttribute('data-wx-line', '')
+        line.setAttribute('style', 'margin:5px 0;')
+        const bullet = isOrdered ? `${idx++}.` : (level === 0 ? '•' : '◦')
+        line.innerHTML = `${nbsp(level)}${bullet} ${inner}`
+        out.push(line)
+
+        // 递归处理子列表（顺序：先文本，后子列表）
+        subLists.forEach(sub => collect(sub, level + 1, out))
+      }
+      else if (tag === 'ul' || tag === 'ol') {
+        // 兼容 modifyHtmlStructure 将子列表移出 li 的情况
+        collect(child as HTMLElement, level + 1, out)
+      }
+    })
+  }
+
+  roots.forEach((list) => {
+    const lines: HTMLElement[] = []
+    collect(list, 0, lines)
+
+    // 用一个容器包裹转好的行，继承原 ul/ol 的视觉（优先使用已内联样式；否则回退到计算样式）
+    const wrapper = document.createElement('div')
+    wrapper.setAttribute('data-wx-list', '')
+    let wrapperStyle = list.getAttribute('style') || ''
+    // 移除背景/边框/圆角等，仅保留 margin/padding，彻底去除“背景框效果”
+    if (wrapperStyle) {
+      wrapperStyle = wrapperStyle
+        .split(';')
+        .map(s => s.trim())
+        .filter(Boolean)
+        .filter((rule) => {
+          const prop = rule.split(':')[0].trim().toLowerCase()
+          return prop.startsWith('margin') || prop.startsWith('padding')
+        })
+        .join(';')
+    }
+    if (!wrapperStyle) {
+      const cs = window.getComputedStyle(list)
+      const get = (p: string) => cs.getPropertyValue(p)
+      const parts: string[] = []
+      ;(['margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left'] as const)
+        .forEach((p) => {
+          const v = get(p)
+          if (v && v !== '0px')
+            parts.push(`${p}:${v}`)
+        })
+      wrapperStyle = parts.join(';')
+    }
+    if (wrapperStyle)
+      wrapper.setAttribute('style', wrapperStyle)
+
+    lines.forEach(l => wrapper.appendChild(l))
+    list.replaceWith(wrapper)
+  })
+}
+
 function createEmptyNode(): HTMLElement {
   const node = document.createElement(`p`)
   node.style.fontSize = `0`
@@ -281,13 +371,61 @@ function createEmptyNode(): HTMLElement {
 }
 
 /**
+ * 公众号样式兼容补丁（仅复制到公众号时注入）
+ * - 避免列表内 strong/em 触发换行
+ * - 降级 .md-list-prefix 的布局以兼容不支持 inline-flex 的编辑器
+ */
+function getWeChatCompatStyles(): string {
+  return `<style>
+  /* 列表/简化结构内的强调元素强制保持内联展示 */
+  ul li strong, ol li strong, ul li b, ol li b,
+  .list .content strong, .list .content b,
+  div[data-wx-line] strong, div[data-wx-line] b { display: inline; font-weight: 700; }
+  ul li em, ol li em, ul li i, ol li i,
+  .list .content em, .list .content i,
+  div[data-wx-line] em, div[data-wx-line] i { display: inline; font-style: italic; }
+
+  /* 避免块级 p 导致换行（简化结构中的 p 也内联化） */
+  ul li > p, ol li > p, .list .content > p,
+  div[data-wx-line] > p { display: inline; margin: 0; padding: 0; }
+
+  /* 前缀圆徽标：在部分编辑器降级 inline-flex 为 inline-block，避免换行 */
+  .md-list-prefix { display: inline-block !important; text-align: center; vertical-align: top; }
+  </style>`
+}
+
+/**
+ * DOM 级纠正：展开列表项内的段落，移除多余换行
+ */
+function normalizeListInlineForWeChat(container: HTMLElement) {
+  // 展开 li > p、.list .content > p
+  const ps = container.querySelectorAll<HTMLElement>('ul li > p, ol li > p, .list .content > p')
+  ps.forEach((p) => {
+    // 仅在 p 内没有块级元素时展开
+    if (!p.querySelector('p,div,ul,ol,pre,table,blockquote')) {
+      const frag = document.createDocumentFragment()
+      while (p.firstChild) frag.appendChild(p.firstChild)
+      p.replaceWith(frag)
+    }
+  })
+
+  // 移除列表项内部多余的 <br>
+  container.querySelectorAll('ul li br, ol li br, .list .content br').forEach((br) => {
+    const parent = br.parentElement
+    if (parent && !parent.closest('pre, code'))
+      br.remove()
+  })
+}
+
+/**
  * 获取需要添加的样式
  * @returns {Promise<string>} 样式字符串
  */
 async function getStylesToAdd(): Promise<string> {
   const themeStyles = getThemeStyles()
   const hljsStyles = await getHljsStyles()
-  return [themeStyles, hljsStyles].filter(Boolean).join(``)
+  const compatStyles = getWeChatCompatStyles()
+  return [themeStyles, hljsStyles, compatStyles].filter(Boolean).join(``)
 }
 
 export async function processClipboardContent(primaryColor: string) {
@@ -301,6 +439,9 @@ export async function processClipboardContent(primaryColor: string) {
 
   // 先合并 CSS 和修改 HTML 结构
   clipboardDiv.innerHTML = modifyHtmlStructure(mergeCss(clipboardDiv.innerHTML))
+
+  // 列表：转换为简单缩进文本结构（公众号最佳实践）
+  convertComplexListsToSimple(clipboardDiv)
 
   // 处理样式和颜色变量
   clipboardDiv.innerHTML = clipboardDiv.innerHTML
@@ -317,6 +458,9 @@ export async function processClipboardContent(primaryColor: string) {
       /<span class="edgeLabel"([^>]*)><p[^>]*>(.*?)<\/p><\/span>/g,
       `<span class="edgeLabel"$1>$2</span>`,
     )
+
+  // 列表内联兼容修复：避免 bold/italic 触发换行
+  normalizeListInlineForWeChat(clipboardDiv)
 
   // 处理图片大小
   solveWeChatImage()
@@ -339,6 +483,7 @@ export async function processClipboardContent(primaryColor: string) {
     section.innerHTML = parent.innerHTML
 
     const grand = parent.parentElement!
+
     // 清空父元素
     grand.innerHTML = ``
     grand.appendChild(section)

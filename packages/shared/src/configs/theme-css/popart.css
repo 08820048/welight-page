@@ -1,0 +1,315 @@
+/**
+ * 波普艺术主题（popart）
+ * 明亮黄色网格背景配彩色标题框，展现波普艺术的视觉冲击力
+ * 黄色网格背景 + 彩色标题框 + 黑色边框 + 高对比度设计
+ */
+
+/* 容器基础样式 */
+.md-container {
+  background: #FFFF00;
+  background-image:
+    linear-gradient(rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 200, 200, 0.3) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #000000;
+  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  line-height: 1.6;
+  padding: 20px;
+  border: 5px solid #000000;
+  box-shadow: 8px 8px 0px #000000;
+}
+
+/* H1标题样式 - 红色背景框 + 居中 + 自适应宽度 */
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #FF1493;
+  margin: 20px auto;
+  padding: 15px 20px;
+  border: 4px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  width: fit-content;
+}
+
+/* H2标题样式 - 青色背景框 + 居中 + 自适应宽度 */
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+  background: #00FFFF;
+  margin: 18px auto;
+  padding: 12px 18px;
+  border: 3px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+  text-align: center;
+  display: block;
+  width: fit-content;
+}
+
+/* H3标题样式 - 紫色背景框 */
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #00bcd4;
+  margin: 16px 0;
+  padding: 10px 16px;
+  border: 3px solid #000000;
+  box-shadow: 3px 3px 0px #000000;
+}
+
+/* H4标题样式 - 绿色背景框 */
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+  background: #9c27b0;
+  margin: 14px 0;
+  padding: 8px 14px;
+  border: 2px solid #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* H5标题样式 - 橙色背景框 */
+h5 {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  background: #4caf50;
+  margin: 12px 0;
+  padding: 6px 12px;
+  border: 2px solid #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* H6标题样式 - 粉色背景框 */
+h6 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+  background: #ff9800;
+  margin: 10px 0;
+  padding: 5px 10px;
+  border: 2px solid #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* 段落样式 */
+p {
+  margin: 15px 0;
+  color: #000000;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* 粗体文本 */
+strong {
+  color: #FF0000;
+  font-weight: bold;
+}
+
+/* 斜体文本 */
+em {
+  color: #9932CC;
+  font-style: italic;
+}
+
+/* 行内代码 - 绿色边框效果 */
+code {
+  background: #000000;
+  color: #00FF00;
+  padding: 3px 8px;
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  border: 2px solid #32CD32;
+  box-shadow: 2px 2px 0px #32CD32;
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* 代码块容器 - 确保滚动条正常显示（不设置背景色和文字颜色，由代码高亮主题控制） */
+pre {
+  position: relative;
+  margin: 20px 0;
+  padding: 15px;
+  overflow-x: auto !important; /* 自适应显示水平滚动条 */
+  overflow-y: hidden !important;
+  white-space: pre !important; /* 保持换行符但不自动换行 */
+  word-wrap: normal !important;
+  word-break: normal !important;
+  text-wrap: nowrap !important; /* 额外的不换行设置 */
+  /* background 和 color 由代码高亮主题控制，不在此设置 */
+  border: 4px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 代码内容样式 */
+pre code {
+  display: inline;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: 400;
+  white-space: inherit;
+  word-wrap: inherit;
+  word-break: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 滚动条美化 */
+pre code::-webkit-scrollbar {
+  height: 8px;
+}
+
+pre code::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+pre code::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+}
+
+pre code::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* 引用样式 - 只保留左侧竖线边框 */
+blockquote {
+  background: transparent;
+  color: #000000;
+  margin: 20px 0;
+  padding: 15px 20px;
+  border-left: 6px solid #ff1744;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  box-shadow: none;
+  font-style: italic;
+}
+
+/* 链接样式 */
+a {
+  color: #FF0000;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #9932CC;
+  background: #FFFF00;
+  padding: 2px 4px;
+}
+
+/* 分隔线样式 */
+hr {
+  border: none;
+  height: 6px;
+  background: #000000;
+  margin: 30px 0;
+  box-shadow: 0 3px 0px #FF1493;
+}
+
+/* 表格样式 */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0;
+  border: 4px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+th {
+  background: #FF1493;
+  color: #FFFFFF;
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+  border: 2px solid #000000;
+}
+
+td {
+  background: #FFFFFF;
+  color: #000000;
+  padding: 10px 12px;
+  border: 1px solid #000000;
+}
+
+tr:nth-child(even) td {
+  background: #FFFF99;
+}
+
+/* 自定义列表样式 */
+.list {
+  margin: 15px 0;
+}
+
+.list-item {
+  display: flex;
+  align-items: flex-start;
+  margin: 8px 0;
+  padding: 0;
+  background: transparent;
+}
+
+.list-item .prefix {
+  background: #FF1493;
+  color: #FFFFFF;
+  min-width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  font-weight: bold;
+  font-size: 12px;
+  border: 2px solid #000000;
+  flex-shrink: 0;
+}
+
+.list-item .content {
+  flex: 1;
+  color: #000000;
+  line-height: 1.6;
+}
+
+/* 图片样式 */
+img {
+  max-width: 100%;
+  height: auto;
+  border: 4px solid #000000;
+  box-shadow: 4px 4px 0px #FF1493;
+  margin: 15px 0;
+}
+
+/* 手机端和预览内容容器样式 */
+.mobile-content,
+.preview-content {
+  background: #FFFF00;
+  background-image:
+    linear-gradient(rgba(200, 200, 200, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 200, 200, 0.3) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #000000;
+  border: 3px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  margin: 10px;
+  padding: 15px;
+}
