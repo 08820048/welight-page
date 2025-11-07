@@ -2,7 +2,6 @@
 import { Download, FileCode, FileCog, FileText, Upload } from 'lucide-vue-next'
 import { useEditorStore } from '@/stores/editor'
 import { useExportStore } from '@/stores/export'
-import { useUIStore } from '@/stores/ui'
 
 const props = withDefaults(defineProps<{
   asSub?: boolean
@@ -16,9 +15,7 @@ const { asSub } = toRefs(props)
 
 const editorStore = useEditorStore()
 const exportStore = useExportStore()
-const uiStore = useUIStore()
 
-const { isDark, isEditOnLeft, isOpenPostSlider } = storeToRefs(uiStore)
 
 const importMarkdownContent = useImportMarkdownContent()
 
@@ -84,18 +81,6 @@ function exportEditorContent2PDF() {
         <FileCog class="mr-2 size-4" />
         导入/导出项目配置
       </MenubarItem>
-      <MenubarSeparator />
-      <MenubarCheckboxItem v-model:checked="isDark">
-        深色模式
-      </MenubarCheckboxItem>
-      <MenubarSeparator />
-      <MenubarCheckboxItem v-model:checked="isEditOnLeft">
-        左侧编辑
-      </MenubarCheckboxItem>
-      <MenubarSeparator />
-      <MenubarCheckboxItem v-model:checked="isOpenPostSlider">
-        内容管理
-      </MenubarCheckboxItem>
     </MenubarSubContent>
   </MenubarSub>
 
@@ -134,18 +119,6 @@ function exportEditorContent2PDF() {
         <FileCog class="mr-2 size-4" />
         导入/导出项目配置
       </MenubarItem>
-      <MenubarSeparator />
-      <MenubarCheckboxItem v-model:checked="isDark">
-        深色模式
-      </MenubarCheckboxItem>
-      <MenubarSeparator />
-      <MenubarCheckboxItem v-model:checked="isEditOnLeft">
-        左侧编辑
-      </MenubarCheckboxItem>
-      <MenubarSeparator />
-      <MenubarCheckboxItem v-model:checked="isOpenPostSlider">
-        内容管理
-      </MenubarCheckboxItem>
     </MenubarContent>
   </MenubarMenu>
 </template>

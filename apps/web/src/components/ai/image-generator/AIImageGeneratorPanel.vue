@@ -793,7 +793,7 @@ function getTimeRemainingClass(index: number): string {
       <!-- ============ 输入框 ============ -->
       <div v-if="!configVisible" class="relative flex-shrink-0 mt-auto">
         <div
-          class="bg-background border-border flex flex-col items-baseline gap-2 border rounded-xl px-3 py-2 pr-12 shadow-inner"
+          class="bg-background border-border flex flex-col items-baseline gap-2 border rounded-xl px-3 py-2 pr-12"
         >
           <Textarea
             v-model="prompt"
