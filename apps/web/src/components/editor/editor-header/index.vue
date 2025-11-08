@@ -412,7 +412,7 @@ async function copy() {
 
       <!-- 样式面板按钮 - 新风格 -->
       <button class="cta ml-2" @click="toggleRightSlider" title="切换样式面板">
-        <span class="span">主题</span>
+        <span class="span">主题设置</span>
         <span class="second">
           <svg
             width="50px"
