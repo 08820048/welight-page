@@ -10,10 +10,12 @@ import { useExportStore } from '@/stores/export'
 import { useRenderStore } from '@/stores/render'
 import { useThemeStore } from '@/stores/theme'
 import { useUIStore } from '@/stores/ui'
+import { useAuthStore } from '@/stores/auth'
 import { addPrefix, generatePureHTML, processClipboardContent, store } from '@/utils'
 import { widthOptions } from '@welight/shared/configs'
 import FormatDropdown from './FormatDropdown.vue'
 import SettingsDropdown from './SettingsDropdown.vue'
+import UserDropdown from '@/components/auth/UserDropdown.vue'
 
 const emit = defineEmits([`startCopy`, `endCopy`])
 
@@ -22,6 +24,7 @@ const themeStore = useThemeStore()
 const renderStore = useRenderStore()
 const uiStore = useUIStore()
 const exportStore = useExportStore()
+const authStore = useAuthStore()
 
 const { editor } = storeToRefs(editorStore)
 const { output } = storeToRefs(renderStore)
@@ -246,6 +249,8 @@ async function copy() {
     })
   }, 350)
 }
+
+
 </script>
 
 <template>
@@ -319,6 +324,10 @@ async function copy() {
 
     <!-- 右侧操作区 -->
     <div class="space-x-2 flex flex-wrap items-center mr-5">
+      <!-- 用户信息 -->
+      <div class="hidden md:flex items-center space-x-3 mr-4">
+        <UserDropdown />
+      </div>
       <!-- 预览模式 -->
       <div class="hidden md:flex items-center space-x-2">
         <Monitor class="h-4 w-4 text-muted-foreground" />
@@ -730,6 +739,8 @@ kbd {
 .span {
   transform: skewX(15deg);
 }
+
+
 
 .second {
   width: 20px;

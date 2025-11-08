@@ -1,25 +1,56 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import { storeToRefs } from 'pinia'
 import { Toaster } from '@/components/ui/sonner'
 import { useUIStore } from '@/stores/ui'
+import { useAuthStore } from '@/stores/auth'
 import CodemirrorEditor from '@/views/CodemirrorEditor.vue'
+import LoginDialog from '@/components/auth/LoginDialog.vue'
 
 const uiStore = useUIStore()
+const authStore = useAuthStore()
 const { isDark } = storeToRefs(uiStore)
 
 const isUtools = ref(false)
+const showLoginDialog = ref(false)
 
-onMounted(() => {
+onMounted(async () => {
   // 检测是否为 Utools 环境
   isUtools.value = !!(window as any).__MD_UTOOLS__
   if (isUtools.value) {
     document.documentElement.classList.add(`is-utools`)
   }
+
+  // 初始化认证状态
+  await authStore.initAuth()
+
+  // 如果未登录，显示登录对话框
+  if (!authStore.isAuthenticated) {
+    showLoginDialog.value = true
+  }
+})
+
+const handleLoginSuccess = () => {
+  showLoginDialog.value = false
+}
+
+// 监听认证状态变化，如果用户登出则显示登录对话框
+watch(() => authStore.isAuthenticated, (isAuthenticated) => {
+  if (!isAuthenticated) {
+    showLoginDialog.value = true
+  }
 })
 </script>
 
 <template>
-  <CodemirrorEditor />
+  <CodemirrorEditor v-if="authStore.isAuthenticated" />
+
+  <LoginDialog
+    :show-login="showLoginDialog"
+    @login-success="handleLoginSuccess"
+    @close="showLoginDialog = false"
+  />
+
   <Toaster
     rich-colors
     position="top-center"
