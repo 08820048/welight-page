@@ -249,7 +249,7 @@ pre.code__pre > code,
   text-indent: 0;
   color: inherit;
   background: none;
-  white-space: pre;
+  white-space: nowrap;
   margin: 0;
 }
 

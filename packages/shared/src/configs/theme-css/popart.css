@@ -140,7 +140,7 @@ pre {
   padding: 15px;
   overflow-x: auto !important; /* 自适应显示水平滚动条 */
   overflow-y: hidden !important;
-  white-space: pre !important; /* 保持换行符但不自动换行 */
+  white-space: nowrap !important; /* 保持换行符但不自动换行 */
   word-wrap: normal !important;
   word-break: normal !important;
   text-wrap: nowrap !important; /* 额外的不换行设置 */
