@@ -1,0 +1,309 @@
+/**
+ * 数字浪潮主题 - 现代科技感设计
+ * 适用于科技类文章、技术资讯、产品介绍等内容
+ */
+
+/* 基础样式 */
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  line-height: 1.75;
+  color: #1a1a1a;
+}
+
+/* 容器背景 - 科技网格效果 */
+.container {
+  background:
+    linear-gradient(to right, color-mix(in srgb, var(--md-primary-color) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--md-primary-color) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+  background-size:
+    40px 40px,
+    40px 40px,
+    100% 100%;
+  padding: 5px 2px;
+}
+
+/* 一级标题 */
+h1 {
+  font-size: 2.2em;
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 25px 25px 25px 25px;
+  margin: 0 0 40px 0;
+  text-align: left;
+  color: #0a0a0a;
+  letter-spacing: 0.5px;
+  position: relative;
+  background: #ffffff;
+  border: 4px solid var(--md-primary-color);
+  border-radius: 0;
+  box-shadow:
+    8px 8px 0 color-mix(in srgb, var(--md-primary-color) 30%, transparent),
+    16px 16px 0 color-mix(in srgb, var(--md-primary-color) 15%, transparent);
+}
+
+/* 二级标题 */
+h2 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin: 40px 0 20px 0;
+  padding: 15px 0 15px 0;
+  text-align: left;
+  color: #0a0a0a;
+  position: relative;
+  letter-spacing: 0.3px;
+  background:
+    linear-gradient(var(--md-primary-color), var(--md-primary-color)) no-repeat,
+    linear-gradient(
+        color-mix(in srgb, var(--md-primary-color) 30%, transparent),
+        color-mix(in srgb, var(--md-primary-color) 30%, transparent)
+      )
+      no-repeat;
+  background-size:
+    60% 4px,
+    100% 2px;
+  background-position:
+    left bottom,
+    left bottom;
+  padding-bottom: 12px;
+}
+
+/* 三级标题 */
+h3 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin: 40px 0 20px 0;
+  padding: 15px 30px 15px 25px;
+  text-align: left;
+  color: #ffffff;
+  position: relative;
+  letter-spacing: 0.3px;
+  background: linear-gradient(
+    120deg,
+    var(--md-primary-color) 0%,
+    color-mix(in srgb, var(--md-primary-color) 80%, #000) 100%
+  );
+  clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 50%, calc(100% - 30px) 100%, 0 100%);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--md-primary-color) 20%, transparent);
+}
+
+/* 四级标题 */
+h4 {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 30px 0 15px 0;
+  padding: 8px 15px 8px 35px;
+  text-align: left;
+  color: #2a2a2a;
+  position: relative;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--md-primary-color) 12%, transparent) 0%, transparent 80%);
+  border-radius: 6px;
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--md-primary-color) 60%, #999);
+}
+
+/* 五级标题 */
+h5 {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin: 25px 0 12px 0;
+  text-align: left;
+  color: var(--md-primary-color);
+  padding-left: 30px;
+  position: relative;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--md-primary-color) 8%, transparent) 0%, transparent 60%);
+  border-radius: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+/* 六级标题 */
+h6 {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 20px 0 10px 0;
+  text-align: left;
+  color: #4a4a4a;
+  padding-left: 25px;
+  position: relative;
+  background: color-mix(in srgb, var(--md-primary-color) 5%, transparent);
+  border-radius: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* 段落 */
+p {
+  margin: 1.5em 8px;
+  letter-spacing: 0.1em;
+  color: hsl(var(--foreground));
+}
+
+/* 引用 */
+blockquote {
+  margin: 25px 0;
+  padding: 18px 20px 18px 18px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--md-primary-color) 5%, transparent) 0%,
+    color-mix(in srgb, var(--md-primary-color) 2%, transparent) 100%
+  );
+  border-left: 4px solid var(--md-primary-color);
+  border-radius: 0 8px 8px 0;
+  color: #3a3a3a;
+  font-style: normal;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* 引用段落 */
+blockquote p {
+  margin: 6px 0;
+  display: block;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  color: #3a3a3a;
+}
+
+/* 行内代码 */
+code {
+  margin: 0;
+  white-space: nowrap;
+  font-size: 90%;
+  font-family:
+    Menlo,
+    Operator Mono,
+    Consolas,
+    Monaco,
+    monospace;
+  padding: 3px 5px;
+  color: #d14;
+  background: rgba(27, 31, 35, 0.05);
+  border-radius: 4px;
+}
+
+/* 图片 */
+img {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin: 30px auto;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+  max-width: 100%;
+}
+
+/* 有序列表 */
+ol {
+  padding-left: 32px;
+  margin: 20px 0;
+  margin-left: 0;
+  color: hsl(var(--foreground));
+}
+
+/* 无序列表 */
+ul {
+  padding-left: 32px;
+  margin: 20px 0;
+  list-style: none;
+  margin-left: 0;
+  color: hsl(var(--foreground));
+}
+
+/* 列表项 */
+li {
+  margin: 10px 0;
+  line-height: 1.75;
+  color: #1a1a1a;
+  position: relative;
+  padding-left: 8px;
+  display: block;
+}
+
+/* 链接 */
+a {
+  color: var(--md-primary-color);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--md-primary-color) 30%, transparent);
+  transition: border-color 0.2s ease;
+}
+
+/* 加粗 */
+strong {
+  font-weight: 600;
+  color: #0a0a0a;
+  font-size: inherit;
+}
+
+/* 斜体 */
+em {
+  font-style: italic;
+  color: #4a4a4a;
+  font-size: inherit;
+}
+
+/* 表格 */
+table {
+  width: 100%;
+  margin: 30px 0;
+  border-collapse: collapse;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  color: hsl(var(--foreground));
+}
+
+/* 表头 */
+thead {
+  background: linear-gradient(
+    135deg,
+    var(--md-primary-color) 0%,
+    color-mix(in srgb, var(--md-primary-color) 80%, #000) 100%
+  );
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* 表头单元格 */
+th {
+  padding: 16px 14px;
+  text-align: left;
+  font-weight: 600;
+  border: none;
+  font-size: 0.95em;
+  color: #ffffff;
+  word-break: keep-all;
+}
+
+/* 表格单元格 */
+td {
+  padding: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #2a2a2a;
+  word-break: keep-all;
+}
+
+/* 图片说明 */
+figcaption {
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+  text-align: center;
+}
+
+/* 分割线 */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, var(--md-primary-color) 50%, transparent 100%);
+  margin: 40px 0;
+  opacity: 0.3;
+  border-style: solid;
+  border-width: 2px 0 0;
+  border-color: rgba(0, 0, 0, 0.1);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: scale(1, 0.5);
+  transform-origin: 0 0;
+  transform: scale(1, 0.5);
+}

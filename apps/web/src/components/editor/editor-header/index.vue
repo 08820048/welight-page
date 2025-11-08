@@ -315,72 +315,93 @@ async function copy() {
       <!-- 预览模式 -->
       <div class="hidden md:flex items-center space-x-2">
         <Monitor class="h-4 w-4 text-muted-foreground" />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm" class="h-8 px-2">
-              {{ widthOptions.find(w => w.value === previewWidth)?.label || '预览' }}
-              <ChevronDownIcon class="ml-1 h-3 w-3" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              v-for="{ label, value } in widthOptions"
-              :key="value"
-              @click="previewWidthChanged(value)"
-              :class="{ 'bg-accent': previewWidth === value }"
-            >
-              {{ label }}
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <label class="preview-switch">
+          <input
+            :checked="previewWidth === 'w-full'"
+            type="checkbox"
+            @change="() => previewWidthChanged(previewWidth === 'w-full' ? 'w-[375px]' : 'w-full')"
+          >
+          <div class="preview-slider">
+            <span>移动端</span>
+            <span>电脑端</span>
+          </div>
+        </label>
       </div>
 
       <!-- 深色模式 -->
       <div class="hidden md:flex items-center space-x-2">
-        <component :is="isDark ? Moon : Sun" class="h-4 w-4 text-muted-foreground" />
-        <Switch
-          :checked="isDark"
-          @update:checked="toggleDarkMode"
-          class="data-[state=checked]:bg-primary"
-        />
+        <component :is="isDark ? 'span' : 'span'" class="text-xs">
+          ☀️
+        </component>
+        <div class="toggle-wrapper">
+          <input
+            :checked="isDark"
+            type="checkbox"
+            class="toggle-checkbox"
+            @change="toggleDarkMode"
+          >
+          <div class="toggle-container">
+            <div class="toggle-button">
+              <div class="toggle-button-circles-container">
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="text-xs">🌑</span>
       </div>
 
       <!-- CSS编辑器 -->
       <div class="hidden md:flex items-center space-x-2">
         <Code class="h-4 w-4 text-muted-foreground" />
-        <Switch
-          :checked="isShowCssEditor"
-          @update:checked="toggleCssEditor"
-          class="data-[state=checked]:bg-primary"
-        />
+        <div class="toggle-wrapper">
+          <input
+            :checked="isShowCssEditor"
+            type="checkbox"
+            class="toggle-checkbox"
+            @change="toggleCssEditor"
+          >
+          <div class="toggle-container">
+            <div class="toggle-button">
+              <div class="toggle-button-circles-container">
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+                <div class="toggle-button-circle" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- 复制按钮组 -->
-      <div
-        class="bg-background space-x-1 text-background-foreground flex items-center border rounded-md"
-      >
-        <Button variant="ghost" class="shadow-none text-sm px-2 md:px-4" @click="copy">
-          复制
-        </Button>
-        <Separator orientation="vertical" class="h-5" />
-        <DropdownMenu v-model="copyMode">
-          <DropdownMenuTrigger as-child>
-            <Button variant="ghost" class="px-2 shadow-none">
-              <ChevronDownIcon class="text-secondary-foreground h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" :align-offset="-5" class="w-40">
-            <DropdownMenuRadioGroup v-model="copyMode">
-              <DropdownMenuRadioItem value="txt">
-                公众号格式
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="md">
-                MD 格式
-              </DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+      <!-- 复制按钮 -->
+      <button class="copy-btn" @click="copy">
+        <span class="copy-text">复制</span>
+        <span class="copy-svg-icon">
+          <svg fill="white" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
+          </svg>
+        </span>
+      </button>
 
       <!-- 文章信息（移动端隐藏） -->
       <PostInfo class="hidden md:inline-flex" />
@@ -423,5 +444,205 @@ kbd {
       justify-content: flex-start;
     }
   }
+}
+
+/* CSS 编辑器开关样式 */
+.toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 0.5em;
+  padding: 0.125em;
+  background-image: linear-gradient(to bottom, #d5d5d5, #e8e8e8);
+  box-shadow: 0 1px 1px rgb(255 255 255 / 0.6);
+  font-size: 1em;
+}
+
+.toggle-checkbox {
+  appearance: none;
+  position: absolute;
+  z-index: 1;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  font: inherit;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 0.375em;
+  width: 3em;
+  height: 1.5em;
+  background-color: #e8e8e8;
+  box-shadow:
+    inset 0 0 0.0625em 0.125em rgb(255 255 255 / 0.2),
+    inset 0 0.0625em 0.125em rgb(0 0 0 / 0.4);
+  transition: background-color 0.4s linear;
+}
+
+.toggle-checkbox:checked + .toggle-container {
+  background-color: #06c05f;
+}
+
+.toggle-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0.0625em;
+  border-radius: 0.3125em;
+  width: 1.375em;
+  height: 1.375em;
+  background-color: #e8e8e8;
+  box-shadow:
+    inset 0 -0.0625em 0.0625em 0.125em rgb(0 0 0 / 0.1),
+    inset 0 -0.125em 0.0625em rgb(0 0 0 / 0.2),
+    inset 0 0.1875em 0.0625em rgb(255 255 255 / 0.3),
+    0 0.125em 0.125em rgb(0 0 0 / 0.5);
+  transition: left 0.4s;
+}
+
+.toggle-checkbox:checked + .toggle-container > .toggle-button {
+  left: 1.5625em;
+}
+
+.toggle-button-circles-container {
+  display: grid;
+  grid-template-columns: repeat(3, min-content);
+  gap: 0.125em;
+  position: absolute;
+  margin: 0 auto;
+}
+
+.toggle-button-circle {
+  border-radius: 50%;
+  width: 0.125em;
+  height: 0.125em;
+  background-image: radial-gradient(circle at 50% 0, #f5f5f5, #c4c4c4);
+}
+
+/* 预览模式开关样式 */
+.preview-switch {
+  font-size: 10px;
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 2em;
+}
+
+.preview-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  color: #000;
+  font-weight: 600;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: 0.4s;
+}
+
+.preview-slider:before {
+  position: absolute;
+  content: '移动端';
+  height: 90%;
+  width: 48%;
+  left: 2%;
+  border-radius: 20px;
+  background-color: white;
+  color: green;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  box-shadow:
+    0 1px 1px 0 rgba(0, 0, 0, 0.2),
+    0 2px 4px 0 rgba(0, 0, 0, 0.2),
+    0 -1px 0 0 rgba(0, 0, 0, 0.1) inset,
+    0 -1.31em 1.31em -1.31em rgba(0, 0, 0, 0.3) inset,
+    0 0 1px 0 rgba(0, 0, 0, 0.1);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
+  transition: 0.4s;
+}
+
+.preview-slider:after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  right: -7px;
+  bottom: -7px;
+  border-radius: 1.71em;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.1));
+  z-index: -1;
+}
+
+.preview-switch input:checked + .preview-slider {
+  background-color: #06c05f;
+  color: #fff;
+}
+
+.preview-switch input:checked + .preview-slider:before {
+  content: '电脑端';
+  transform: translateX(100%);
+  color: green;
+}
+
+.preview-switch input {
+  display: none;
+}
+
+/* 复制按钮样式 */
+.copy-btn {
+  width: 100px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+}
+
+.copy-text {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgb(2, 153, 153);
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.copy-svg-icon {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: teal;
+  transition: background-color 0.3s;
+}
+
+.copy-btn:hover .copy-text {
+  background-color: rgb(0, 133, 133);
+}
+
+.copy-btn:hover .copy-svg-icon {
+  background-color: rgb(0, 105, 105);
 }
 </style>

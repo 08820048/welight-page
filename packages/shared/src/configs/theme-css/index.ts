@@ -9,6 +9,8 @@ import graceCSS from './grace.css?raw'
 import simpleCSS from './simple.css?raw'
 import rainbowCSS from './rainbow.css?raw'
 import popartCSS from './popart.css?raw'
+import academicCSS from './academic.css?raw'
+import technewsCSS from './technews.css?raw'
 
 /**
  * 基础样式 CSS
@@ -24,6 +26,8 @@ export const themeMap = {
   simple: simpleCSS,
   rainbow: rainbowCSS,
   popart: popartCSS,
+  academic: academicCSS,
+  technews: technewsCSS,
 } as const
 
 export type ThemeName = keyof typeof themeMap

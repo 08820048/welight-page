@@ -30,6 +30,16 @@ export const themeOptionsMap = {
     value: `popart`,
     desc: `0703团队`,
   },
+  academic: {
+    label: `学术报告`,
+    value: `academic`,
+    desc: `@Welight`,
+  },
+  technews: {
+    label: `数字浪潮`,
+    value: `technews`,
+    desc: `@Welight`,
+  },
 }
 
 export const themeOptions: IConfigOption<ThemeName>[] = [
@@ -58,5 +68,14 @@ export const themeOptions: IConfigOption<ThemeName>[] = [
     value: `popart`,
     desc: `0703团队`,
   },
-
+  {
+    label: `学术报告`,
+    value: `academic`,
+    desc: `@Welight`,
+  },
+  {
+    label: `数字浪潮`,
+    value: `technews`,
+    desc: `@Welight`,
+  },
 ]

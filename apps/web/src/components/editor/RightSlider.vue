@@ -13,6 +13,7 @@ import {
 } from '@welight/shared/configs'
 import { X } from 'lucide-vue-next'
 import PickColors from 'vue-pick-colors'
+import { useCssEditorStore } from '@/stores/cssEditor'
 import { useEditorStore } from '@/stores/editor'
 import { useRenderStore } from '@/stores/render'
 import { useThemeStore } from '@/stores/theme'
@@ -38,6 +39,7 @@ const { isMobile, isOpenRightSlider, isDark } = storeToRefs(uiStore)
 
 const editorStore = useEditorStore()
 const renderStore = useRenderStore()
+const cssEditorStore = useCssEditorStore()
 
 // Editor refresh function - triggers re-render with current theme settings
 function editorRefresh() {
