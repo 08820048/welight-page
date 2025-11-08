@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { useUIStore } from '@/stores/ui'
-import { addPrefix } from '@/utils'
+import { addPrefix, store } from '@/utils'
 
 /* -------------------- props / emits -------------------- */
 const props = defineProps<{
@@ -25,7 +25,7 @@ const dialogVisible = ref(props.open)
 const activeCategory = ref(`editor`)
 
 // 默认复制格式
-const copyMode = useStorage(addPrefix(`copyMode`), `txt`)
+const copyMode = store.reactive(addPrefix(`copyMode`), `txt`)
 
 /* -------------------- dialog state sync -------------------- */
 watch(() => props.open, (val) => {
