@@ -12,7 +12,7 @@ body {
 }
 
 /* 容器背景 - 科技网格效果 */
-:root {
+.md-container {
   background:
     linear-gradient(to right, color-mix(in srgb, var(--md-primary-color) 3%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in srgb, var(--md-primary-color) 3%, transparent) 1px, transparent 1px),
