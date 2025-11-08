@@ -2,34 +2,23 @@
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
       <button class="user-trigger">
-        <div class="user-avatar-small">
-          <img v-if="authStore.user?.avatar" :src="authStore.user.avatar" :alt="authStore.user.nickname" />
-          <div v-else class="avatar-placeholder-small">
-            {{ getUserInitials() }}
-          </div>
-        </div>
         <div class="user-details-small">
-          <span class="user-name-small">{{ authStore.user?.nickname || '用户' }}</span>
-          <span class="credits-small" v-if="authStore.credits">
+          <div class="account-level" v-if="authStore.credits?.accountLevel">
+            {{ authStore.credits.accountLevel }}
+          </div>
+          <div class="credits-display" v-if="authStore.credits">
             {{ authStore.credits.remainingCredits }} 积分
-          </span>
+          </div>
         </div>
         <ChevronDownIcon class="h-3 w-3 text-muted-foreground" />
       </button>
     </DropdownMenuTrigger>
-    
-    <DropdownMenuContent align="end" class="w-80">
+
+    <DropdownMenuContent align="end" class="w-80 max-w-[90vw]">
       <!-- 用户基本信息 -->
       <div class="user-header">
-        <div class="user-avatar">
-          <img v-if="authStore.user?.avatar" :src="authStore.user.avatar" :alt="authStore.user.nickname" />
-          <div v-else class="avatar-placeholder">
-            {{ getUserInitials() }}
-          </div>
-        </div>
         <div class="user-info">
-          <h3 class="user-name">{{ authStore.user?.nickname || '用户' }}</h3>
-          <p class="user-email">{{ authStore.user?.email }}</p>
+          <p class="user-email">{{ authStore.credits?.email || authStore.user?.email }}</p>
         </div>
       </div>
 
@@ -43,7 +32,7 @@
             <RefreshCwIcon :class="{ 'animate-spin': isRefreshing }" class="h-3 w-3" />
           </button>
         </div>
-        
+
         <div class="credits-grid">
           <div class="credit-stat">
             <span class="credit-label">剩余</span>
@@ -71,8 +60,8 @@
       <div class="transactions-section" v-if="authStore.credits?.recentTransactions?.length">
         <h4>最近交易</h4>
         <div class="transaction-list">
-          <div 
-            v-for="transaction in authStore.credits.recentTransactions.slice(0, 3)" 
+          <div
+            v-for="transaction in authStore.credits.recentTransactions.slice(0, 3)"
             :key="transaction.id"
             class="transaction-item"
           >
@@ -98,6 +87,20 @@
       </div>
     </DropdownMenuContent>
   </DropdownMenu>
+
+  <!-- 退出登录确认对话框 -->
+  <ConfirmDialog
+    :visible="showLogoutConfirm"
+    title="退出登录"
+    message="确定要退出登录吗？退出后需要重新输入许可证密钥登录。"
+    confirm-text="退出登录"
+    cancel-text="取消"
+    type="warning"
+    :loading="isLoggingOut"
+    @confirm="confirmLogout"
+    @cancel="showLogoutConfirm = false"
+    @close="showLogoutConfirm = false"
+  />
 </template>
 
 <script setup lang="ts">
@@ -105,9 +108,12 @@ import { ref } from 'vue'
 import { ChevronDownIcon, RefreshCwIcon, LogOutIcon } from 'lucide-vue-next'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
 import { useAuthStore } from '@/stores/auth'
+import ConfirmDialog from '@/components/ui/ConfirmDialog.vue'
 
 const authStore = useAuthStore()
 const isRefreshing = ref(false)
+const showLogoutConfirm = ref(false)
+const isLoggingOut = ref(false)
 
 const getUserInitials = (): string => {
   const name = authStore.user?.nickname || authStore.user?.email || 'U'
@@ -143,19 +149,27 @@ const formatTime = (timeStr: string): string => {
   const date = new Date(timeStr)
   const now = new Date()
   const diff = now.getTime() - date.getTime()
-  
+
   if (diff < 60000) return '刚刚'
   if (diff < 3600000) return `${Math.floor(diff / 60000)}分钟前`
   if (diff < 86400000) return `${Math.floor(diff / 3600000)}小时前`
   if (diff < 604800000) return `${Math.floor(diff / 86400000)}天前`
-  
+
   return date.toLocaleDateString()
 }
 
-const handleLogout = async () => {
-  if (confirm('确定要退出登录吗？')) {
+const handleLogout = () => {
+  showLogoutConfirm.value = true
+}
+
+const confirmLogout = async () => {
+  isLoggingOut.value = true
+  try {
     await authStore.logout()
+    showLogoutConfirm.value = false
     // 页面会自动显示登录对话框
+  } finally {
+    isLoggingOut.value = false
   }
 }
 </script>
@@ -164,110 +178,56 @@ const handleLogout = async () => {
 .user-trigger {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 8px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .user-trigger:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.user-avatar-small {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-}
 
-.user-avatar-small img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.avatar-placeholder-small {
-  width: 100%;
-  height: 100%;
-  background: #6366f1;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 11px;
-}
 
 .user-details-small {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   min-width: 0;
+  gap: 1px;
 }
 
-.user-name-small {
-  font-size: 12px;
-  font-weight: 500;
+.account-level {
+  font-size: 13px;
+  font-weight: 600;
   color: #1f2937;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 80px;
+  max-width: 120px;
+  line-height: 1.1;
 }
 
-.credits-small {
-  font-size: 10px;
+.credits-display {
+  font-size: 11px;
   color: #059669;
-  font-weight: 500;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.1;
 }
 
 .user-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
   padding: 16px;
 }
 
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.user-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.avatar-placeholder {
-  width: 100%;
-  height: 100%;
-  background: #6366f1;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 14px;
-}
-
 .user-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.user-name {
-  margin: 0 0 4px 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #1f2937;
+  width: 100%;
 }
 
 .user-email {

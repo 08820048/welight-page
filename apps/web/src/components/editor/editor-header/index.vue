@@ -320,16 +320,19 @@ async function copy() {
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
+
+      <!-- 移动端用户头像 -->
+      <div class="ml-2">
+        <UserDropdown />
+      </div>
     </div>
 
     <!-- 右侧操作区 -->
-    <div class="space-x-2 flex flex-wrap items-center mr-5">
-      <!-- 用户信息 -->
-      <div class="hidden md:flex items-center space-x-3 mr-4">
-        <UserDropdown />
-      </div>
-      <!-- 预览模式 -->
-      <div class="hidden md:flex items-center space-x-2">
+    <div class="flex items-center mr-5">
+      <!-- 功能按钮组 -->
+      <div class="space-x-2 flex flex-wrap items-center mr-4">
+        <!-- 预览模式 -->
+        <div class="hidden md:flex items-center space-x-2">
         <Monitor class="h-4 w-4 text-muted-foreground" />
         <label class="preview-switch">
           <input
@@ -457,12 +460,12 @@ async function copy() {
           </svg>
         </span>
       </button>
+      </div>
 
-
-
-
-
-
+      <!-- 用户信息 - 最右侧 -->
+      <div class="hidden md:flex items-center">
+        <UserDropdown />
+      </div>
     </div>
   </header>
 

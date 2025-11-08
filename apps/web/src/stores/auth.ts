@@ -4,11 +4,11 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { authService } from '@/services/auth'
 import { useStorage } from '@vueuse/core'
-import type { 
-  User, 
-  CreditQueryResponseDTO, 
+import type {
+  User,
+  CreditQueryResponseDTO,
   LicenseLoginRequest,
-  AuthState 
+  AuthState
 } from '@/types/auth'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
   const initAuth = async () => {
     if (token.value && userInfo.value) {
       user.value = userInfo.value
-      
+
       // 验证 token 是否仍然有效
       const isValid = await authService.validateToken(token.value)
       if (!isValid) {
@@ -49,23 +49,41 @@ export const useAuthStore = defineStore('auth', () => {
 
     try {
       const response = await authService.licenseLogin(request)
-      
+
       if (response.code === 200 && response.data) {
         // 保存认证信息
         token.value = response.data.token
         user.value = response.data.user
         userInfo.value = response.data.user
-        
+
         // 获取积分信息
         await fetchCredits()
-        
+
         return { success: true, message: response.message }
       } else {
         error.value = response.message || '登录失败'
         return { success: false, message: response.message || '登录失败' }
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : '网络错误，请稍后重试'
+      let message = '网络错误，请稍后重试'
+
+      if (err instanceof Error) {
+        message = err.message
+
+        // 为常见错误提供更友好的提示
+        if (message.includes('无效的许可证密钥')) {
+          message = '许可证密钥无效，请检查输入是否正确'
+        } else if (message.includes('许可证未激活')) {
+          message = '许可证尚未激活，请联系客服激活'
+        } else if (message.includes('许可证已过期')) {
+          message = '许可证已过期，请续费后重试'
+        } else if (message.includes('邮箱不匹配')) {
+          message = '邮箱与许可证记录不匹配，请检查邮箱地址'
+        } else if (message.includes('网络')) {
+          message = '网络连接失败，请检查网络后重试'
+        }
+      }
+
       error.value = message
       return { success: false, message }
     } finally {
@@ -106,6 +124,11 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
   }
 
+  // 设置错误
+  const setError = (message: string) => {
+    error.value = message
+  }
+
   return {
     // 状态
     user,
@@ -113,16 +136,17 @@ export const useAuthStore = defineStore('auth', () => {
     token,
     isLoading,
     error,
-    
+
     // 计算属性
     isAuthenticated,
     hasCredits,
-    
+
     // 方法
     initAuth,
     loginWithLicense,
     fetchCredits,
     logout,
     clearError,
+    setError,
   }
 })

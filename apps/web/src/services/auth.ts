@@ -1,10 +1,10 @@
 // 认证服务 API
 
-import type { 
-  ApiResponse, 
-  LoginResponseDTO, 
-  LicenseLoginRequest, 
-  CreditQueryResponseDTO 
+import type {
+  ApiResponse,
+  LoginResponseDTO,
+  LicenseLoginRequest,
+  CreditQueryResponseDTO
 } from '@/types/auth'
 
 const API_BASE_URL = 'https://ilikexff.cn/api'
@@ -14,11 +14,11 @@ class AuthService {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
     }
-    
+
     if (token) {
       headers['Authorization'] = `Bearer ${token}`
     }
-    
+
     return headers
   }
 
@@ -32,11 +32,18 @@ class AuthService {
       body: JSON.stringify(request),
     })
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+    // 无论成功还是失败，都解析 JSON 响应
+    const result: ApiResponse<LoginResponseDTO> = await response.json()
+
+    // 如果服务器返回错误码，抛出包含服务器错误信息的错误
+    if (!response.ok || result.code !== 200) {
+      const error = new Error(result.message || `HTTP ${response.status}: ${response.statusText}`)
+      // 将完整的响应信息附加到错误对象上
+      ;(error as any).response = result
+      throw error
     }
 
-    return response.json()
+    return result
   }
 
   /**
@@ -51,7 +58,7 @@ class AuthService {
     } = {}
   ): Promise<ApiResponse<CreditQueryResponseDTO>> {
     const { includeTransactionHistory = false, page = 0, size = 20 } = options
-    
+
     const params = new URLSearchParams({
       includeTransactionHistory: includeTransactionHistory.toString(),
       page: page.toString(),
@@ -63,11 +70,17 @@ class AuthService {
       headers: this.getAuthHeaders(token),
     })
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+    // 无论成功还是失败，都解析 JSON 响应
+    const result: ApiResponse<CreditQueryResponseDTO> = await response.json()
+
+    // 如果服务器返回错误码，抛出包含服务器错误信息的错误
+    if (!response.ok || result.code !== 200) {
+      const error = new Error(result.message || `HTTP ${response.status}: ${response.statusText}`)
+      ;(error as any).response = result
+      throw error
     }
 
-    return response.json()
+    return result
   }
 
   /**

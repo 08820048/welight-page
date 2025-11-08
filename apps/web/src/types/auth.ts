@@ -48,13 +48,23 @@ export interface TransactionHistory {
 
 export interface CreditQueryResponseDTO {
   email: string
+  deviceFingerprint?: string | null
   isTrialUser: boolean
   totalCredits: number
   usedCredits: number
   remainingCredits: number
   isActive: boolean
-  recentTransactions: Transaction[]
-  transactionHistory?: TransactionHistory
+  createdAt: string
+  updatedAt: string
+  accountLevel: string
+  usageRate: number
+  creditStatusDescription: string
+  creditStatusColor: string
+  accountStatusTip: string
+  queryTime: string
+  creditUsageDescription: string
+  recentTransactions: Transaction[] | null
+  transactionHistory?: TransactionHistory | null
 }
 
 export interface AuthState {
