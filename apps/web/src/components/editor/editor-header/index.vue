@@ -90,7 +90,7 @@ function toggleCssEditor() {
   uiStore.toggleShowCssEditor()
 }
 
-const copyMode = store.reactive(addPrefix(`copyMode`), `txt`)
+const copyMode = useStorage(addPrefix(`copyMode`), `txt`)
 
 const { copy: copyContent } = useClipboard({
   legacy: true,

@@ -8,7 +8,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { useUIStore } from '@/stores/ui'
-import { addPrefix, store } from '@/utils'
+import { addPrefix } from '@/utils'
 
 /* -------------------- props / emits -------------------- */
 const props = defineProps<{
@@ -25,7 +25,7 @@ const dialogVisible = ref(props.open)
 const activeCategory = ref(`editor`)
 
 // 默认复制格式
-const copyMode = store.reactive(addPrefix(`copyMode`), `txt`)
+const copyMode = useStorage(addPrefix(`copyMode`), `txt`)
 
 /* -------------------- dialog state sync -------------------- */
 watch(() => props.open, (val) => {
@@ -57,10 +57,6 @@ function selectCategory(categoryId: string) {
 
 function toggleEditPosition() {
   uiStore.toggleEditOnLeft()
-}
-
-function setCopyMode(mode: string) {
-  copyMode.value = mode
 }
 </script>
 
@@ -175,9 +171,9 @@ function setCopyMode(mode: string) {
                         :checked="copyMode === 'txt'"
                         type="checkbox"
                         class="check"
-                        @click="setCopyMode('txt')"
+                        @change="copyMode = 'txt'"
                       >
-                      <label for="copy-txt" class="label" @click="setCopyMode('txt')">
+                      <label for="copy-txt" class="label">
                         <svg width="45" height="45" viewBox="0 0 95 95">
                           <rect x="30" y="20" width="50" height="50" stroke="black" fill="none" />
                           <g transform="translate(0,-952.36222)">
@@ -193,9 +189,9 @@ function setCopyMode(mode: string) {
                         :checked="copyMode === 'md'"
                         type="checkbox"
                         class="check"
-                        @click="setCopyMode('md')"
+                        @change="copyMode = 'md'"
                       >
-                      <label for="copy-md" class="label" @click="setCopyMode('md')">
+                      <label for="copy-md" class="label">
                         <svg width="45" height="45" viewBox="0 0 95 95">
                           <rect x="30" y="20" width="50" height="50" stroke="black" fill="none" />
                           <g transform="translate(0,-952.36222)">
