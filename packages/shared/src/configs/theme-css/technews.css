@@ -307,3 +307,150 @@ hr {
   transform-origin: 0 0;
   transform: scale(1, 0.5);
 }
+
+/* GFM 警告块样式 */
+blockquote[data-type='note'] {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #1976d2 5%, transparent) 0%,
+    color-mix(in srgb, #1976d2 2%, transparent) 100%
+  );
+  border-left-color: #1976d2;
+}
+
+blockquote[data-type='tip'] {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #388e3c 5%, transparent) 0%,
+    color-mix(in srgb, #388e3c 2%, transparent) 100%
+  );
+  border-left-color: #388e3c;
+}
+
+blockquote[data-type='info'] {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #0288d1 5%, transparent) 0%,
+    color-mix(in srgb, #0288d1 2%, transparent) 100%
+  );
+  border-left-color: #0288d1;
+}
+
+blockquote[data-type='important'] {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #7b1fa2 5%, transparent) 0%,
+    color-mix(in srgb, #7b1fa2 2%, transparent) 100%
+  );
+  border-left-color: #7b1fa2;
+}
+
+blockquote[data-type='warning'] {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #f57c00 5%, transparent) 0%,
+    color-mix(in srgb, #f57c00 2%, transparent) 100%
+  );
+  border-left-color: #f57c00;
+}
+
+blockquote[data-type='caution'] {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #d32f2f 5%, transparent) 0%,
+    color-mix(in srgb, #d32f2f 2%, transparent) 100%
+  );
+  border-left-color: #d32f2f;
+}
+
+/* 警告块标题 */
+.blockquote-title {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.blockquote-title[data-type='note'] {
+  color: #1976d2;
+}
+
+.blockquote-title[data-type='tip'] {
+  color: #388e3c;
+}
+
+.blockquote-title[data-type='info'] {
+  color: #0288d1;
+}
+
+.blockquote-title[data-type='important'] {
+  color: #7b1fa2;
+}
+
+.blockquote-title[data-type='warning'] {
+  color: #f57c00;
+}
+
+.blockquote-title[data-type='caution'] {
+  color: #d32f2f;
+}
+
+/* 脚注 */
+.footnotes {
+  margin: 0.5em 8px;
+  font-size: 80%;
+  color: hsl(var(--foreground));
+}
+
+.footnote {
+  font-size: 12px;
+  color: hsl(var(--foreground));
+}
+
+/* 图表 */
+figure {
+  margin: 30px 0;
+  text-align: center;
+  color: hsl(var(--foreground));
+}
+
+/* 数学公式 */
+.katex {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5em 0;
+}
+
+/* 标记高亮 */
+mark {
+  background: linear-gradient(
+    120deg,
+    var(--md-primary-color) 0%,
+    color-mix(in srgb, var(--md-primary-color) 80%, #000) 100%
+  );
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fff;
+  box-shadow: 0 2px 4px color-mix(in srgb, var(--md-primary-color) 20%, transparent);
+}
+
+/* 下划线 */
+u {
+  text-decoration: underline;
+  text-decoration-color: var(--md-primary-color);
+  text-decoration-thickness: 2px;
+}
+
+/* 波浪线 */
+.wavy {
+  text-decoration: underline wavy;
+  text-decoration-color: var(--md-primary-color);
+  text-decoration-thickness: 2px;
+}
