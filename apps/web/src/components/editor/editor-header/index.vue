@@ -435,10 +435,10 @@ async function copy() {
           viewBox="0 0 144.75738 77.18431"
           preserveAspectRatio="none"
         >
-          <g transform="translate(-171.52826,-126.11624)">
+          <g transform="translate(-171.52826,-126.11624) scale(0.6)">
             <g
               fill="none"
-              stroke-width="17"
+              stroke-width="8"
               stroke-linecap="round"
               stroke-miterlimit="10"
             >
