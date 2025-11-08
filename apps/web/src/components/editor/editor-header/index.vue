@@ -813,9 +813,9 @@ kbd {
 .theme-button .button-cosm {
   fill: #33333366;
   transition: 0.3s ease-out;
-  scale: 0.3;
+  scale: 0.2;
   position: absolute;
-  translate: calc(-100% + 12px) 0.5rem;
+  translate: calc(-100% + 8px) 0.2rem;
 }
 
 .theme-button:hover {
@@ -892,13 +892,13 @@ kbd {
 
 .theme-button:hover .button-cosm {
   rotate: -15deg;
-  translate: calc(-100% + 10px) 0.7rem;
+  translate: calc(-100% + 6px) 0.3rem;
 }
 
 .theme-button:active .button-cosm {
   fill: #333333f1;
   rotate: -135deg;
-  translate: calc(-100% + 25px) 0.4rem;
+  translate: calc(-100% + 15px) 0.1rem;
   animation: none;
 }
 
