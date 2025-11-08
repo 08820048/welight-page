@@ -410,45 +410,43 @@ async function copy() {
         </span>
       </button>
 
-      <!-- 样式面板按钮 - 手绘风格 -->
-      <button
-        class="theme-button ml-2"
-        @click="toggleRightSlider"
-        title="切换样式面板"
-      >
-        <svg
-          class="button-cosm"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          fill="#000000"
-          width="128"
-          height="128"
-          viewBox="0 0 256 256"
-          id="Flat"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M243.07324,157.43945c-1.2334-1.47949-23.18847-27.34619-60.46972-41.05859-1.67579-17.97412-8.25293-34.36328-18.93653-46.87158C149.41309,52.8208,128.78027,44,104,44,54.51074,44,22.10059,88.57715,20.74512,90.4751a3.99987,3.99987,0,0,0,6.50781,4.65234C27.5625,94.6958,58.68359,52,104,52c22.36816,0,40.89648,7.85107,53.584,22.70508,8.915,10.437,14.65625,23.9541,16.65528,38.894A133.54185,133.54185,0,0,0,136,108c-25.10742,0-46.09473,6.48486-60.69434,18.75391-12.65234,10.63379-19.91015,25.39355-19.91015,40.49463a43.61545,43.61545,0,0,0,12.69336,31.21923C76.98438,207.3208,89.40234,212,104,212c23.98047,0,44.37305-9.4668,58.97461-27.37744,12.74512-15.6333,20.05566-37.145,20.05566-59.01953,0-.1128-.001-.22559-.001-.33838,33.62988,13.48486,53.62207,36.96631,53.89746,37.2959a4.00015,4.00015,0,0,0,6.14648-5.1211ZM104,204c-27.89746,0-40.60449-19.05078-40.60449-36.75146C63.39551,142.56592,86.11621,116,136,116a124.37834,124.37834,0,0,1,38.97266,6.32617q.05712,1.63038.05761,3.27686C175.03027,177.07129,139.29785,204,104,204Z"
-          ></path>
-        </svg>
-        <svg
-          class="highlight"
-          viewBox="0 0 144.75738 77.18431"
-          preserveAspectRatio="none"
-        >
-          <g transform="translate(-171.52826,-126.11624) scale(0.6)">
+      <!-- 样式面板按钮 - 新风格 -->
+      <button class="cta ml-2" @click="toggleRightSlider" title="切换样式面板">
+        <span class="span">主题</span>
+        <span class="second">
+          <svg
+            width="50px"
+            height="20px"
+            viewBox="0 0 66 43"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
             <g
+              id="arrow"
+              stroke="none"
+              stroke-width="1"
               fill="none"
-              stroke-width="8"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
+              fill-rule="evenodd"
             >
               <path
-                d="M180.02826,169.45123c0,0 12.65228,-25.55115 24.2441,-25.66863c6.39271,-0.06479 -5.89143,46.12943 4.90937,50.63857c10.22345,4.2681 24.14292,-52.38336 37.86455,-59.80493c3.31715,-1.79413 -5.35094,45.88889 -0.78872,58.34589c5.19371,14.18125 33.36934,-58.38221 36.43049,-56.91633c4.67078,2.23667 -0.06338,44.42744 5.22574,47.53647c6.04041,3.55065 19.87185,-20.77286 19.87185,-20.77286"
+                class="one"
+                d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
+                fill="#FFFFFF"
+              ></path>
+              <path
+                class="two"
+                d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
+                fill="#FFFFFF"
+              ></path>
+              <path
+                class="three"
+                d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
+                fill="#FFFFFF"
               ></path>
             </g>
-          </g>
-        </svg>
-        主题设置
+          </svg>
+        </span>
       </button>
 
 
@@ -465,72 +463,7 @@ async function copy() {
   <EditorStateDialog :visible="editorStateDialogVisible" @close="editorStateDialogVisible = false" />
   <AIImageGeneratorPanel v-model:open="uiStore.aiImageDialogVisible" />
 
-  <!-- SVG滤镜定义 -->
-  <svg height="0" width="0">
-    <filter id="handDrawnNoise">
-      <feTurbulence
-        result="noise"
-        numOctaves="8"
-        baseFrequency="0.1"
-        type="fractalNoise"
-      ></feTurbulence>
-      <feDisplacementMap
-        yChannelSelector="G"
-        xChannelSelector="R"
-        scale="3"
-        in2="noise"
-        in="SourceGraphic"
-      ></feDisplacementMap>
-    </filter>
-    <filter id="handDrawnNoise2">
-      <feTurbulence
-        result="noise"
-        numOctaves="8"
-        baseFrequency="0.1"
-        seed="1010"
-        type="fractalNoise"
-      ></feTurbulence>
-      <feDisplacementMap
-        yChannelSelector="G"
-        xChannelSelector="R"
-        scale="3"
-        in2="noise"
-        in="SourceGraphic"
-      ></feDisplacementMap>
-    </filter>
 
-    <filter id="handDrawnNoiset">
-      <feTurbulence
-        result="noise"
-        numOctaves="8"
-        baseFrequency="0.1"
-        type="fractalNoise"
-      ></feTurbulence>
-      <feDisplacementMap
-        yChannelSelector="G"
-        xChannelSelector="R"
-        scale="6"
-        in2="noise"
-        in="SourceGraphic"
-      ></feDisplacementMap>
-    </filter>
-    <filter id="handDrawnNoiset2">
-      <feTurbulence
-        result="noise"
-        numOctaves="8"
-        baseFrequency="0.1"
-        seed="1010"
-        type="fractalNoise"
-      ></feTurbulence>
-      <feDisplacementMap
-        yChannelSelector="G"
-        xChannelSelector="R"
-        scale="6"
-        in2="noise"
-        in="SourceGraphic"
-      ></feDisplacementMap>
-    </filter>
-  </svg>
 </template>
 
 <style lang="less" scoped>
@@ -760,175 +693,86 @@ kbd {
   background-color: rgb(0, 105, 105);
 }
 
-/* 手绘风格主题按钮样式 */
-.theme-button {
-  text-align: center;
-  transition: 0.3s ease-in-out;
+/* 新的 CTA 按钮样式 */
+.cta {
+  display: flex;
+  padding: 6px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  color: white;
+  background: #6225e6;
+  transition: 1s;
+  box-shadow: 3px 3px 0 black;
+  transform: skewX(-15deg);
+  border: none;
   cursor: pointer;
-  background-color: transparent;
-  filter: url(#handDrawnNoise);
-  display: inline-flex;
-  align-items: center;
-  user-select: none;
-  font-family: "Courier New", monospace;
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 0.5em;
-  border-width: 0px;
-  border-radius: 1rem;
-  box-shadow: #33333366 2px 2px 0 1px;
-  animation: idle 1s infinite ease-in-out;
+}
+
+.cta:focus {
+  outline: none;
+}
+
+.cta:hover {
+  transition: 0.5s;
+  box-shadow: 5px 5px 0 #fbc638;
+}
+
+.cta .second {
+  transition: 0.5s;
+  margin-right: 0px;
+}
+
+.cta:hover .second {
+  transition: 0.5s;
+  margin-right: 20px;
+}
+
+.span {
+  transform: skewX(15deg);
+}
+
+.second {
+  width: 20px;
+  margin-left: 15px;
   position: relative;
+  top: 12%;
 }
 
-.theme-button .highlight {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  fill: rgba(255, 225, 0, 0.5);
-  stroke: rgba(255, 225, 0, 0.5);
-  stroke-width: 10;
-  stroke-linecap: round;
-  pointer-events: none;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  transition: stroke-dashoffset 0.5s ease-in-out;
+.one {
+  transition: 0.4s;
+  transform: translateX(-60%);
 }
 
-@keyframes idle {
+.two {
+  transition: 0.5s;
+  transform: translateX(-30%);
+}
+
+.cta:hover .three {
+  animation: color_anim 1s infinite 0.2s;
+}
+
+.cta:hover .one {
+  transform: translateX(0%);
+  animation: color_anim 1s infinite 0.6s;
+}
+
+.cta:hover .two {
+  transform: translateX(0%);
+  animation: color_anim 1s infinite 0.4s;
+}
+
+@keyframes color_anim {
   0% {
-    filter: url(#handDrawnNoise);
+    fill: white;
   }
+
   50% {
-    rotate: 2.5deg;
-    filter: url(#handDrawnNoise2);
+    fill: #fbc638;
   }
+
   100% {
-    filter: url(#handDrawnNoise);
-  }
-}
-
-.theme-button .button-cosm {
-  fill: #33333366;
-  transition: 0.3s ease-out;
-  scale: 0.2;
-  position: absolute;
-  translate: calc(-100% + 8px) 0.2rem;
-}
-
-.theme-button:hover {
-  font-weight: bold;
-  border-width: 0px;
-  border-radius: 1rem;
-  rotate: -2.5deg;
-  animation: hover 2.5s infinite ease-in-out;
-}
-
-.theme-button:hover .highlight {
-  stroke-dashoffset: 0;
-}
-
-.theme-button:active .highlight {
-  stroke-dashoffset: 1000;
-  animation:
-    highlight 5s infinite,
-    col 0.5s forwards;
-  stroke: #bc4e2666;
-}
-
-@keyframes col {
-  0% {
-    stroke: rgba(255, 225, 0, 0.5);
-  }
-  100% {
-    stroke: #1c98eb66;
-  }
-}
-
-@keyframes highlight {
-  0% {
-    stroke-dashoffset: 0;
-  }
-  25% {
-    stroke-dashoffset: 1000;
-  }
-  50% {
-    stroke-dashoffset: 1000;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes hover {
-  0% {
-    rotate: 0deg;
-    filter: url(#handDrawnNoise);
-    translate: 0 0px;
-  }
-  25% {
-    rotate: -1deg;
-    filter: url(#handDrawnNoise2);
-    translate: 0 -2px;
-  }
-  50% {
-    rotate: 0deg;
-    filter: url(#handDrawnNoise);
-    translate: 0 2px;
-  }
-  75% {
-    rotate: -1deg;
-    filter: url(#handDrawnNoise2);
-    translate: 0 -2px;
-  }
-  100% {
-    rotate: 0deg;
-    filter: url(#handDrawnNoise);
-    translate: 0 0px;
-  }
-}
-
-.theme-button:hover .button-cosm {
-  rotate: -15deg;
-  translate: calc(-100% + 6px) 0.3rem;
-}
-
-.theme-button:active .button-cosm {
-  fill: #333333f1;
-  rotate: -135deg;
-  translate: calc(-100% + 15px) 0.1rem;
-  animation: none;
-}
-
-.theme-button:active {
-  font-weight: bold;
-  border-width: 0px;
-  border-radius: 1rem;
-  box-shadow: inset #333333f1 2px 2px 0 1px;
-  rotate: -2.5deg;
-  animation: active 1s infinite ease-in-out;
-}
-
-@keyframes active {
-  0% {
-    filter: url(#handDrawnNoiset);
-    translate: 0 -1px;
-  }
-  25% {
-    rotate: -3deg;
-  }
-  50% {
-    filter: url(#handDrawnNoiset2);
-    translate: 0 1px;
-  }
-  66% {
-    rotate: 1.5deg;
-  }
-  100% {
-    filter: url(#handDrawnNoiset);
-    translate: 0 -1px;
+    fill: white;
   }
 }
 </style>
