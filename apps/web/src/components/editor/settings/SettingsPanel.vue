@@ -58,6 +58,10 @@ function selectCategory(categoryId: string) {
 function toggleEditPosition() {
   uiStore.toggleEditOnLeft()
 }
+
+function setCopyMode(mode: string) {
+  copyMode.value = mode
+}
 </script>
 
 <template>
@@ -171,9 +175,9 @@ function toggleEditPosition() {
                         :checked="copyMode === 'txt'"
                         type="checkbox"
                         class="check"
-                        @change="copyMode = 'txt'"
+                        @click="setCopyMode('txt')"
                       >
-                      <label for="copy-txt" class="label">
+                      <label for="copy-txt" class="label" @click="setCopyMode('txt')">
                         <svg width="45" height="45" viewBox="0 0 95 95">
                           <rect x="30" y="20" width="50" height="50" stroke="black" fill="none" />
                           <g transform="translate(0,-952.36222)">
@@ -189,9 +193,9 @@ function toggleEditPosition() {
                         :checked="copyMode === 'md'"
                         type="checkbox"
                         class="check"
-                        @change="copyMode = 'md'"
+                        @click="setCopyMode('md')"
                       >
-                      <label for="copy-md" class="label">
+                      <label for="copy-md" class="label" @click="setCopyMode('md')">
                         <svg width="45" height="45" viewBox="0 0 95 95">
                           <rect x="30" y="20" width="50" height="50" stroke="black" fill="none" />
                           <g transform="translate(0,-952.36222)">
