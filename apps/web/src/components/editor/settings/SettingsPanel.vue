@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/dialog'
 import AIConfig from '@/components/ai/chat-box/AIConfig.vue'
 import AIImageConfig from '@/components/ai/image-generator/AIImageConfig.vue'
+import { useUIStore } from '@/stores/ui'
 
 /* -------------------- props / emits -------------------- */
 const props = defineProps<{
@@ -17,7 +18,10 @@ const emit = defineEmits(['update:open'])
 
 /* -------------------- reactive state -------------------- */
 const dialogVisible = ref(props.open)
-const activeCategory = ref('ai')
+const activeCategory = ref('editor')
+
+const uiStore = useUIStore()
+const { isEditOnLeft } = storeToRefs(uiStore)
 
 // Panel is a fixed square
 const panelSize = ref(720)
@@ -34,6 +38,11 @@ watch(dialogVisible, (val) => {
 /* -------------------- 设置分类 -------------------- */
 const categories = [
   {
+    id: 'editor',
+    label: '编辑器',
+    description: '编辑器布局和行为设置'
+  },
+  {
     id: 'ai',
     label: 'AI配置',
     description: '配置AI聊天和图像生成服务'
@@ -43,6 +52,10 @@ const categories = [
 /* -------------------- 操作函数 -------------------- */
 function selectCategory(categoryId: string) {
   activeCategory.value = categoryId
+}
+
+function toggleEditOnLeft() {
+  uiStore.toggleEditOnLeft()
 }
 </script>
 
@@ -81,6 +94,51 @@ function selectCategory(categoryId: string) {
         <!-- 右侧设置内容 -->
         <div class="flex-1 overflow-y-auto min-w-0">
           <div class="p-4">
+            <!-- 编辑器设置 -->
+            <div v-if="activeCategory === 'editor'" class="space-y-4">
+              <div>
+                <h3 class="text-base font-semibold mb-2">编辑器设置</h3>
+                <p class="text-xs text-muted-foreground mb-4">
+                  配置编辑器的布局和行为
+                </p>
+              </div>
+
+              <!-- 编辑器位置设置 -->
+              <div class="space-y-4">
+                <div class="border rounded-lg p-4">
+                  <h4 class="text-sm font-medium mb-3 flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                    编辑器位置
+                  </h4>
+                  <p class="text-xs text-muted-foreground mb-3">
+                    选择编辑器在界面中的位置
+                  </p>
+                  <div class="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      :class="{
+                        'border-primary bg-primary/10': isEditOnLeft,
+                      }"
+                      @click="!isEditOnLeft && toggleEditOnLeft()"
+                    >
+                      左侧编辑
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      :class="{
+                        'border-primary bg-primary/10': !isEditOnLeft,
+                      }"
+                      @click="isEditOnLeft && toggleEditOnLeft()"
+                    >
+                      右侧编辑
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- AI配置 -->
             <div v-if="activeCategory === 'ai'" class="space-y-4">
               <div>
