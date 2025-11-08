@@ -448,7 +448,7 @@ async function copy() {
             </g>
           </g>
         </svg>
-        主题
+        主题设置
       </button>
 
 
