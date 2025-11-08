@@ -6,7 +6,7 @@ import { EditorView } from '@codemirror/view'
 import { highlightPendingBlocks, hljs } from '@welight/core'
 import { markdownSetup, theme } from '@welight/shared/editor'
 import imageCompression from 'browser-image-compression'
-import { Eye, Pen, Palette } from 'lucide-vue-next'
+import { Eye, Pen } from 'lucide-vue-next'
 import { SidebarAIToolbar } from '@/components/ai'
 import SelectionMenu from '@/components/editor/SelectionMenu.vue'
 
@@ -730,18 +730,7 @@ onUnmounted(() => {
           </ResizablePanel>
         </ResizablePanelGroup>
 
-        <!-- 主题设置打开按钮 - 浏览器右侧边缘 -->
-        <Button
-          v-if="!isMobile && !isOpenRightSlider"
-          variant="outline"
-          class="absolute right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center justify-center px-2 py-4 h-auto min-h-20 bg-background/80 backdrop-blur-sm border-l border-t border-b border-r-0 rounded-r-none shadow-lg hover:bg-accent transition-all duration-200"
-          @click="isOpenRightSlider = !isOpenRightSlider"
-        >
-          <Palette class="size-4 mb-1" />
-          <span class="text-xs font-medium whitespace-nowrap" style="writing-mode: vertical-rl; text-orientation: mixed;">
-            主题设置
-          </span>
-        </Button>
+
       </div>
 
       <!-- 移动端浮动按钮组 -->

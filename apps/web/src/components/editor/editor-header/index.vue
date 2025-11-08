@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChevronDownIcon, Code, Menu, Monitor, Moon, PanelLeft, PanelLeftClose, PanelLeftOpen, Sun, List } from 'lucide-vue-next'
+import { ChevronDownIcon, Code, Menu, Monitor, Moon, Palette, PanelLeft, PanelLeftClose, PanelLeftOpen, Sun, List } from 'lucide-vue-next'
 import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -67,6 +67,11 @@ function handleOpenEditorState() {
 // 切换内容管理侧边栏
 function togglePostSlider() {
   isOpenPostSlider.value = !isOpenPostSlider.value
+}
+
+// 切换主题设置面板
+function toggleRightSlider() {
+  isOpenRightSlider.value = !isOpenRightSlider.value
 }
 
 // 预览模式切换
@@ -404,6 +409,18 @@ async function copy() {
           </svg>
         </span>
       </button>
+
+      <!-- 样式面板按钮 -->
+      <Button
+        variant="outline"
+        size="icon"
+        class="ml-2"
+        :class="{ 'bg-accent': isOpenRightSlider }"
+        @click="toggleRightSlider"
+        title="切换样式面板"
+      >
+        <Palette class="h-4 w-4" />
+      </Button>
 
       <!-- 文章信息（移动端隐藏） -->
       <PostInfo class="hidden md:inline-flex" />
