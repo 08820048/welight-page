@@ -35,7 +35,7 @@ const {
 } = storeToRefs(themeStore)
 
 const uiStore = useUIStore()
-const { isMobile, isOpenRightSlider, isDark } = storeToRefs(uiStore)
+const { isMobile, isOpenRightSlider, isDark, isEditOnLeft } = storeToRefs(uiStore)
 
 const editorStore = useEditorStore()
 const renderStore = useRenderStore()
@@ -127,6 +127,10 @@ function useJustifyChanged() {
 
 function resetStyleConfirm() {
   uiStore.isOpenConfirmDialog = true
+}
+
+function editOnLeftChanged() {
+  uiStore.toggleEditOnLeft()
 }
 
 // 控制是否启用动画
@@ -393,6 +397,26 @@ const formatOptions = ref<Format[]>([`rgb`, `hex`, `hsl`, `hsv`])
             }" @click="isUseJustify && useJustifyChanged()"
           >
             关闭
+          </Button>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h2>编辑器位置</h2>
+        <div class="grid grid-cols-5 justify-items-center gap-2">
+          <Button
+            class="w-full" variant="outline" :class="{
+              'border-black dark:border-white border-2': isEditOnLeft,
+            }" @click="!isEditOnLeft && editOnLeftChanged()"
+          >
+            左侧
+          </Button>
+          <Button
+            class="w-full" variant="outline" :class="{
+              'border-black dark:border-white border-2': !isEditOnLeft,
+            }" @click="isEditOnLeft && editOnLeftChanged()"
+          >
+            右侧
           </Button>
         </div>
       </div>
