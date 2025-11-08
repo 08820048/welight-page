@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ChevronDownIcon, Code, Menu, Monitor, Moon, PanelLeft, Sun, List } from 'lucide-vue-next'
+import { ChevronDownIcon, Code, Menu, Monitor, Moon, PanelLeft, PanelLeftClose, PanelLeftOpen, Sun, List } from 'lucide-vue-next'
 import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -258,7 +258,8 @@ async function copy() {
         @click="togglePostSlider"
         title="切换内容管理"
       >
-        <PanelLeft class="h-4 w-4" />
+        <PanelLeftOpen v-if="!isOpenPostSlider" class="h-4 w-4" />
+        <PanelLeftClose v-else class="h-4 w-4" />
       </Button>
 
       <!-- 桌面端菜单 -->
@@ -287,7 +288,8 @@ async function copy() {
         @click="togglePostSlider"
         title="切换内容管理"
       >
-        <PanelLeft class="h-4 w-4" />
+        <PanelLeftOpen v-if="!isOpenPostSlider" class="h-4 w-4" />
+        <PanelLeftClose v-else class="h-4 w-4" />
       </Button>
 
       <!-- 汉堡菜单按钮 -->
