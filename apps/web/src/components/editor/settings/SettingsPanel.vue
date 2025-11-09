@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import AIConfig from '@/components/ai/chat-box/AIConfig.vue'
-import AIImageConfig from '@/components/ai/image-generator/AIImageConfig.vue'
+// AI 功能已隐藏
+// import AIConfig from '@/components/ai/chat-box/AIConfig.vue'
+// import AIImageConfig from '@/components/ai/image-generator/AIImageConfig.vue'
 import {
   Dialog,
   DialogContent,
@@ -43,11 +44,12 @@ const categories = [
     label: `编辑器`,
     description: `编辑器相关设置`,
   },
-  {
-    id: `ai`,
-    label: `AI配置`,
-    description: `配置AI聊天和图像生成服务`,
-  },
+  // AI 功能已隐藏
+  // {
+  //   id: `ai`,
+  //   label: `AI配置`,
+  //   description: `配置AI聊天和图像生成服务`,
+  // },
 ]
 
 /* -------------------- 操作函数 -------------------- */
@@ -206,8 +208,8 @@ function toggleEditPosition() {
               </div>
             </div>
 
-            <!-- AI配置 -->
-            <div v-if="activeCategory === 'ai'" class="space-y-4">
+            <!-- AI配置已隐藏 -->
+            <!-- <div v-if="activeCategory === 'ai'" class="space-y-4">
               <div>
                 <h3 class="text-base font-semibold mb-2">
                   AI配置
@@ -217,7 +219,6 @@ function toggleEditPosition() {
                 </p>
               </div>
 
-              <!-- AI聊天配置 -->
               <div class="space-y-4">
                 <div class="border rounded-lg p-3">
                   <h4 class="text-sm font-medium mb-2 flex items-center gap-2">
@@ -227,7 +228,6 @@ function toggleEditPosition() {
                   <AIConfig :hide-title="true" />
                 </div>
 
-                <!-- AI图像生成配置 -->
                 <div class="border rounded-lg p-3">
                   <h4 class="text-sm font-medium mb-2 flex items-center gap-2">
                     <div class="w-1.5 h-1.5 bg-green-500 rounded-full" />
@@ -236,7 +236,7 @@ function toggleEditPosition() {
                   <AIImageConfig :hide-title="true" />
                 </div>
               </div>
-            </div>
+            </div> -->
 
 
           </div>

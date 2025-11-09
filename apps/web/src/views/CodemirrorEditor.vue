@@ -7,7 +7,8 @@ import { highlightPendingBlocks, hljs } from '@welight/core'
 import { markdownSetup, theme } from '@welight/shared/editor'
 import imageCompression from 'browser-image-compression'
 import { Eye, Pen } from 'lucide-vue-next'
-import { SidebarAIToolbar } from '@/components/ai'
+// AI 功能已隐藏
+// import { SidebarAIToolbar } from '@/components/ai'
 import SelectionMenu from '@/components/editor/SelectionMenu.vue'
 
 import {
@@ -667,10 +668,11 @@ onUnmounted(() => {
               }"
             >
               <SearchTab v-if="codeMirrorView" ref="searchTabRef" :editor-view="codeMirrorView as any" />
-              <SidebarAIToolbar
+              <!-- AI 功能已隐藏 -->
+              <!-- <SidebarAIToolbar
                 :is-mobile="isMobile"
                 :show-editor="showEditor"
-              />
+              /> -->
 
 	              <SelectionMenu v-if="codeMirrorView" :editor-view="codeMirrorView as any" :container="codeMirrorWrapper as any" />
 

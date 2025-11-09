@@ -206,7 +206,8 @@ function runAIQuick(action: AIPreset) {
       <Button variant="ghost" size="icon" class="h-8 w-8" @click="ol"><ListOrdered class="h-4 w-4" /></Button>
       <Button variant="ghost" size="icon" class="h-8 w-8" @click="quote"><Quote class="h-4 w-4" /></Button>
       <Button variant="ghost" size="icon" class="h-8 w-8" @click="ilCode"><Code class="h-4 w-4" /></Button>
-      <span class="mx-1 h-5 w-px bg-border" />
+      <!-- AI 功能已隐藏 -->
+      <!-- <span class="mx-1 h-5 w-px bg-border" />
       <DropdownMenu>
         <DropdownMenuTrigger as-child>
           <Button variant="ghost" size="icon" class="h-8 w-8 text-primary" title="AI 工具">
@@ -220,11 +221,9 @@ function runAIQuick(action: AIPreset) {
           <DropdownMenuItem @click="runAIQuick('translate-zh')">翻译为中文</DropdownMenuItem>
           <DropdownMenuItem @click="runAIQuick('translate-en')">翻译为英文</DropdownMenuItem>
           <DropdownMenuItem @click="uiStore.toggleAIImageDialog(true)">AI 生图</DropdownMenuItem>
-
           <DropdownMenuItem @click="uiStore.toggleAIDialog(true)">AI 对话</DropdownMenuItem>
-
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu> -->
     </div>
   </div>
   <AIPolishPopover
