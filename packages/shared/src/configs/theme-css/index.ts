@@ -11,6 +11,7 @@ import rainbowCSS from './rainbow.css?raw'
 import popartCSS from './popart.css?raw'
 import academicCSS from './academic.css?raw'
 import technewsCSS from './technews.css?raw'
+import newspaperCSS from './newspaper.css?raw'
 
 /**
  * 基础样式 CSS
@@ -28,6 +29,7 @@ export const themeMap = {
   popart: popartCSS,
   academic: academicCSS,
   technews: technewsCSS,
+  newspaper: newspaperCSS,
 } as const
 
 export type ThemeName = keyof typeof themeMap

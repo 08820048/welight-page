@@ -150,7 +150,7 @@ function addHandler() {
 
 // 查看内置主题功能
 const isOpenViewThemeDialog = ref(false)
-const selectedViewTheme = ref<'default' | 'grace' | 'simple' | 'rainbow' | 'popart'>('default')
+const selectedViewTheme = ref<'default' | 'grace' | 'simple' | 'rainbow' | 'popart' | 'academic' | 'technews' | 'newspaper'>('default')
 
 // 打开查看内置主题对话框
 function openViewThemeDialog() {

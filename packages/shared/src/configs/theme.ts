@@ -40,6 +40,11 @@ export const themeOptionsMap = {
     value: `technews`,
     desc: `@Welight`,
   },
+  newspaper: {
+    label: `经典报纸`,
+    value: `newspaper`,
+    desc: `@Welight`,
+  },
 }
 
 export const themeOptions: IConfigOption<ThemeName>[] = [
@@ -76,6 +81,11 @@ export const themeOptions: IConfigOption<ThemeName>[] = [
   {
     label: `数字浪潮`,
     value: `technews`,
+    desc: `@Welight`,
+  },
+  {
+    label: `经典报纸`,
+    value: `newspaper`,
     desc: `@Welight`,
   },
 ]
