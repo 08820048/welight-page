@@ -9,7 +9,7 @@ export default defineBackground({
         return
       }
       if (detail.reason === `install`) {
-        browser.tabs.create({ url: `https://md-pages.doocs.org/welcome` })
+        browser.tabs.create({ url: `https://wl-pages.doocs.org/welcome` })
       }
       else if (detail.reason === `update`) {
         browser.runtime.openOptionsPage()
@@ -21,7 +21,7 @@ export default defineBackground({
         return
       browser.contextMenus.create({
         id: `openSidePanel`,
-        title: `MD 公众号编辑器`,
+        title: `WL 公众号编辑器`,
         documentUrlPatterns: [`https://mp.weixin.qq.com/cgi-bin/appmsg*`],
         contexts: [`all`],
       })

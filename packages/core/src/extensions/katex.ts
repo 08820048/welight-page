@@ -16,9 +16,15 @@ const blockLatexRule = /^\\\[([^\\]*(?:\\.[^\\]*)*?)\\\]/
 function createRenderer(display: boolean, withStyle: boolean = true) {
   return (token: any) => {
     // @ts-expect-error MathJax is a global variable
-    window.MathJax.texReset()
+    // 安全调用 texReset，如果不存在则跳过
+    if ((window as any).MathJax && typeof (window as any).MathJax.texReset === 'function') {
+      (window as any).MathJax.texReset()
+    } else if ((window as any).MathJax && (window as any).MathJax.tex && typeof (window as any).MathJax.tex.Reset === 'function') {
+      (window as any).MathJax.tex.Reset()
+    }
+
     // @ts-expect-error MathJax is a global variable
-    const mjxContainer = window.MathJax.tex2svg(token.text, { display })
+    const mjxContainer = (window as any).MathJax.tex2svg(token.text, { display })
     const svg = mjxContainer.firstChild
     const width = svg.style[`min-width`] || svg.getAttribute(`width`)
     svg.removeAttribute(`width`)

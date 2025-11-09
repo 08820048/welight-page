@@ -202,8 +202,29 @@
     </script>
     <script>
       window.MathJax = {
-        tex: { tags: 'ams' },
-        svg: { fontCache: 'none' },
+        tex: {
+          tags: 'ams',
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          processEnvironments: true
+        },
+        svg: {
+          fontCache: 'none'
+        },
+        startup: {
+          ready: () => {
+            MathJax.startup.defaultReady();
+            // 确保 texReset 函数存在
+            if (!MathJax.texReset) {
+              MathJax.texReset = function() {
+                if (MathJax.tex && MathJax.tex.Reset) {
+                  MathJax.tex.Reset();
+                }
+              };
+            }
+          }
+        }
       }
     </script>
     <script

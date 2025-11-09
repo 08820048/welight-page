@@ -71,13 +71,13 @@ export function htmlScriptToVirtual(
   config: wxt.ResolvedConfig,
   getWxtDevServer: () => wxt.WxtDevServer | undefined,
 ): vite.PluginOption {
-  const virtualInlineScript = `virtual:md-inline-script`
+  const virtualInlineScript = `virtual:wl-inline-script`
   const resolvedVirtualInlineScript = `\0${virtualInlineScript}`
 
   const server = getWxtDevServer?.()
   return [
     {
-      name: `md:dev-html-prerender`,
+      name: `wl:dev-html-prerender`,
       apply: `build`,
       transformIndexHtml: {
         order: `post`,
@@ -117,7 +117,7 @@ export function htmlScriptToVirtual(
       },
     },
     {
-      name: `md:virtualize-react-refresh`,
+      name: `wl:virtualize-react-refresh`,
       apply: `serve`,
       resolveId(id) {
         // Resolve inline scripts
@@ -133,7 +133,7 @@ export function htmlScriptToVirtual(
       load(id) {
         // Resolve virtualized inline scripts
         if (id.startsWith(resolvedVirtualInlineScript)) {
-          // id="virtual:md-inline-script?<hash>"
+          // id="virtual:wl-inline-script?<hash>"
           const key = id.substring(id.indexOf(`?`) + 1)
           return inlineScriptContents[key]
         }
@@ -151,7 +151,7 @@ export function htmlScriptToLocal(
   wxt: wxt.Wxt,
 ): vite.Plugin {
   return {
-    name: `md:build-html-prerender`,
+    name: `wl:build-html-prerender`,
     apply: `build`,
     transformIndexHtml: {
       order: `post`,
@@ -195,7 +195,7 @@ export function htmlScriptToLocal(
               // Save the text content for later
               const textContent = script.textContent ?? ``
               const key = hash(textContent)
-              const fileName = `md-inline-${key}.js`
+              const fileName = `wl-inline-${key}.js`
               // write to file
               const outFile = path.resolve(wxt.config.outDir, `./${fileName}`)
               await writeFile(outFile, textContent, `utf8`)
@@ -224,7 +224,7 @@ export function vueDevtoolsHack(
 ): vite.Plugin {
   const server = getWxtDevServer?.()
   return {
-    name: `md:vue-devtools-hack`,
+    name: `wl:vue-devtools-hack`,
     apply: `build`,
     transformIndexHtml: {
       order: `post`,

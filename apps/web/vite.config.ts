@@ -19,7 +19,7 @@ const isUTools = process.env.SERVER_ENV === `UTOOLS`
 const isCfWorkers = process.env.CF_WORKERS === `1`
 const isCfPages = process.env.CF_PAGES === `1`
 
-const base = isNetlify || isCfWorkers || isCfPages ? `/` : isUTools ? `./` : `/md/`
+const base = isNetlify || isCfWorkers || isCfPages ? `/` : isUTools ? `./` : `/wl/`
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
@@ -63,9 +63,9 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         external: [`mermaid`],
         output: {
-          chunkFileNames: `static/js/md-[name]-[hash].js`,
-          entryFileNames: `static/js/md-[name]-[hash].js`,
-          assetFileNames: `static/[ext]/md-[name]-[hash].[ext]`,
+          chunkFileNames: `static/js/wl-[name]-[hash].js`,
+          entryFileNames: `static/js/wl-[name]-[hash].js`,
+          assetFileNames: `static/[ext]/wl-[name]-[hash].[ext]`,
           globals: { mermaid: `mermaid` },
           manualChunks(id) {
             if (id.includes(`node_modules`)) {
