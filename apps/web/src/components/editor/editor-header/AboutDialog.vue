@@ -15,9 +15,9 @@ function onUpdate(val: boolean) {
 }
 
 const links = [
-  { label: `GitHub 仓库`, url: `https://github.com/doocs/md` },
-  { label: `Gitee 仓库`, url: `https://gitee.com/doocs/md` },
-  { label: `GitCode 仓库`, url: `https://gitcode.com/doocs/md` },
+  { label: `官网`, url: `https://waer.ltd` },
+  { label: `博客`, url: `https://ilikexff.cn` },
+  { label: `Q群`, url: `https://qun.qq.com/universal-share/share?ac=1&authKey=U4EFNYA9KuxK3OOQJQRfmzrfpwn3NM%2BHScNavJLkDXANe7H%2BONEQvGMvVI2LRrx2&busi_data=eyJncm91cENvZGUiOiIxMDcxNTU4ODAzIiwidG9rZW4iOiI3N2krQUx6VTVoTXVwOVRBRU52djl6R3k2VDYyNWR1RXl4bk92S2Y5SzNWVTBrUTlmeitCNEN6OS92KzZoMElqIiwidWluIjoiMjIxNzAyMTU2MyJ9&data=xN0g96ZxEMQlgiGFEWHsx8x0rZ0Qz9zmsBlJXrOxz6m1DVOYht3OeVZLFTMy6bGTC-Nc4yxMX25CDwocSJMQRLkcxdIUz6736qxlkysN8AE&svctype=5&tempid=h5_group_info` },
 ]
 
 function onRedirect(url: string) {
@@ -32,12 +32,12 @@ function onRedirect(url: string) {
         <DialogTitle>关于</DialogTitle>
       </DialogHeader>
       <div class="text-center">
-        <h3>一款高度简洁的微信 Markdown 编辑器</h3>
-        <p>扫码关注公众号 Doocs，原创技术内容第一时间推送！</p>
+        <h3>Welight 公众号排版网页版本</h3>
+        <p>扫码关注公众号[TechGame前沿]，游戏科技资讯每日推送。</p>
         <img
           class="mx-auto my-5"
-          src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/gh/doocs/md/images/1648303220922-7e14aefa-816e-44c1-8604-ade709ca1c69.png"
-          alt="Doocs Markdown 编辑器"
+          src="https://images.waer.ltd/notes/202509282306627.jpg"
+          alt="TechGame"
           style="width: 40%"
         >
       </div>

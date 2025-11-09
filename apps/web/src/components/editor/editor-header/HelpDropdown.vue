@@ -5,16 +5,12 @@ const props = withDefaults(defineProps<{
   asSub: false,
 })
 
-const emit = defineEmits([`openAbout`, `openFund`])
+const emit = defineEmits([`openAbout`])
 
 const { asSub } = toRefs(props)
 
 function openAboutDialog() {
   emit(`openAbout`)
-}
-
-function openFundDialog() {
-  emit(`openFund`)
 }
 
 function openWebsite() {
@@ -36,9 +32,6 @@ function openDesktopDownload() {
       <MenubarCheckboxItem @click="openAboutDialog()">
         关于
       </MenubarCheckboxItem>
-      <MenubarCheckboxItem @click="openFundDialog()">
-        赞赏
-      </MenubarCheckboxItem>
       <MenubarCheckboxItem @click="openWebsite()">
         官网
       </MenubarCheckboxItem>
@@ -54,9 +47,6 @@ function openDesktopDownload() {
     <MenubarContent align="start">
       <MenubarCheckboxItem @click="openAboutDialog()">
         <span>关于</span>
-      </MenubarCheckboxItem>
-      <MenubarCheckboxItem @click="openFundDialog()">
-        <span>赞赏</span>
       </MenubarCheckboxItem>
       <MenubarCheckboxItem @click="openWebsite()">
         <span>官网</span>

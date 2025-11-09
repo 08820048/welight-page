@@ -197,6 +197,7 @@ ol {
   padding-left: 32px;
   margin: 20px 0;
   margin-left: 0;
+  list-style-type: decimal;
   color: hsl(var(--foreground));
 }
 
@@ -204,7 +205,7 @@ ol {
 ul {
   padding-left: 32px;
   margin: 20px 0;
-  list-style: none;
+  list-style-type: disc;
   margin-left: 0;
   color: hsl(var(--foreground));
 }
@@ -216,7 +217,7 @@ li {
   color: #1a1a1a;
   position: relative;
   padding-left: 8px;
-  display: block;
+  display: list-item;
 }
 
 /* 链接 */

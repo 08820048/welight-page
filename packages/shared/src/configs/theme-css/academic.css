@@ -146,6 +146,7 @@ ol {
   padding-left: 30px;
   margin: 20px 0;
   margin-left: 0;
+  list-style-type: decimal;
   color: hsl(var(--foreground));
 }
 
@@ -153,7 +154,7 @@ ol {
 ul {
   padding-left: 30px;
   margin: 20px 0;
-  list-style: disc;
+  list-style-type: disc;
   margin-left: 0;
   color: hsl(var(--foreground));
 }
@@ -163,7 +164,7 @@ li {
   margin: 12px 0;
   line-height: 1.8;
   color: #2c2c2c;
-  display: block;
+  display: list-item;
 }
 
 /* 链接 */
