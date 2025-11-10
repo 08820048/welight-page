@@ -1,17 +1,32 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import LoginDialog from '@/components/auth/LoginDialog.vue'
 import { Toaster } from '@/components/ui/sonner'
 import { useAuthStore } from '@/stores/auth'
 import { useUIStore } from '@/stores/ui'
 
+const route = useRoute()
 const uiStore = useUIStore()
 const authStore = useAuthStore()
 const { isDark } = storeToRefs(uiStore)
 
 const isUtools = ref(false)
 const showLoginDialog = ref(false)
+
+// 公开页面列表（不需要登录的页面）
+const publicRoutes = ['/themes']
+
+// 判断当前页面是否为公开页面
+const isPublicRoute = computed(() => {
+  return publicRoutes.includes(route.path)
+})
+
+// 判断是否需要显示内容
+const shouldShowContent = computed(() => {
+  return isPublicRoute.value || authStore.isAuthenticated
+})
 
 onMounted(async () => {
   // 检测是否为 Utools 环境
@@ -23,8 +38,8 @@ onMounted(async () => {
   // 初始化认证状态
   await authStore.initAuth()
 
-  // 如果未登录，显示登录对话框
-  if (!authStore.isAuthenticated) {
+  // 如果不是公开页面且未登录，显示登录对话框
+  if (!isPublicRoute.value && !authStore.isAuthenticated) {
     showLoginDialog.value = true
   }
 })
@@ -33,18 +48,30 @@ function handleLoginSuccess() {
   showLoginDialog.value = false
 }
 
-// 监听认证状态变化，如果用户登出则显示登录对话框
+// 监听认证状态变化，如果用户登出且不在公开页面则显示登录对话框
 watch(() => authStore.isAuthenticated, (isAuthenticated) => {
-  if (!isAuthenticated) {
+  if (!isAuthenticated && !isPublicRoute.value) {
     showLoginDialog.value = true
+  }
+})
+
+// 监听路由变化，处理公开页面和私有页面的切换
+watch(() => route.path, (newPath) => {
+  const isPublic = publicRoutes.includes(newPath)
+  if (!isPublic && !authStore.isAuthenticated) {
+    showLoginDialog.value = true
+  }
+  else if (isPublic) {
+    showLoginDialog.value = false
   }
 })
 </script>
 
 <template>
-  <router-view v-if="authStore.isAuthenticated" />
+  <router-view v-if="shouldShowContent" />
 
   <LoginDialog
+    v-if="!isPublicRoute"
     :show-login="showLoginDialog"
     @login-success="handleLoginSuccess"
     @close="showLoginDialog = false"

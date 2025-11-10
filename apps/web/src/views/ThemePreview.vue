@@ -116,17 +116,22 @@ onMounted(async () => {
               @click="$router.push('/')"
             >
               <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
               </svg>
-              返回编辑器
+              进入编辑器
             </button>
             <div class="h-6 w-px bg-border" />
             <h1 class="text-lg font-semibold">
               主题预览
             </h1>
           </div>
-          <div class="text-sm text-muted-foreground">
-            共 {{ themes.length }} 个主题
+          <div class="flex items-center space-x-4">
+            <div class="text-sm text-muted-foreground">
+              共 {{ themes.length }} 个主题
+            </div>
+            <div class="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
+              公开预览
+            </div>
           </div>
         </div>
       </div>
