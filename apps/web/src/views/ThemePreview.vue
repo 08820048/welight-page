@@ -171,19 +171,19 @@ function handleSubmitTheme() {
                 class="submit-theme-button inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-3 py-1"
                 @click="handleSubmitTheme"
               >
-                🎨 提交主题
+                提交主题
               </button>
               <div class="submit-theme-tooltip">
                 <div class="tooltip-content">
-                  <h3>🎨 主题投稿</h3>
+                  <h3>主题投稿</h3>
                   <p>如果你也希望自己的主题可以让更多人使用，欢迎前往该地址进行主题投递，审核通过后将会在页面中展示。</p>
                   <div class="submit-info">
                     <p><strong>主题提交地址:</strong></p>
                     <p class="link-info">
-                      📝 飞书文档提交区
+                      飞书文档提交区
                     </p>
                     <p class="password-info">
-                      🔑 密码：<code>999&992W</code>
+                      密码：<code>999&992W</code>
                     </p>
                   </div>
                 </div>
@@ -542,50 +542,46 @@ function handleSubmitTheme() {
 
 .submit-theme-button {
   transition: all 0.2s ease;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #4f46e5;
   color: white !important;
-  border: none;
+  border: 1px solid #4f46e5;
   font-weight: 500;
 }
 
 .submit-theme-button:hover {
-  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  background: #4338ca !important;
+  border-color: #4338ca;
 }
 
 .submit-theme-tooltip {
   position: absolute;
   top: 100%;
   right: 0;
-  margin-top: 12px;
+  margin-top: 8px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease;
   z-index: 1000;
-  transform: translateY(-10px);
 }
 
 .submit-theme-container:hover .submit-theme-tooltip {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
 }
 
 .tooltip-content {
-  background: linear-gradient(145deg, #2d3748, #1a202c);
-  color: #e2e8f0;
-  padding: 20px;
-  border-radius: 12px;
+  background: #ffffff;
+  color: #374151;
+  padding: 16px;
+  border-radius: 8px;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.5;
   width: 280px;
   box-shadow:
-    0 20px 25px -5px rgba(0, 0, 0, 0.3),
-    0 10px 10px -5px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   position: relative;
-  border: 1px solid rgba(102, 126, 234, 0.3);
+  border: 1px solid #e5e7eb;
 }
 
 .tooltip-content::before {
@@ -597,36 +593,33 @@ function handleSubmitTheme() {
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-bottom: 8px solid #2d3748;
+  border-bottom: 8px solid #ffffff;
 }
 
 .tooltip-content h3 {
-  margin: 0 0 16px 0;
-  color: #667eea;
-  font-size: 18px;
+  margin: 0 0 12px 0;
+  color: #111827;
+  font-size: 16px;
   font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .tooltip-content p {
-  margin: 0 0 16px 0;
-  color: #cbd5e0;
+  margin: 0 0 12px 0;
+  color: #6b7280;
   font-size: 13px;
   line-height: 1.5;
 }
 
 .submit-info {
-  background: rgba(102, 126, 234, 0.1);
-  border: 1px solid rgba(102, 126, 234, 0.2);
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 16px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 12px;
 }
 
 .submit-info p {
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   font-size: 13px;
 }
 
@@ -635,31 +628,24 @@ function handleSubmitTheme() {
 }
 
 .link-info {
-  color: #90cdf4;
+  color: #4f46e5;
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .password-info {
-  color: #a0aec0;
+  color: #6b7280;
   font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .password-info code {
-  background: rgba(102, 126, 234, 0.2);
-  color: #90cdf4;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  border: 1px solid rgba(102, 126, 234, 0.3);
+  font-weight: 500;
+  border: 1px solid #d1d5db;
 }
 
 /* 响应式设计 */
