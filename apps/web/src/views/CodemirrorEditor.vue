@@ -903,22 +903,23 @@ onUnmounted(() => {
 
 .mobile-phone-button {
   position: absolute;
-  background: #2c2c2c;
-  border-radius: 4px;
+  background: #000000;
+  border: 4px solid #000000;
+  border-radius: 6px;
 }
 
 .mobile-phone-button-power {
-  right: -6px;
-  top: 120px;
+  right: -8px;
+  top: 56px;
   width: 4px;
-  height: 60px;
+  height: 28px;
 }
 
 .mobile-phone-button-volume {
-  right: -6px;
-  bottom: 200px;
+  right: -8px;
+  bottom: 144px;
   width: 4px;
-  height: 80px;
+  height: 40px;
 }
 
 .mobile-phone-screen {
@@ -968,7 +969,8 @@ onUnmounted(() => {
 
 .dark .mobile-phone-notch,
 .dark .mobile-phone-button {
-  background: #1a1a1a;
+  background: #000000;
+  border-color: #000000;
 }
 
 .dark .mobile-phone-screen {
