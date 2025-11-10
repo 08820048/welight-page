@@ -11,35 +11,17 @@ body {
   color: #1a1a1a;
 }
 
-/* 容器背景 - 锯齿牛皮纸效果 */
+/* 容器背景 - 科技网格效果 */
 .md-container {
-  background: #fffef0;
-  box-shadow:
-    2px 3px 20px rgba(0, 0, 0, 0.3),
-    0 0 60px #8a4d0f inset;
-  padding: 2em;
-  position: relative;
-  border-radius: 8px;
-}
-
-/* 锯齿边缘效果 */
-.md-container::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
   background:
-    radial-gradient(circle at 2px 2px, transparent 1px, #8a4d0f 1px, #8a4d0f 2px, transparent 2px),
-    radial-gradient(circle at 6px 6px, transparent 1px, #8a4d0f 1px, #8a4d0f 2px, transparent 2px);
-  background-size: 8px 8px;
-  background-position:
-    0 0,
-    4px 4px;
-  border-radius: 10px;
-  z-index: -1;
-  opacity: 0.3;
+    linear-gradient(to right, color-mix(in srgb, var(--md-primary-color) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--md-primary-color) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+  background-size:
+    40px 40px,
+    40px 40px,
+    100% 100%;
+  padding: 5px 2px;
 }
 
 /* 一级标题 */

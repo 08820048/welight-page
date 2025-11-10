@@ -1,0 +1,282 @@
+/**
+ * 锯齿牛皮纸主题 - 复古纸张质感设计
+ * 适用于文学作品、历史文档、复古风格内容等
+ */
+
+/* 基础样式 */
+body {
+  font-family:
+    'Times New Roman', 'Songti SC', 'SimSun', serif;
+  line-height: 1.8;
+  color: #2c1810;
+}
+
+/* 容器背景 - 锯齿牛皮纸效果 */
+.md-container {
+  background: #fffef0;
+  box-shadow:
+    2px 3px 20px rgba(0, 0, 0, 0.3),
+    0 0 60px #8a4d0f inset;
+  padding: 2em;
+  position: relative;
+  border-radius: 8px;
+}
+
+/* 锯齿边缘效果 */
+.md-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background:
+    radial-gradient(circle at 2px 2px, transparent 1px, #8a4d0f 1px, #8a4d0f 2px, transparent 2px),
+    radial-gradient(circle at 6px 6px, transparent 1px, #8a4d0f 1px, #8a4d0f 2px, transparent 2px);
+  background-size: 8px 8px;
+  background-position:
+    0 0,
+    4px 4px;
+  border-radius: 10px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* 一级标题 */
+h1 {
+  font-size: 2.5em;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 30px 0 20px 0;
+  margin: 0 0 30px 0;
+  text-align: center;
+  color: #2c1810;
+  letter-spacing: 2px;
+  position: relative;
+  text-shadow: 1px 1px 2px rgba(139, 77, 15, 0.1);
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #8a4d0f, transparent);
+  border-radius: 2px;
+}
+
+/* 二级标题 */
+h2 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin: 35px 0 20px 0;
+  padding: 15px 0 10px 20px;
+  color: #2c1810;
+  position: relative;
+  border-left: 4px solid #8a4d0f;
+  background: linear-gradient(to right, rgba(139, 77, 15, 0.05), transparent);
+}
+
+/* 三级标题 */
+h3 {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin: 30px 0 15px 0;
+  color: #2c1810;
+  position: relative;
+  padding-left: 15px;
+}
+
+h3::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: #8a4d0f;
+  font-size: 0.8em;
+}
+
+/* 四级标题 */
+h4 {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 25px 0 12px 0;
+  color: #2c1810;
+  font-style: italic;
+}
+
+/* 五级标题 */
+h5 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 20px 0 10px 0;
+  color: #2c1810;
+  text-decoration: underline;
+  text-decoration-color: #8a4d0f;
+}
+
+/* 六级标题 */
+h6 {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 15px 0 8px 0;
+  color: #2c1810;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 段落 */
+p {
+  margin: 16px 0;
+  text-align: justify;
+  text-indent: 2em;
+  color: #2c1810;
+}
+
+/* 引用 */
+blockquote {
+  margin: 25px 0;
+  padding: 20px 25px;
+  background: rgba(139, 77, 15, 0.05);
+  border-left: 5px solid #8a4d0f;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+  font-style: italic;
+  color: #3d2317;
+}
+
+blockquote::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 3em;
+  color: #8a4d0f;
+  opacity: 0.3;
+  font-family: serif;
+}
+
+/* 列表 */
+ul, ol {
+  margin: 16px 0;
+  padding-left: 30px;
+}
+
+li {
+  margin: 8px 0;
+  color: #2c1810;
+}
+
+ul li::marker {
+  color: #8a4d0f;
+}
+
+ol li::marker {
+  color: #8a4d0f;
+  font-weight: 600;
+}
+
+/* 代码块 */
+pre {
+  background: #f5f2ed;
+  border: 1px solid #d4c4a8;
+  border-radius: 6px;
+  padding: 20px;
+  margin: 20px 0;
+  overflow-x: auto;
+  box-shadow: inset 0 2px 4px rgba(139, 77, 15, 0.1);
+}
+
+code {
+  font-family: 'Courier New', 'Monaco', monospace;
+  background: #f5f2ed;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid #d4c4a8;
+  color: #2c1810;
+}
+
+/* 表格 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: #fffef0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(139, 77, 15, 0.1);
+}
+
+th {
+  background: #8a4d0f;
+  color: #fffef0;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #d4c4a8;
+  color: #2c1810;
+}
+
+tr:nth-child(even) {
+  background: rgba(139, 77, 15, 0.03);
+}
+
+/* 链接 */
+a {
+  color: #8a4d0f;
+  text-decoration: underline;
+  text-decoration-color: rgba(139, 77, 15, 0.5);
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #6b3a0c;
+  text-decoration-color: #6b3a0c;
+}
+
+/* 强调 */
+strong {
+  font-weight: 700;
+  color: #2c1810;
+}
+
+em {
+  font-style: italic;
+  color: #3d2317;
+}
+
+/* 分割线 */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #8a4d0f, transparent);
+  margin: 30px 0;
+  border-radius: 1px;
+}
+
+/* 图片 */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(139, 77, 15, 0.2);
+  margin: 20px 0;
+}
+
+/* 数学公式 */
+.katex {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
