@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ThemeName } from '@welight/shared/configs'
-import { initRenderer } from '@welight/core'
+import { generateCSSVariables, initRenderer, processCSS, wrapCSSWithScope } from '@welight/core'
 import { postProcessHtml, renderMarkdown } from '@welight/core/utils'
-import { baseCSSContent, themeMap, themeOptionsMap } from '@welight/shared/configs'
+import { baseCSSContent, defaultStyleConfig, themeMap, themeOptionsMap } from '@welight/shared/configs'
 import { computed, nextTick, onMounted, ref } from 'vue'
 import DEFAULT_CONTENT from '@/assets/example/markdown.md?raw'
 
@@ -22,42 +22,71 @@ const themes = computed(() => {
 const renderedThemes = ref<Record<string, string>>({})
 
 // 为每个主题创建独立的CSS样式
-function injectThemeStyles() {
+async function injectThemeStyles() {
   // 移除旧的主题样式
   const oldStyles = document.querySelectorAll('style[data-theme-preview]')
   oldStyles.forEach(style => style.remove())
 
-  // 注入基础样式
-  const baseStyle = document.createElement('style')
-  baseStyle.setAttribute('data-theme-preview', 'base')
-  baseStyle.textContent = baseCSSContent
-  document.head.appendChild(baseStyle)
-
   // 为每个主题注入独立的样式
-  themes.value.forEach((theme) => {
+  for (const theme of themes.value) {
     const style = document.createElement('style')
     style.setAttribute('data-theme-preview', theme.key)
 
-    // 构建完整的主题CSS（和主页面一致的方式）
-    let themeCSS = themeMap.default // 默认主题作为基础
+    try {
+      // 1. 生成 CSS 变量（使用默认配置）
+      const variablesCSS = generateCSSVariables({
+        primaryColor: defaultStyleConfig.primaryColor,
+        fontFamily: defaultStyleConfig.fontFamily,
+        fontSize: defaultStyleConfig.fontSize,
+        isUseIndent: false,
+        isUseJustify: false,
+      })
 
-    // 如果不是 default 主题，叠加主题特定样式
-    if (theme.key !== 'default') {
-      const specificThemeCSS = themeMap[theme.key]
-      if (specificThemeCSS) {
-        themeCSS = `${themeCSS}\n\n${specificThemeCSS}`
+      // 2. 构建完整的主题CSS（和主页面一致的方式）
+      let themeCSS = themeMap.default // 默认主题作为基础
+
+      // 3. 如果不是 default 主题，叠加主题特定样式
+      if (theme.key !== 'default') {
+        const specificThemeCSS = themeMap[theme.key]
+        if (specificThemeCSS) {
+          themeCSS = `${themeCSS}\n\n${specificThemeCSS}`
+        }
       }
+
+      // 4. 给主题 CSS 添加作用域（只影响对应的预览区域）
+      const scopedThemeCSS = wrapCSSWithScope(themeCSS, `#output-${theme.key}`)
+
+      // 5. 拼接完整 CSS
+      let mergedCSS = [
+        variablesCSS, // CSS 变量（全局）
+        baseCSSContent, // 基础样式（全局）
+        scopedThemeCSS, // 主题样式（限制在对应预览区域）
+      ].filter(Boolean).join('\n\n')
+
+      // 6. 使用 PostCSS 处理 CSS（简化 calc() 表达式等）
+      mergedCSS = await processCSS(mergedCSS)
+
+      style.textContent = mergedCSS
+      document.head.appendChild(style)
     }
-
-    // 将CSS包装在主题特定的作用域中
-    const scopedCSS = themeCSS.replace(
-      /(^|\n)([^{}]+)\{/g,
-      `$1#output-${theme.key} $2{`,
-    )
-
-    style.textContent = scopedCSS
-    document.head.appendChild(style)
-  })
+    catch (error) {
+      console.error(`Failed to inject theme ${theme.key}:`, error)
+      // 降级处理：使用简单的作用域包装
+      let themeCSS = themeMap.default
+      if (theme.key !== 'default') {
+        const specificThemeCSS = themeMap[theme.key]
+        if (specificThemeCSS) {
+          themeCSS = `${themeCSS}\n\n${specificThemeCSS}`
+        }
+      }
+      const scopedCSS = themeCSS.replace(
+        /(^|\n)([^{}]+)\{/g,
+        `$1#output-${theme.key} $2{`,
+      )
+      style.textContent = scopedCSS
+      document.head.appendChild(style)
+    }
+  }
 }
 
 // 渲染单个主题
@@ -87,8 +116,8 @@ onMounted(async () => {
     // 初始化渲染器
     const renderer = initRenderer()
 
-    // 注入所有主题样式
-    injectThemeStyles()
+    // 注入所有主题样式（异步）
+    await injectThemeStyles()
 
     // 等待CSS注入完成
     await nextTick()
