@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { Download, FileCode, FileCog, FileText, Upload } from 'lucide-vue-next'
+import { Download, FileCode, FileCog, FileText, Upload, Monitor } from 'lucide-vue-next'
 import { useEditorStore } from '@/stores/editor'
 import { useExportStore } from '@/stores/export'
+import { usePostStore } from '@/stores/post'
+import { openInDesktop } from '@/utils/desktopBridge'
 
 const props = withDefaults(defineProps<{
   asSub?: boolean
@@ -15,7 +17,7 @@ const { asSub } = toRefs(props)
 
 const editorStore = useEditorStore()
 const exportStore = useExportStore()
-
+const postStore = usePostStore()
 
 const importMarkdownContent = useImportMarkdownContent()
 
@@ -40,6 +42,15 @@ function downloadAsCardImage() {
   exportStore.downloadAsCardImage()
 }
 
+// 在桌面版中打开
+async function openInDesktopApp() {
+  const content = editorStore.getContent()
+  const currentPost = postStore.currentPost
+  const filename = currentPost?.title || 'untitled'
+
+  await openInDesktop(content, filename)
+}
+
 function exportEditorContent2PDF() {
   exportStore.exportEditorContent2PDF()
 }
@@ -55,6 +66,11 @@ function exportEditorContent2PDF() {
       <MenubarItem @click="importMarkdownContent()">
         <Upload class="mr-2 size-4" />
         导入 .md
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem @click="openInDesktopApp()">
+        <Monitor class="mr-2 size-4" />
+        在桌面版中打开
       </MenubarItem>
       <MenubarItem @click="exportEditorContent2MD()">
         <Download class="mr-2 size-4" />
@@ -93,6 +109,11 @@ function exportEditorContent2PDF() {
       <MenubarItem @click="importMarkdownContent()">
         <Upload class="mr-2 size-4" />
         导入 .md
+      </MenubarItem>
+      <MenubarSeparator />
+      <MenubarItem @click="openInDesktopApp()">
+        <Monitor class="mr-2 size-4" />
+        在桌面版中打开
       </MenubarItem>
       <MenubarItem @click="exportEditorContent2MD()">
         <Download class="mr-2 size-4" />

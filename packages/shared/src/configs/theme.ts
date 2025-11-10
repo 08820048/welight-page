@@ -23,12 +23,12 @@ export const themeOptionsMap = {
   rainbow: {
     label: `童趣彩虹`,
     value: `rainbow`,
-    desc: `0703团队`,
+    desc: `@Welight`,
   },
   popart: {
     label: `波普艺术`,
     value: `popart`,
-    desc: `0703团队`,
+    desc: `@Welight`,
   },
   academic: {
     label: `学术报告`,
@@ -38,11 +38,6 @@ export const themeOptionsMap = {
   technews: {
     label: `数字浪潮`,
     value: `technews`,
-    desc: `@Welight`,
-  },
-  newspaper: {
-    label: `经典报纸`,
-    value: `newspaper`,
     desc: `@Welight`,
   },
 }
@@ -66,12 +61,12 @@ export const themeOptions: IConfigOption<ThemeName>[] = [
   {
     label: `童趣彩虹`,
     value: `rainbow`,
-    desc: `0703团队`,
+    desc: `@Welight`,
   },
   {
     label: `波普艺术`,
     value: `popart`,
-    desc: `0703团队`,
+    desc: `@Welight`,
   },
   {
     label: `学术报告`,
@@ -81,11 +76,6 @@ export const themeOptions: IConfigOption<ThemeName>[] = [
   {
     label: `数字浪潮`,
     value: `technews`,
-    desc: `@Welight`,
-  },
-  {
-    label: `经典报纸`,
-    value: `newspaper`,
     desc: `@Welight`,
   },
 ]
