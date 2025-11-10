@@ -701,7 +701,35 @@ onUnmounted(() => {
                   class="w-full max-w-full"
                   :class="{ output_night: !backLight }"
                 >
+                  <!-- 移动端手机外形预览 -->
                   <div
+                    v-if="!isMobile && themeStore.previewWidth === 'w-[375px]'"
+                    class="mobile-phone-container mx-auto"
+                  >
+                    <div class="mobile-phone-frame">
+                      <!-- 手机顶部刘海 -->
+                      <div class="mobile-phone-notch"></div>
+
+                      <!-- 手机右侧按钮 -->
+                      <div class="mobile-phone-button mobile-phone-button-power"></div>
+                      <div class="mobile-phone-button mobile-phone-button-volume"></div>
+
+                      <!-- 手机屏幕内容 -->
+                      <div class="mobile-phone-screen">
+                        <section id="output" class="mobile-phone-content" v-html="output" />
+                        <div v-if="isCoping" class="loading-mask">
+                          <div class="loading-mask-box">
+                            <div class="loading__img" />
+                            <span>正在生成</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 电脑端或移动端设备预览 -->
+                  <div
+                    v-else
                     class="preview border-x shadow-xl mx-auto"
                     :class="[
                       isMobile ? 'w-full' : previewWidth,
@@ -836,5 +864,127 @@ onUnmounted(() => {
   overflow-x: hidden;
   height: 100%;
   position: relative;
+}
+
+/* 手机外形预览样式 */
+.mobile-phone-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  min-height: 600px;
+}
+
+.mobile-phone-frame {
+  position: relative;
+  width: 320px;
+  height: 640px;
+  background: linear-gradient(145deg, #f0f0f0, #e6e6e6);
+  border: 4px solid #2c2c2c;
+  border-radius: 32px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.mobile-phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 24px;
+  background: #2c2c2c;
+  border-radius: 0 0 16px 16px;
+  z-index: 10;
+}
+
+.mobile-phone-button {
+  position: absolute;
+  background: #2c2c2c;
+  border-radius: 4px;
+}
+
+.mobile-phone-button-power {
+  right: -6px;
+  top: 120px;
+  width: 4px;
+  height: 60px;
+}
+
+.mobile-phone-button-volume {
+  right: -6px;
+  bottom: 200px;
+  width: 4px;
+  height: 80px;
+}
+
+.mobile-phone-screen {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-phone-content {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+
+  /* 自定义滚动条 */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* 暗色模式下的手机外形 */
+.dark .mobile-phone-frame {
+  background: linear-gradient(145deg, #3a3a3a, #2d2d2d);
+  border-color: #1a1a1a;
+}
+
+.dark .mobile-phone-notch,
+.dark .mobile-phone-button {
+  background: #1a1a1a;
+}
+
+.dark .mobile-phone-screen {
+  background: #1f1f1f;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05);
+}
+
+.dark .mobile-phone-content {
+  color: #e5e5e5;
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
 }
 </style>
