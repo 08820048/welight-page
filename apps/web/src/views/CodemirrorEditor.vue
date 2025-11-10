@@ -708,11 +708,11 @@ onUnmounted(() => {
                   >
                     <div class="mobile-phone-frame">
                       <!-- 手机顶部刘海 -->
-                      <div class="mobile-phone-notch"></div>
+                      <span class="mobile-phone-notch"></span>
 
                       <!-- 手机右侧按钮 -->
-                      <div class="mobile-phone-button mobile-phone-button-power"></div>
-                      <div class="mobile-phone-button mobile-phone-button-volume"></div>
+                      <span class="mobile-phone-button-power"></span>
+                      <span class="mobile-phone-button-volume"></span>
 
                       <!-- 手机屏幕内容 -->
                       <div class="mobile-phone-screen">
@@ -866,7 +866,7 @@ onUnmounted(() => {
   position: relative;
 }
 
-/* 手机外形预览样式 */
+/* 手机外形预览样式 - 严格按照原始设计 */
 .mobile-phone-container {
   display: flex;
   justify-content: center;
@@ -877,58 +877,48 @@ onUnmounted(() => {
 
 .mobile-phone-frame {
   position: relative;
-  width: 320px;
+  display: flex;
+  justify-content: center;
   height: 640px;
-  background: linear-gradient(145deg, #f0f0f0, #e6e6e6);
-  border: 4px solid #2c2c2c;
+  width: 320px;
+  border: 4px solid #000000;
   border-radius: 32px;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    inset 0 2px 4px rgba(255, 255, 255, 0.1),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  background: #f9fafb;
+  box-shadow: 5px 5px 2.5px 6px rgb(209, 218, 218);
 }
 
 .mobile-phone-notch {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 24px;
-  background: #2c2c2c;
-  border-radius: 0 0 16px 16px;
-  z-index: 10;
-}
-
-.mobile-phone-button {
-  position: absolute;
+  border: 1px solid #000000;
   background: #000000;
-  border: 4px solid #000000;
-  border-radius: 6px;
-  z-index: 5;
+  width: 80px;
+  height: 8px;
+  border-radius: 0 0 12px 12px;
 }
 
 .mobile-phone-button-power {
+  position: absolute;
   right: -8px;
-  top: 56px;
-  width: 8px;
+  top: 136px;
+  border: 4px solid #000000;
   height: 28px;
+  border-radius: 5px;
 }
 
 .mobile-phone-button-volume {
+  position: absolute;
   right: -8px;
-  bottom: 144px;
-  width: 8px;
+  top: 172px;
+  border: 4px solid #000000;
   height: 40px;
+  border-radius: 6px;
 }
 
 .mobile-phone-screen {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
   background: #ffffff;
   border-radius: 20px;
   overflow: hidden;
@@ -938,7 +928,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  padding: 16px;
+  padding:0;
   font-size: 14px;
   line-height: 1.6;
 
@@ -963,13 +953,17 @@ onUnmounted(() => {
 
 /* 暗色模式下的手机外形 */
 .dark .mobile-phone-frame {
-  background: linear-gradient(145deg, #3a3a3a, #2d2d2d);
-  border-color: #1a1a1a;
+  background: #374151;
+  border-color: #000000;
 }
 
-.dark .mobile-phone-notch,
-.dark .mobile-phone-button {
+.dark .mobile-phone-notch {
   background: #000000;
+  border-color: #000000;
+}
+
+.dark .mobile-phone-button-power,
+.dark .mobile-phone-button-volume {
   border-color: #000000;
 }
 

@@ -13,7 +13,14 @@ body {
 
 /* 容器背景 - 科技网格效果 */
 .md-container {
-  background:
+    width: 190px;
+      height: 254px;
+      display: flex;
+      padding: 2em;
+      box-shadow: 2px 3px 20px black, 0 0 60px #8a4d0f inset;
+      background: #fffef0;
+      filter: url(#wavy2);
+  /* background:
     linear-gradient(to right, color-mix(in srgb, var(--md-primary-color) 3%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in srgb, var(--md-primary-color) 3%, transparent) 1px, transparent 1px),
     linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
@@ -21,7 +28,7 @@ body {
     40px 40px,
     40px 40px,
     100% 100%;
-  padding: 5px 2px;
+  padding: 5px 2px; */
 }
 
 /* 一级标题 */
