@@ -906,19 +906,20 @@ onUnmounted(() => {
   background: #000000;
   border: 4px solid #000000;
   border-radius: 6px;
+  z-index: 5;
 }
 
 .mobile-phone-button-power {
   right: -8px;
   top: 56px;
-  width: 4px;
+  width: 8px;
   height: 28px;
 }
 
 .mobile-phone-button-volume {
   right: -8px;
   bottom: 144px;
-  width: 4px;
+  width: 8px;
   height: 40px;
 }
 
@@ -931,7 +932,6 @@ onUnmounted(() => {
   background: #ffffff;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-phone-content {
@@ -975,7 +975,6 @@ onUnmounted(() => {
 
 .dark .mobile-phone-screen {
   background: #1f1f1f;
-  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05);
 }
 
 .dark .mobile-phone-content {
