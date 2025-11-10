@@ -57,9 +57,9 @@ Markdown 中的段落就是一行接一行的文本。要创建新段落，只�
 - **链接**：用方括号和圆括号创建链接 `[显示文本](链接地址)`。
 - **图片**：和链接类似，只需在前面加上 `!`，如 `![描述文本](图片链接)`。
 
-[访问 Doocs](https://github.com/doocs)
+[访问 Welight](https://waer.ltd)
 
-![doocs](https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/gh/doocs/md/images/logo-2.png)
+![image.png](https://images.waer.ltd/images/202510210151599757.png)
 
 轻松实现富媒体内容展示！
 
@@ -130,11 +130,14 @@ fn partition<T: Ord>(arr: &mut [T]) -> usize {
 
 Markdown 支持简单的表格，用 `|` 和 `-` 分隔单元格和表头。
 
-| 项目人员                                    | 邮箱                   | 微信号       |
-| ------------------------------------------- | ---------------------- | ------------ |
-| [yanglbme](https://github.com/yanglbme)     | contact@yanglibin.info | YLB0109      |
-| [YangFong](https://github.com/YangFong)     | yangfong2022@gmail.com | yq2419731931 |
-| [thinkasany](https://github.com/thinkasany) | thinkasany@gmail.com   | thinkasany   |
+| 产品名称 | 数量      | 活动前价格 (¥) | 活动价格 (¥) | 优惠幅度 | 时效     |
+| -------- | --------- | -------------- | ------------ | -------- | -------- |
+| 许可证   | /         | 49.99          | 14.99        | 永久有效 | 永久授权 |
+| 入门推荐 | 800积分,  | 10.00          | 8.80         | 永久有效 | 用完为止 |
+| 热门选择 | 2000积分  | 24.00          | 21.12        | 永久有效 | 用完为止 |
+| 超值套餐 | 3000积分  | 46.00          | 40.48        | 永久有效 | 用完为止 |
+| 企业专享 | 5000积分  | 88.00          | 77.44        | 永久有效 | 用完为止 |
+| 旗舰套餐 | 11000积分 | 160.00         | 140.80       | 永久有效 | 用完为止 |
 
 这样的表格让数据展示更为清爽！
 
@@ -301,13 +304,13 @@ Markdown 是一种简单、强大且易于掌握的标记语言，通过学习�
 
 #### 推荐阅读
 
-- [阿里又一个 20k+ stars 开源项目诞生，恭喜 fastjson！](https://mp.weixin.qq.com/s/RNKDCK2KoyeuMeEs6GUrow)
-- [刷掉 90% 候选人的互联网大厂海量数据面试题（附题解 + 方法总结）](https://mp.weixin.qq.com/s/rjGqxUvrEqJNlo09GrT1Dw)
-- [好用！期待已久的文本块功能究竟如何在 Java 13 中发挥作用？](https://mp.weixin.qq.com/s/kalGv5T8AZGxTnLHr2wDsA)
-- [2019 GitHub 开源贡献排行榜新鲜出炉！微软谷歌领头，阿里跻身前 12！](https://mp.weixin.qq.com/s/_q812aGD1b9QvZ2WFI0Qgw)
+- [Faker的第六冠：当传奇成为日常，T1的三连冠王朝](https://mp.weixin.qq.com/s/tT-c62KN4YoaN735ArILZw)
+- [狗策划是如何拖慢游戏开发进度的](https://mp.weixin.qq.com/s/ECHLBU127YVlWInDdFc82A)
+- [最佳Apple Watch应用：提升你的工作效率](https://mp.weixin.qq.com/s/5YFTjkK0lSnn_7apwWV4lA)
+- [[游戏算法基础]:A\* 寻路算法(持续维护)](https://mp.weixin.qq.com/s/5vgR2SS4rrx7nuaQmEyw1w)
 
 ---
 
 <center>
-    <img src="https://cdn-doocs.oss-cn-shenzhen.aliyuncs.com/gh/doocs/md/images/1648303220922-7e14aefa-816e-44c1-8604-ade709ca1c69.png" style="width: 100px;">
+    <img src="https://images.waer.ltd/notes/202509282306627.jpg" style="width: 100px;">
 </center>
