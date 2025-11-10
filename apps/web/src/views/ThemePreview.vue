@@ -542,91 +542,135 @@ function handleSubmitTheme() {
 
 .submit-theme-button {
   transition: all 0.2s ease;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white !important;
+  border: none;
+  font-weight: 500;
 }
 
 .submit-theme-button:hover {
-  background: rgba(102, 168, 255, 0.1) !important;
-  color: #66a8ff !important;
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
 .submit-theme-tooltip {
   position: absolute;
   top: 100%;
   right: 0;
-  margin-top: 8px;
+  margin-top: 12px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
+  transform: translateY(-10px);
 }
 
 .submit-theme-container:hover .submit-theme-tooltip {
   opacity: 1;
   visibility: visible;
+  transform: translateY(0);
 }
 
 .tooltip-content {
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  padding: 16px;
-  border-radius: 8px;
+  background: linear-gradient(145deg, #2d3748, #1a202c);
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 12px;
   font-size: 14px;
-  line-height: 1.5;
-  max-width: 300px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  border: 2px solid #66a8ff;
+  line-height: 1.6;
+  width: 280px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.3),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
   position: relative;
-  white-space: nowrap;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.tooltip-content::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 24px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #2d3748;
 }
 
 .tooltip-content h3 {
-  margin: 0 0 12px 0;
-  color: #66a8ff;
-  font-size: 16px;
-  font-weight: bold;
-  white-space: normal;
+  margin: 0 0 16px 0;
+  color: #667eea;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .tooltip-content p {
-  margin: 0 0 12px 0;
-  white-space: normal;
+  margin: 0 0 16px 0;
+  color: #cbd5e0;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .submit-info {
-  border-top: 1px solid #333;
-  padding-top: 12px;
-  margin-top: 12px;
+  background: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
 }
 
 .submit-info p {
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
+  font-size: 13px;
+}
+
+.submit-info p:last-child {
+  margin-bottom: 0;
 }
 
 .link-info {
-  color: #66a8ff;
+  color: #90cdf4;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .password-info {
+  color: #a0aec0;
   font-size: 12px;
-  color: #ccc;
-  margin-top: 8px !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .password-info code {
-  background: rgba(102, 168, 255, 0.2);
-  color: #66a8ff;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: 'Courier New', monospace;
+  background: rgba(102, 126, 234, 0.2);
+  color: #90cdf4;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(102, 126, 234, 0.3);
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .tooltip-content {
-    max-width: 250px;
-    font-size: 13px;
+    width: 260px;
     right: -50px;
+  }
+
+  .tooltip-content::before {
+    right: 74px;
   }
 }
 </style>
