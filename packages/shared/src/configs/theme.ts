@@ -41,7 +41,7 @@ export const themeOptionsMap = {
     desc: `@Welight`,
   },
   'vintage-paper': {
-    label: `锯齿牛皮纸`,
+    label: `泛黄纸张`,
     value: `vintage-paper`,
     desc: `@Welight`,
   },
@@ -84,7 +84,7 @@ export const themeOptions: IConfigOption<ThemeName>[] = [
     desc: `@Welight`,
   },
   {
-    label: `锯齿牛皮纸`,
+    label: `泛黄纸张`,
     value: `vintage-paper`,
     desc: `@Welight`,
   },
