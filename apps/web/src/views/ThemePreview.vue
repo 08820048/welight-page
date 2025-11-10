@@ -167,11 +167,15 @@ function handleSubmitTheme() {
               公开预览
             </div>
             <div class="submit-theme-container">
-              <button
-                class="submit-theme-button inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-3 py-1"
-                @click="handleSubmitTheme"
-              >
-                提交主题
+              <button class="loader" @click="handleSubmitTheme">
+                <div class="loader-bg">
+                  <span>提交主题</span>
+                </div>
+                <div class="drops">
+                  <div class="drop1" />
+                  <div class="drop2" />
+                  <div class="drop3" />
+                </div>
               </button>
               <div class="submit-theme-tooltip">
                 <div class="tooltip-content">
@@ -188,6 +192,23 @@ function handleSubmitTheme() {
                   </div>
                 </div>
               </div>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 0; height: 0;">
+                <defs>
+                  <filter id="liquid">
+                    <feGaussianBlur
+                      result="blur"
+                      stdDeviation="10"
+                      in="SourceGraphic"
+                    />
+                    <feColorMatrix
+                      result="liquid"
+                      values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                      mode="matrix"
+                      in="blur"
+                    />
+                  </filter>
+                </defs>
+              </svg>
             </div>
           </div>
         </div>
@@ -540,17 +561,133 @@ function handleSubmitTheme() {
   position: relative;
 }
 
-.submit-theme-button {
-  transition: all 0.2s ease;
-  background: #4f46e5;
-  color: white !important;
-  border: 1px solid #4f46e5;
-  font-weight: 500;
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.submit-theme-button:hover {
-  background: #4338ca !important;
-  border-color: #4338ca;
+@keyframes jump-scare {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9) rotate(-5deg);
+    opacity: 1;
+  }
+}
+
+@keyframes drop {
+  0% {
+    bottom: 0px;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    bottom: -400px;
+  }
+}
+
+.loader {
+  text-align: center;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  width: auto;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.loader-bg {
+  border-radius: 12px;
+  padding: 8px 16px;
+  z-index: 2;
+  width: auto;
+  min-width: 100px;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background-color: black;
+  background-image: radial-gradient(circle 80px at 50% 150%, #2a2a2a, black);
+  margin-bottom: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.loader-bg:hover {
+  text-shadow: 0px 0px 8px #fff;
+  animation: jump-scare 0.2s ease-in-out;
+}
+
+.loader-bg:active {
+  background-image: radial-gradient(circle 140px at 50% 150%, #2a2a2a, black);
+}
+
+.loader-bg:hover + .drops .drop2,
+.loader-bg:hover + .drops .drop3 {
+  animation: drop 0.5s cubic-bezier(1, 0.19, 0.66, 0.12) 0.1s infinite;
+}
+
+.loader-bg:active + .drops .drop1,
+.loader-bg:active + .drops .drop2,
+.loader-bg:active + .drops .drop3 {
+  background-color: #fff;
+}
+
+.drops {
+  filter: url('#liquid');
+  position: absolute;
+  top: 35%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  opacity: 0;
+  animation: fade-in 0.3s linear 0.2s forwards;
+}
+
+.drop1,
+.drop2,
+.drop3 {
+  width: 20px;
+  height: 28px;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  background-color: black;
+}
+
+.drop1 {
+  width: 125px;
+  height: 16px;
+  bottom: 2px;
+  border-radius: 0;
+}
+
+.drop3 {
+  background-color: white;
+}
+
+.drop2,
+.drop3 {
+  animation: drop 1.5s cubic-bezier(1, 0.19, 0.66, 0.12) 0.7s infinite;
 }
 
 .submit-theme-tooltip {
