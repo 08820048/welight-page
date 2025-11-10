@@ -1,21 +1,15 @@
 <script setup lang="ts">
-import { ChevronDownIcon, Code, Menu, Monitor, Moon, PanelLeft, PanelLeftClose, PanelLeftOpen, Sun, List } from 'lucide-vue-next'
-import { Switch } from '@/components/ui/switch'
+import { Code, Menu, Monitor, PanelLeftClose, PanelLeftOpen } from 'lucide-vue-next'
+import UserDropdown from '@/components/auth/UserDropdown.vue'
 import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Menubar, MenubarContent, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar'
-import { Separator } from '@/components/ui/separator'
 import { useEditorStore } from '@/stores/editor'
-import { useExportStore } from '@/stores/export'
 import { useRenderStore } from '@/stores/render'
 import { useThemeStore } from '@/stores/theme'
 import { useUIStore } from '@/stores/ui'
-import { useAuthStore } from '@/stores/auth'
-import { addPrefix, generatePureHTML, processClipboardContent, store } from '@/utils'
-import { widthOptions } from '@welight/shared/configs'
+import { addPrefix, processClipboardContent } from '@/utils'
 import FormatDropdown from './FormatDropdown.vue'
 import SettingsDropdown from './SettingsDropdown.vue'
-import UserDropdown from '@/components/auth/UserDropdown.vue'
 
 const emit = defineEmits([`startCopy`, `endCopy`])
 
@@ -23,13 +17,11 @@ const editorStore = useEditorStore()
 const themeStore = useThemeStore()
 const renderStore = useRenderStore()
 const uiStore = useUIStore()
-const exportStore = useExportStore()
-const authStore = useAuthStore()
 
 const { editor } = storeToRefs(editorStore)
 const { output } = storeToRefs(renderStore)
 const { primaryColor, previewWidth } = storeToRefs(themeStore)
-const { isOpenRightSlider, isOpenPostSlider, isDark, isPinFloatingToc, isShowCssEditor } = storeToRefs(uiStore)
+const { isOpenRightSlider, isOpenPostSlider, isDark, isShowCssEditor } = storeToRefs(uiStore)
 
 // Editor refresh function
 function editorRefresh() {
@@ -56,8 +48,6 @@ function handleOpenAbout() {
   aboutDialogVisible.value = true
 }
 
-
-
 function handleOpenEditorState() {
   editorStateDialogVisible.value = true
 }
@@ -81,11 +71,6 @@ function previewWidthChanged(newWidth: string) {
 // 深色模式切换
 function toggleDarkMode() {
   uiStore.toggleDark()
-}
-
-// 浮动目录切换
-function toggleFloatingToc() {
-  uiStore.togglePinFloatingToc()
 }
 
 // CSS编辑器切换
@@ -244,8 +229,6 @@ async function copy() {
     })
   }, 350)
 }
-
-
 </script>
 
 <template>
@@ -260,8 +243,8 @@ async function copy() {
         size="icon"
         class="hidden md:flex ml-2 mr-1"
         :class="{ 'bg-accent': isOpenPostSlider }"
-        @click="togglePostSlider"
         title="切换内容管理"
+        @click="togglePostSlider"
       >
         <PanelLeftOpen v-if="!isOpenPostSlider" class="h-4 w-4" />
         <PanelLeftClose v-else class="h-4 w-4" />
@@ -275,11 +258,10 @@ async function copy() {
           <EditDropdown />
           <StyleDropdown />
           <SettingsDropdown />
+          <WebsiteDropdown />
           <HelpDropdown @open-about="handleOpenAbout" />
         </Menubar>
       </div>
-
-
     </div>
 
     <!-- 移动端按钮组 -->
@@ -290,8 +272,8 @@ async function copy() {
         size="icon"
         class="mr-2"
         :class="{ 'bg-accent': isOpenPostSlider }"
-        @click="togglePostSlider"
         title="切换内容管理"
+        @click="togglePostSlider"
       >
         <PanelLeftOpen v-if="!isOpenPostSlider" class="h-4 w-4" />
         <PanelLeftClose v-else class="h-4 w-4" />
@@ -311,6 +293,7 @@ async function copy() {
             <EditDropdown :as-sub="true" />
             <StyleDropdown :as-sub="true" />
             <SettingsDropdown :as-sub="true" />
+            <WebsiteDropdown :as-sub="true" />
             <HelpDropdown :as-sub="true" @open-about="handleOpenAbout" />
           </MenubarContent>
         </MenubarMenu>
@@ -328,133 +311,133 @@ async function copy() {
       <div class="space-x-2 flex flex-wrap items-center mr-4">
         <!-- 预览模式 -->
         <div class="hidden md:flex items-center space-x-2">
-        <Monitor class="h-4 w-4 text-muted-foreground" />
-        <label class="preview-switch">
-          <input
-            :checked="previewWidth === 'w-full'"
-            type="checkbox"
-            @change="() => previewWidthChanged(previewWidth === 'w-full' ? 'w-[375px]' : 'w-full')"
-          >
-          <div class="preview-slider">
-            <span>移动端</span>
-            <span>电脑端</span>
-          </div>
-        </label>
-      </div>
-
-      <!-- 深色模式 -->
-      <div class="hidden md:flex items-center space-x-2">
-        <component :is="isDark ? 'span' : 'span'" class="text-xs">
-          ☀️
-        </component>
-        <div class="toggle-wrapper">
-          <input
-            :checked="isDark"
-            type="checkbox"
-            class="toggle-checkbox"
-            @change="toggleDarkMode"
-          >
-          <div class="toggle-container">
-            <div class="toggle-button">
-              <div class="toggle-button-circles-container">
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <span class="text-xs">🌑</span>
-      </div>
-
-      <!-- CSS编辑器 -->
-      <div class="hidden md:flex items-center space-x-2">
-        <Code class="h-4 w-4 text-muted-foreground" />
-        <div class="toggle-wrapper">
-          <input
-            :checked="isShowCssEditor"
-            type="checkbox"
-            class="toggle-checkbox"
-            @change="toggleCssEditor"
-          >
-          <div class="toggle-container">
-            <div class="toggle-button">
-              <div class="toggle-button-circles-container">
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-                <div class="toggle-button-circle" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 复制按钮 -->
-      <button class="copy-btn" @click="copy">
-        <span class="copy-text">复制</span>
-        <span class="copy-svg-icon">
-          <svg fill="white" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
-            <path d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
-          </svg>
-        </span>
-      </button>
-
-      <!-- 样式面板按钮 - 新风格 -->
-      <button class="cta ml-2" @click="toggleRightSlider" title="切换样式面板">
-        <span class="span">主题设置</span>
-        <span class="second">
-          <svg
-            width="50px"
-            height="20px"
-            viewBox="0 0 66 43"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-          >
-            <g
-              id="arrow"
-              stroke="none"
-              stroke-width="1"
-              fill="none"
-              fill-rule="evenodd"
+          <Monitor class="h-4 w-4 text-muted-foreground" />
+          <label class="preview-switch">
+            <input
+              :checked="previewWidth === 'w-full'"
+              type="checkbox"
+              @change="() => previewWidthChanged(previewWidth === 'w-full' ? 'w-[375px]' : 'w-full')"
             >
-              <path
-                class="one"
-                d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
-                fill="#FFFFFF"
-              ></path>
-              <path
-                class="two"
-                d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
-                fill="#FFFFFF"
-              ></path>
-              <path
-                class="three"
-                d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
-                fill="#FFFFFF"
-              ></path>
-            </g>
-          </svg>
-        </span>
-      </button>
+            <div class="preview-slider">
+              <span>移动端</span>
+              <span>电脑端</span>
+            </div>
+          </label>
+        </div>
+
+        <!-- 深色模式 -->
+        <div class="hidden md:flex items-center space-x-2">
+          <component :is="isDark ? 'span' : 'span'" class="text-xs">
+            ☀️
+          </component>
+          <div class="toggle-wrapper">
+            <input
+              :checked="isDark"
+              type="checkbox"
+              class="toggle-checkbox"
+              @change="toggleDarkMode"
+            >
+            <div class="toggle-container">
+              <div class="toggle-button">
+                <div class="toggle-button-circles-container">
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="text-xs">🌑</span>
+        </div>
+
+        <!-- CSS编辑器 -->
+        <div class="hidden md:flex items-center space-x-2">
+          <Code class="h-4 w-4 text-muted-foreground" />
+          <div class="toggle-wrapper">
+            <input
+              :checked="isShowCssEditor"
+              type="checkbox"
+              class="toggle-checkbox"
+              @change="toggleCssEditor"
+            >
+            <div class="toggle-container">
+              <div class="toggle-button">
+                <div class="toggle-button-circles-container">
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                  <div class="toggle-button-circle" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 复制按钮 -->
+        <button class="copy-btn" @click="copy">
+          <span class="copy-text">复制</span>
+          <span class="copy-svg-icon">
+            <svg fill="white" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+              <path d="M280 64h40c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128C0 92.7 28.7 64 64 64h40 9.6C121 27.5 153.3 0 192 0s71 27.5 78.4 64H280zM64 112c-8.8 0-16 7.2-16 16V448c0 8.8 7.2 16 16 16H320c8.8 0 16-7.2 16-16V128c0-8.8-7.2-16-16-16H304v24c0 13.3-10.7 24-24 24H192 104c-13.3 0-24-10.7-24-24V112H64zm128-8a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
+            </svg>
+          </span>
+        </button>
+
+        <!-- 样式面板按钮 - 新风格 -->
+        <button class="cta ml-2" title="切换样式面板" @click="toggleRightSlider">
+          <span class="span">主题设置</span>
+          <span class="second">
+            <svg
+              width="50px"
+              height="20px"
+              viewBox="0 0 66 43"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g
+                id="arrow"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+              >
+                <path
+                  class="one"
+                  d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
+                  fill="#FFFFFF"
+                />
+                <path
+                  class="two"
+                  d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
+                  fill="#FFFFFF"
+                />
+                <path
+                  class="three"
+                  d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
+                  fill="#FFFFFF"
+                />
+              </g>
+            </svg>
+          </span>
+        </button>
       </div>
 
       <!-- 用户信息 - 最右侧 -->
@@ -469,8 +452,6 @@ async function copy() {
   <EditorStateDialog :visible="editorStateDialogVisible" @close="editorStateDialogVisible = false" />
   <!-- AI 功能已隐藏 -->
   <!-- <AIImageGeneratorPanel v-model:open="uiStore.aiImageDialogVisible" /> -->
-
-
 </template>
 
 <style lang="less" scoped>
@@ -737,8 +718,6 @@ kbd {
 .span {
   transform: skewX(15deg);
 }
-
-
 
 .second {
   width: 20px;

@@ -13,10 +13,6 @@ function openAboutDialog() {
   emit(`openAbout`)
 }
 
-function openWebsite() {
-  window.open('https://waer.ltd/', '_blank')
-}
-
 function openDesktopDownload() {
   window.open('https://waer.ltd/download', '_blank')
 }
@@ -32,9 +28,6 @@ function openDesktopDownload() {
       <MenubarCheckboxItem @click="openAboutDialog()">
         关于
       </MenubarCheckboxItem>
-      <MenubarCheckboxItem @click="openWebsite()">
-        官网
-      </MenubarCheckboxItem>
       <MenubarCheckboxItem @click="openDesktopDownload()">
         桌面版下载
       </MenubarCheckboxItem>
@@ -47,9 +40,6 @@ function openDesktopDownload() {
     <MenubarContent align="start">
       <MenubarCheckboxItem @click="openAboutDialog()">
         <span>关于</span>
-      </MenubarCheckboxItem>
-      <MenubarCheckboxItem @click="openWebsite()">
-        <span>官网</span>
       </MenubarCheckboxItem>
       <MenubarCheckboxItem @click="openDesktopDownload()">
         <span>桌面版下载</span>

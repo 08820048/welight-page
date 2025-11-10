@@ -17,7 +17,6 @@ import {
   ResizablePanelGroup,
 } from '@/components/ui/resizable'
 import { SearchTab } from '@/components/ui/search-tab'
-import { Button } from '@/components/ui/button'
 import { useCssEditorStore } from '@/stores/cssEditor'
 import { useEditorStore } from '@/stores/editor'
 import { usePostStore } from '@/stores/post'
@@ -682,8 +681,7 @@ onUnmounted(() => {
                 :show-editor="showEditor"
               /> -->
 
-	              <SelectionMenu v-if="codeMirrorView" :editor-view="codeMirrorView as any" :container="codeMirrorWrapper as any" />
-
+              <SelectionMenu v-if="codeMirrorView" :editor-view="codeMirrorView as any" :container="codeMirrorWrapper as any" />
 
               <EditorContextMenu>
                 <div
@@ -714,15 +712,11 @@ onUnmounted(() => {
                     v-if="!isMobile && themeStore.previewWidth === 'w-[375px]'"
                     class="mobile-phone-container mx-auto"
                   >
-                    <div class="mobile-phone-frame">
-                      <!-- 手机顶部刘海 -->
-                      <span class="mobile-phone-notch"></span>
-
-                      <!-- 手机右侧按钮 -->
-                      <span class="mobile-phone-button-power"></span>
-                      <span class="mobile-phone-button-volume"></span>
-
-                      <!-- 手机屏幕内容 -->
+                    <div class="mobile-phone-card">
+                      <div class="btn1" />
+                      <div class="btn2" />
+                      <div class="btn3" />
+                      <div class="btn4" />
                       <div class="mobile-phone-screen">
                         <section id="output" class="mobile-phone-content" v-html="output" />
                         <div v-if="isCoping" class="loading-mask">
@@ -731,6 +725,12 @@ onUnmounted(() => {
                             <span>正在生成</span>
                           </div>
                         </div>
+                      </div>
+                      <div class="mobile-phone-top">
+                        <div class="mobile-phone-camera">
+                          <div class="mobile-phone-camera-int" />
+                        </div>
+                        <div class="mobile-phone-speaker" />
                       </div>
                     </div>
                   </div>
@@ -761,14 +761,11 @@ onUnmounted(() => {
               </div>
 
               <FloatingToc />
-
             </div>
             <CssEditor />
             <RightSlider />
           </ResizablePanel>
         </ResizablePanelGroup>
-
-
       </div>
 
       <!-- 移动端浮动按钮组 -->
@@ -874,7 +871,7 @@ onUnmounted(() => {
   position: relative;
 }
 
-/* 手机外形预览样式 - 严格按照原始设计 */
+/* 手机外形预览样式 - 和主题预览页面统一 */
 .mobile-phone-container {
   display: flex;
   justify-content: center;
@@ -883,60 +880,114 @@ onUnmounted(() => {
   min-height: 600px;
 }
 
-.mobile-phone-frame {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  height: 640px;
+.mobile-phone-card {
   width: 320px;
-  border: 4px solid #000000;
-  border-radius: 32px;
-  background: #f9fafb;
-  box-shadow: 5px 5px 2.5px 6px rgb(209, 218, 218);
-}
-
-.mobile-phone-notch {
-  border: 1px solid #000000;
-  background: #000000;
-  width: 80px;
-  height: 8px;
-  border-radius: 0 0 12px 12px;
-}
-
-.mobile-phone-button-power {
-  position: absolute;
-  right: -8px;
-  top: 136px;
-  border: 4px solid #000000;
-  height: 28px;
-  border-radius: 5px;
-}
-
-.mobile-phone-button-volume {
-  position: absolute;
-  right: -8px;
-  top: 172px;
-  border: 4px solid #000000;
-  height: 40px;
-  border-radius: 6px;
+  height: 640px;
+  background: black;
+  border-radius: 35px;
+  border: 2px solid rgb(40, 40, 40);
+  padding: 7px;
+  position: relative;
+  box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.486);
 }
 
 .mobile-phone-screen {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  background: #ffffff;
-  border-radius: 20px;
+  background: white;
+  height: calc(100% - 14px);
+  width: calc(100% - 14px);
+  margin: 7px;
+  border-radius: 25px;
+  transition: all 0.6s ease-out;
   overflow: hidden;
+}
+
+.mobile-phone-top {
+  position: absolute;
+  top: 0px;
+  right: 50%;
+  transform: translate(50%, 0%);
+  width: 35%;
+  height: 18px;
+  background-color: black;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.mobile-phone-speaker {
+  position: absolute;
+  top: 2px;
+  right: 50%;
+  transform: translate(50%, 0%);
+  width: 40%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: rgb(20, 20, 20);
+}
+
+.mobile-phone-camera {
+  position: absolute;
+  top: 6px;
+  right: 84%;
+  transform: translate(50%, 0%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.048);
+}
+
+.mobile-phone-camera-int {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  background-color: rgba(0, 0, 255, 0.212);
+}
+
+.btn1,
+.btn2,
+.btn3,
+.btn4 {
+  position: absolute;
+  width: 2px;
+}
+
+.btn1,
+.btn2,
+.btn3 {
+  height: 45px;
+  top: 30%;
+  right: -4px;
+  background-image: linear-gradient(to right, #111111, #222222, #333333, #464646, #595959);
+}
+
+.btn2,
+.btn3 {
+  transform: scale(-1);
+  left: -4px;
+}
+
+.btn2,
+.btn3 {
+  transform: scale(-1);
+  height: 30px;
+}
+
+.btn2 {
+  top: 26%;
+}
+
+.btn3 {
+  top: 36%;
 }
 
 .mobile-phone-content {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  padding:0;
+  padding: 0;
   font-size: 14px;
   line-height: 1.6;
 

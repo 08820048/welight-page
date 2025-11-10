@@ -58,7 +58,10 @@ function buildFootnoteArray(footnotes: [number, string, string][]): string {
     .join(`\n`)
 }
 
-function transform(legend: string, text: string | null, title: string | null): string {
+function transform(legend: string | undefined, text: string | null, title: string | null): string {
+  if (!legend) {
+    return text || title || ``
+  }
   const options = legend.split(`-`)
   for (const option of options) {
     if (option === `alt` && text) {
@@ -224,7 +227,7 @@ export function initRenderer(opts: IOpts = {}): RendererAPI {
         }, 0) as any as number
         return `<pre class="mermaid">${text}</pre>`
       }
-      const langText = lang.split(` `)[0]
+      const langText = lang ? lang.split(` `)[0] : `plaintext`
       const isLanguageRegistered = hljs.getLanguage(langText)
       const language = isLanguageRegistered ? langText : `plaintext`
 
@@ -237,7 +240,7 @@ export function initRenderer(opts: IOpts = {}): RendererAPI {
         const escapedText = text.replace(/"/g, `&quot;`)
         pendingAttr = ` data-language-pending="${langText}" data-raw-code="${escapedText}" data-show-line-number="${opts.isShowLineNumber}"`
       }
-      const code = `<code class="language-${lang}"${pendingAttr}>${highlighted}</code>`
+      const code = `<code class="language-${langText}"${pendingAttr}>${highlighted}</code>`
 
       return `<pre class="hljs code__pre">${span}${code}</pre>`
     },
@@ -294,7 +297,7 @@ export function initRenderer(opts: IOpts = {}): RendererAPI {
     },
 
     image({ href, title, text }: Tokens.Image): string {
-      const subText = styledContent(`figcaption`, transform(opts.legend!, text, title))
+      const subText = styledContent(`figcaption`, transform(opts.legend, text, title))
       return `<figure><img src="${href}" title="${title}" alt="${text}"/>${subText}</figure>`
     },
 

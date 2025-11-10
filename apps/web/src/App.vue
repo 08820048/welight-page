@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Toaster } from '@/components/ui/sonner'
-import { useUIStore } from '@/stores/ui'
-import { useAuthStore } from '@/stores/auth'
-import CodemirrorEditor from '@/views/CodemirrorEditor.vue'
+import { onMounted, ref, watch } from 'vue'
 import LoginDialog from '@/components/auth/LoginDialog.vue'
+import { Toaster } from '@/components/ui/sonner'
+import { useAuthStore } from '@/stores/auth'
+import { useUIStore } from '@/stores/ui'
 
 const uiStore = useUIStore()
 const authStore = useAuthStore()
@@ -30,7 +29,7 @@ onMounted(async () => {
   }
 })
 
-const handleLoginSuccess = () => {
+function handleLoginSuccess() {
   showLoginDialog.value = false
 }
 
@@ -43,7 +42,7 @@ watch(() => authStore.isAuthenticated, (isAuthenticated) => {
 </script>
 
 <template>
-  <CodemirrorEditor v-if="authStore.isAuthenticated" />
+  <router-view v-if="authStore.isAuthenticated" />
 
   <LoginDialog
     :show-login="showLoginDialog"

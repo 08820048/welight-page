@@ -21,6 +21,8 @@
     "@ssttevee/multipart-parser": "^0.1.9",
     "@vee-validate/yup": "^4.15.0",
     "@vueuse/core": "^14.0.0",
+    "@welight/core": "workspace:*",
+    "@welight/shared": "workspace:*",
     "axios": "^1.13.1",
     "browser-image-compression": "^2.0.2",
     "buffer-from": "^1.1.2",
@@ -56,10 +58,9 @@
     "vee-validate": "^4.15.0",
     "vue": "^3.5.22",
     "vue-pick-colors": "^1.8.0",
+    "vue-router": "^4.6.3",
     "vue-sonner": "^2.0.9",
-    "yup": "^1.7.1",
-    "@welight/core": "workspace:*",
-    "@welight/shared": "workspace:*"
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.13.18",
@@ -71,6 +72,7 @@
     "@types/mdast": "^4.0.4",
     "@types/unist": "^3.0.3",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@welight/config": "workspace:*",
     "less": "^4.4.2",
     "linkedom": "^0.18.12",
     "ohash": "^2.0.11",
@@ -87,7 +89,6 @@
     "vite-plugin-vue-devtools": "^8.0.3",
     "vue-tsc": "^3.1.3",
     "wrangler": "^4.45.3",
-    "wxt": "^0.20.11",
-    "@welight/config": "workspace:*"
+    "wxt": "^0.20.11"
   }
 }
