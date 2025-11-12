@@ -190,7 +190,9 @@ ul {
 }
 
 /* 默认主题隐藏渲染器注入的前缀，避免与原生 marker 重复 */
-.md-list-prefix { display: none; }
+.md-list-prefix {
+  display: none;
+}
 
 li {
   display: list-item;
@@ -251,6 +253,8 @@ pre.code__pre > code,
   background: none;
   white-space: nowrap;
   margin: 0;
+  overflow-x: auto !important; /* 确保长代码可以横向滚动 */
+  overflow-y: hidden !important;
 }
 
 /* ==================== 强调 ==================== */
