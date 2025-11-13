@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import type { EditorView } from '@codemirror/view'
 import { EditorSelection } from '@codemirror/state'
-import { Bold, Code, Heading1, Heading2, Heading3, Italic, Link as LinkIcon, List, ListOrdered, Quote, Sparkles, Strikethrough } from 'lucide-vue-next'
+import { applyHeading, formatAlert, formatBold, formatCode, formatItalic, formatLink, formatOrderedList, formatStrikethrough, formatUnorderedList } from '@welight/shared/editor/format'
+import { AlertTriangle, Bold, Code, Info, Italic, Link as LinkIcon, List, ListOrdered, Quote, Strikethrough } from 'lucide-vue-next'
+import { AIPolishPopover } from '@/components/ai/tool-box'
 import { Button } from '@/components/ui/button'
-import { applyHeading, formatBold, formatCode, formatItalic, formatLink, formatOrderedList, formatStrikethrough, formatUnorderedList } from '@welight/shared/editor/format'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useUIStore } from '@/stores/ui'
-import { AIPolishPopover } from '@/components/ai/tool-box'
-import { toast } from '@/utils/toast'
 
 const props = defineProps<{
   editorView?: EditorView | null
@@ -44,17 +43,19 @@ function getSelectionText(view: EditorView) {
 
 function computePosition(view: EditorView) {
   const sel = view.state.selection.main
-  if (sel.empty) return false
+  if (sel.empty)
+    return false
   const from = view.coordsAtPos(sel.from)
   const to = view.coordsAtPos(sel.to)
   const container = wrapperEl.value || (view.dom.parentElement as HTMLElement)
-  if (!from || !to || !container) return false
+  if (!from || !to || !container)
+    return false
 
   const containerRect = container.getBoundingClientRect()
   const cx = (Math.min(from.left, to.left) + Math.max(from.right, to.right)) / 2
   const cyTop = Math.min(from.top, to.top)
 
-  let width = menuRef.value?.offsetWidth || lastMenuWidth.value || 360
+  const width = menuRef.value?.offsetWidth || lastMenuWidth.value || 360
   const x = cx - containerRect.left - width / 2
   const y = cyTop - containerRect.top - 44 // 44px above selection
 
@@ -76,7 +77,8 @@ function computePosition(view: EditorView) {
 
 function maybeShow() {
   const view = getView()
-  if (!view) return
+  if (!view)
+    return
   const sel = view.state.selection.main
   if (sel.empty) {
     visible.value = false
@@ -86,7 +88,8 @@ function maybeShow() {
   if (!visible.value) {
     visible.value = true
     nextTick(() => {
-      if (getView()) computePosition(getView()!)
+      if (getView())
+        computePosition(getView()!)
     })
   }
   else {
@@ -100,8 +103,14 @@ function hide() {
 
 function onKeyup() { maybeShow() }
 function onMouseup() { maybeShow() }
-function onScroll() { if (visible.value) maybeShow() }
-function onResize() { if (visible.value) maybeShow() }
+function onScroll() {
+  if (visible.value)
+    maybeShow()
+}
+function onResize() {
+  if (visible.value)
+    maybeShow()
+}
 
 onMounted(() => {
   const view = getView()
@@ -114,7 +123,8 @@ onMounted(() => {
   container?.addEventListener('scroll', onScroll, true)
   window.addEventListener('resize', onResize)
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') hide()
+    if (e.key === 'Escape')
+      hide()
   })
 })
 
@@ -132,7 +142,8 @@ onBeforeUnmount(() => {
 // actions
 function withView(action: (view: EditorView) => void) {
   const view = getView()
-  if (!view) return
+  if (!view)
+    return
   action(view)
   view.focus()
   // keep selection menu visible but reposition
@@ -171,41 +182,78 @@ function quote() {
   })
 }
 
-function runAIQuick(action: AIPreset) {
-  const view = getView()
-  if (!view) return
-  const sel = view.state.selection.main
-  if (sel.empty) {
-    toast.error('请先选择文本')
-    return
-  }
-  const text = view.state.doc.sliceString(sel.from, sel.to)
-  if (!text.trim()) {
-    toast.error('选中文本为空')
-    return
-  }
-  selectedText.value = text
-  aiPresetAction.value = action
-  aiOpen.value = true
+function alert(type: 'note' | 'tip' | 'important' | 'warning' | 'caution' = 'note') {
+  withView(view => formatAlert(view, type))
 }
 </script>
 
 <template>
   <div v-if="visible" class="absolute z-50" :style="{ top: `${top}px`, left: `${left}px` }">
     <div ref="menuRef" class="flex items-center gap-1 rounded-xl border bg-background/95 px-2 py-1 shadow-lg backdrop-blur supports-backdrop-filter:bg-background/80">
-      <button class="p-2 hover:bg-muted rounded-md text-xs font-medium" @click="h1">H1</button>
-      <button class="p-2 hover:bg-muted rounded-md text-xs font-medium" @click="h2">H2</button>
-      <button class="p-2 hover:bg-muted rounded-md text-xs font-medium" @click="h3">H3</button>
+      <button class="p-2 hover:bg-muted rounded-md text-xs font-medium" @click="h1">
+        H1
+      </button>
+      <button class="p-2 hover:bg-muted rounded-md text-xs font-medium" @click="h2">
+        H2
+      </button>
+      <button class="p-2 hover:bg-muted rounded-md text-xs font-medium" @click="h3">
+        H3
+      </button>
       <span class="mx-1 h-5 w-px bg-border" />
-      <Button variant="ghost" size="icon" class="h-8 w-8" @click="bold"><Bold class="h-4 w-4" /></Button>
-      <Button variant="ghost" size="icon" class="h-8 w-8" @click="italic"><Italic class="h-4 w-4" /></Button>
-      <Button variant="ghost" size="icon" class="h-8 w-8" @click="strike"><Strikethrough class="h-4 w-4" /></Button>
-      <Button variant="ghost" size="icon" class="h-8 w-8" @click="link"><LinkIcon class="h-4 w-4" /></Button>
+      <Button variant="ghost" size="icon" class="h-8 w-8" @click="bold">
+        <Bold class="h-4 w-4" />
+      </Button>
+      <Button variant="ghost" size="icon" class="h-8 w-8" @click="italic">
+        <Italic class="h-4 w-4" />
+      </Button>
+      <Button variant="ghost" size="icon" class="h-8 w-8" @click="strike">
+        <Strikethrough class="h-4 w-4" />
+      </Button>
+      <Button variant="ghost" size="icon" class="h-8 w-8" @click="link">
+        <LinkIcon class="h-4 w-4" />
+      </Button>
       <span class="mx-1 h-5 w-px bg-border" />
-      <Button variant="ghost" size="icon" class="h-8 w-8" @click="ul"><List class="h-4 w-4" /></Button>
-      <Button variant="ghost" size="icon" class="h-8 w-8" @click="ol"><ListOrdered class="h-4 w-4" /></Button>
-      <Button variant="ghost" size="icon" class="h-8 w-8" @click="quote"><Quote class="h-4 w-4" /></Button>
-      <Button variant="ghost" size="icon" class="h-8 w-8" @click="ilCode"><Code class="h-4 w-4" /></Button>
+      <Button variant="ghost" size="icon" class="h-8 w-8" @click="ul">
+        <List class="h-4 w-4" />
+      </Button>
+      <Button variant="ghost" size="icon" class="h-8 w-8" @click="ol">
+        <ListOrdered class="h-4 w-4" />
+      </Button>
+      <Button variant="ghost" size="icon" class="h-8 w-8" @click="quote">
+        <Quote class="h-4 w-4" />
+      </Button>
+      <Button variant="ghost" size="icon" class="h-8 w-8" @click="ilCode">
+        <Code class="h-4 w-4" />
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger as-child>
+          <Button variant="ghost" size="icon" class="h-8 w-8" title="提醒框">
+            <Info class="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" side="top" class="min-w-32">
+          <DropdownMenuItem @click="alert('note')">
+            <Info class="h-4 w-4 mr-2 text-blue-500" />
+            笔记
+          </DropdownMenuItem>
+          <DropdownMenuItem @click="alert('tip')">
+            <Info class="h-4 w-4 mr-2 text-green-500" />
+            提示
+          </DropdownMenuItem>
+          <DropdownMenuItem @click="alert('important')">
+            <AlertTriangle class="h-4 w-4 mr-2 text-purple-500" />
+            重要
+          </DropdownMenuItem>
+          <DropdownMenuItem @click="alert('warning')">
+            <AlertTriangle class="h-4 w-4 mr-2 text-yellow-500" />
+            警告
+          </DropdownMenuItem>
+          <DropdownMenuItem @click="alert('caution')">
+            <AlertTriangle class="h-4 w-4 mr-2 text-red-500" />
+            注意
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
       <!-- AI 功能已隐藏 -->
       <!-- <span class="mx-1 h-5 w-px bg-border" />
       <DropdownMenu>
@@ -235,10 +283,8 @@ function runAIQuick(action: AIPreset) {
     :autorun="true"
     :auto-replace="false"
   />
-
 </template>
 
 <style scoped>
 /***** keep menu readable *****/
 </style>
-

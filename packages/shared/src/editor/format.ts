@@ -155,6 +155,43 @@ export function formatOrderedList(view: EditorView) {
 }
 
 /**
+ * 提醒框格式化函数
+ */
+export function formatAlert(view: EditorView, type: 'note' | 'tip' | 'important' | 'warning' | 'caution' = 'note') {
+  const selection = view.state.selection.main
+  const selected = view.state.doc.sliceString(selection.from, selection.to)
+
+  // 如果没有选中文本，插入模板
+  if (!selected.trim()) {
+    const template = `> [!${type.toUpperCase()}]\n> 在这里输入提醒内容`
+    view.dispatch(view.state.replaceSelection(template))
+    // 将光标定位到内容位置
+    const newPos = selection.from + template.length - 4 // "内容" 前面
+    view.dispatch({ selection: { anchor: newPos - 4, head: newPos } })
+    return
+  }
+
+  // 检查是否已经是提醒框格式
+  const lines = selected.split('\n')
+  const isAlert = lines[0]?.trim().match(/^>\s*\[!(\w+)\]/)
+
+  if (isAlert) {
+    // 移除提醒框格式
+    const updated = lines
+      .map(line => line.replace(/^>\s*/, ''))
+      .filter((line, index) => index !== 0 || !line.match(/^\[!\w+\]/))
+      .join('\n')
+    view.dispatch(view.state.replaceSelection(updated))
+  }
+  else {
+    // 添加提醒框格式
+    const updated = `> [!${type.toUpperCase()}]\n${
+      lines.map(line => `> ${line}`).join('\n')}`
+    view.dispatch(view.state.replaceSelection(updated))
+  }
+}
+
+/**
  * 撤销/重做
  */
 export function undoAction(view: EditorView): boolean {
