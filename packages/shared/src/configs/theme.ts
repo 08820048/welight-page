@@ -5,37 +5,37 @@ import type { ThemeName } from './theme-css'
 export { baseCSSContent, themeMap, type ThemeName } from './theme-css'
 
 export const themeOptionsMap = {
-  default: {
+  'default': {
     label: `经典`,
     value: `default`,
     desc: ``,
   },
-  grace: {
+  'grace': {
     label: `优雅`,
     value: `grace`,
     desc: `@brzhang`,
   },
-  simple: {
+  'simple': {
     label: `简洁`,
     value: `simple`,
     desc: `@okooo5km`,
   },
-  rainbow: {
+  'rainbow': {
     label: `童趣彩虹`,
     value: `rainbow`,
     desc: `@Welight`,
   },
-  popart: {
+  'popart': {
     label: `波普艺术`,
     value: `popart`,
     desc: `@Welight`,
   },
-  academic: {
+  'academic': {
     label: `学术报告`,
     value: `academic`,
     desc: `@Welight`,
   },
-  technews: {
+  'technews': {
     label: `数字浪潮`,
     value: `technews`,
     desc: `@Welight`,
@@ -43,6 +43,11 @@ export const themeOptionsMap = {
   'vintage-paper': {
     label: `泛黄纸张`,
     value: `vintage-paper`,
+    desc: `@Welight`,
+  },
+  'dark-stellar': {
+    label: `暗夜星辰`,
+    value: `dark-stellar`,
     desc: `@Welight`,
   },
 }
@@ -86,6 +91,11 @@ export const themeOptions: IConfigOption<ThemeName>[] = [
   {
     label: `泛黄纸张`,
     value: `vintage-paper`,
+    desc: `@Welight`,
+  },
+  {
+    label: `暗夜星辰`,
+    value: `dark-stellar`,
     desc: `@Welight`,
   },
 ]
