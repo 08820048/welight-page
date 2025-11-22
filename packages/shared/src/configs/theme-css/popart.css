@@ -22,10 +22,10 @@
 
 /* 深色模式 - 深色背景 + 霓虹网格 */
 .dark .md-container {
-  background-color: #1a1a1a;
+  background-color: #1a1a1a !important;
   background-image:
     linear-gradient(rgba(255, 20, 147, 0.2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px) !important;
   color: #ffffff;
   border-color: #00ffff;
   box-shadow: 8px 8px 0px #ff1493;
