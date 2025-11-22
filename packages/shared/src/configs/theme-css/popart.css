@@ -7,7 +7,7 @@
 
 /* 容器基础样式 */
 .md-container {
-  background: #ffff00;
+  background-color: #ffff00;
   background-image:
     linear-gradient(rgba(200, 200, 200, 0.3) 1px, transparent 1px),
     linear-gradient(90deg, rgba(200, 200, 200, 0.3) 1px, transparent 1px);
@@ -22,7 +22,7 @@
 
 /* 深色模式 - 深色背景 + 霓虹网格 */
 .dark .md-container {
-  background: #1a1a1a;
+  background-color: #1a1a1a;
   background-image:
     linear-gradient(rgba(255, 20, 147, 0.2) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px);

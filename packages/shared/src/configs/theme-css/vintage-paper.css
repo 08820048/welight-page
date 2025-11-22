@@ -13,7 +13,7 @@ body {
 
 /* 容器背景 - 手撕牛皮纸效果（微信兼容版本） */
 .md-container {
-  background: #fffef0;
+  background-color: #fffef0;
   box-shadow:
     2px 3px 20px rgba(0, 0, 0, 0.3),
     0 0 60px #8a4d0f inset;
@@ -68,7 +68,7 @@ body {
 
 /* 深色模式下的容器背景 - 深色牛皮纸效果 */
 .dark .md-container {
-  background: #2a2520;
+  background-color: #2a2520;
   box-shadow:
     2px 3px 20px rgba(0, 0, 0, 0.5),
     0 0 60px #1a1410 inset;
