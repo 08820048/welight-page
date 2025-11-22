@@ -28,6 +28,19 @@ export default defineConfig(({ mode }) => {
     base,
     define: { process },
     envPrefix: [`VITE_`, `CF_`],
+    optimizeDeps: {
+      include: [
+        'vue',
+        'pinia',
+        '@vueuse/core',
+        'vee-validate',
+        '@vee-validate/yup',
+        'yup',
+        'vue-pick-colors',
+        'es-toolkit',
+        'html-to-image',
+      ],
+    },
     plugins: [
       vue(),
       isCfWorkers && cloudflare(),
