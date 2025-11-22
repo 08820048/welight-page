@@ -38,6 +38,14 @@ export function wrapCSSWithScope(css: string, scope: string = `#output`): string
             return trimmed
           }
 
+          // 特殊处理 .dark 选择器（深色模式）
+          // .dark 类在 html/body 上，所以应该是 .dark #output 而不是 #output .dark
+          if (trimmed.startsWith(`.dark `)) {
+            // .dark .something -> .dark #output .something
+            const restSelector = trimmed.substring(6) // 去掉 ".dark "
+            return `.dark ${scope} ${restSelector}`
+          }
+
           // 获取选择器的第一部分（基础选择器）
           const baseSelector = trimmed.split(/[\s>+~:[]/, 1)[0].trim()
 
