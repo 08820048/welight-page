@@ -2,11 +2,12 @@
  * 童趣彩虹主题（rainbow）
  * 活泼可爱的儿童风格，彩虹色彩搭配，适合教育、亲子、儿童相关内容
  * 注：尽量遵循现有系统变量；如未提供二级/强调色，使用固定色确保观感
+ * 支持深色模式
  */
 
-/* 背景：淡蓝网格 */
+/* 背景：淡蓝网格（浅色模式） */
 .md-container {
-  background-color: #ffffff;
+  background-color: hsl(var(--background));
   background-image:
     linear-gradient(to right, rgba(135, 206, 235, 0.12) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(135, 206, 235, 0.12) 1px, transparent 1px);
@@ -14,10 +15,17 @@
   background-position: 0 0;
 }
 
+/* 深色模式下的背景网格 */
+.dark .md-container {
+  background-image:
+    linear-gradient(to right, rgba(135, 206, 235, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(135, 206, 235, 0.08) 1px, transparent 1px);
+}
+
 /* 调整基础排版氛围 */
 p {
   line-height: 1.8;
-  color: #333;
+  color: hsl(var(--foreground));
 }
 
 /* ===== 标题 ===== */
@@ -80,10 +88,22 @@ blockquote {
   border-radius: 0 10px 10px 0;
   box-shadow: 0 2px 8px rgba(135, 206, 235, 0.15);
 }
+
+/* 深色模式下的引用块 */
+.dark blockquote {
+  background: linear-gradient(135deg, rgba(65, 105, 225, 0.15) 0%, rgba(135, 206, 235, 0.1) 100%);
+  color: #87ceeb;
+  border-left-color: #4169e1;
+}
+
 blockquote > p {
   margin: 0;
   color: #4169e1;
   font-weight: 500;
+}
+
+.dark blockquote > p {
+  color: #87ceeb;
 }
 
 /* ===== 列表（去除背景框效果，与公众号一致） ===== */
@@ -167,8 +187,17 @@ th {
 td {
   padding: 12px;
   border-bottom: 1px solid #e0e0e0;
-  color: #333;
+  color: hsl(var(--foreground));
 }
+
+.dark td {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
 tr:nth-child(even) {
   background-color: rgba(255, 182, 193, 0.05);
+}
+
+.dark tr:nth-child(even) {
+  background-color: rgba(255, 182, 193, 0.08);
 }

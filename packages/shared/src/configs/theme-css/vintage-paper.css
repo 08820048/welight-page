@@ -1,6 +1,7 @@
 /**
  * 锯齿牛皮纸主题 - 复古纸张质感设计
  * 适用于文学作品、历史文档、复古风格内容等
+ * 支持深色模式
  */
 
 /* 基础样式 */
@@ -65,6 +66,14 @@ body {
   );
 }
 
+/* 深色模式下的容器背景 - 深色牛皮纸效果 */
+.dark .md-container {
+  background: #2a2520;
+  box-shadow:
+    2px 3px 20px rgba(0, 0, 0, 0.5),
+    0 0 60px #1a1410 inset;
+}
+
 /* 一级标题 */
 h1 {
   font-size: 2.5em;
@@ -77,6 +86,11 @@ h1 {
   letter-spacing: 2px;
   position: relative;
   text-shadow: 1px 1px 2px rgba(139, 77, 15, 0.1);
+}
+
+.dark h1 {
+  color: #d4c4a8;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 h1::after {
@@ -103,12 +117,22 @@ h2 {
   background: linear-gradient(to right, rgba(139, 77, 15, 0.05), transparent);
 }
 
+.dark h2 {
+  color: #d4c4a8;
+  border-left-color: #c4a57b;
+  background: linear-gradient(to right, rgba(196, 165, 123, 0.15), transparent);
+}
+
 /* 三级标题 */
 h3 {
   font-size: 1.4em;
   font-weight: 600;
   margin: 30px 0 15px 0;
   color: #2c1810;
+}
+
+.dark h3 {
+  color: #d4c4a8;
 }
 
 /* 四级标题 */
@@ -118,6 +142,10 @@ h4 {
   margin: 25px 0 12px 0;
   color: #2c1810;
   font-style: italic;
+}
+
+.dark h4 {
+  color: #c4a57b;
 }
 
 /* 五级标题 */
@@ -130,6 +158,11 @@ h5 {
   text-decoration-color: #8a4d0f;
 }
 
+.dark h5 {
+  color: #c4a57b;
+  text-decoration-color: #c4a57b;
+}
+
 /* 六级标题 */
 h6 {
   font-size: 1em;
@@ -140,12 +173,20 @@ h6 {
   letter-spacing: 1px;
 }
 
+.dark h6 {
+  color: #c4a57b;
+}
+
 /* 段落 */
 p {
   margin: 16px 0;
   text-align: justify;
   text-indent: 2em;
   color: #2c1810;
+}
+
+.dark p {
+  color: #d4c4a8;
 }
 
 /* 引用 */
@@ -157,6 +198,12 @@ blockquote {
   border-radius: 0 8px 8px 0;
   font-style: italic;
   color: #3d2317;
+}
+
+.dark blockquote {
+  background: rgba(196, 165, 123, 0.1);
+  border-left-color: #c4a57b;
+  color: #c4a57b;
 }
 
 /* 列表 */
@@ -171,13 +218,25 @@ li {
   color: #2c1810;
 }
 
+.dark li {
+  color: #d4c4a8;
+}
+
 ul li::marker {
   color: #8a4d0f;
+}
+
+.dark ul li::marker {
+  color: #c4a57b;
 }
 
 ol li::marker {
   color: #8a4d0f;
   font-weight: 600;
+}
+
+.dark ol li::marker {
+  color: #c4a57b;
 }
 
 /* 代码块 */
@@ -191,6 +250,12 @@ pre {
   box-shadow: inset 0 2px 4px rgba(139, 77, 15, 0.1);
 }
 
+.dark pre {
+  background: #1a1410;
+  border-color: #4a3d2f;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 code {
   font-family: 'Courier New', 'Monaco', monospace;
   background: #f5f2ed;
@@ -198,6 +263,12 @@ code {
   border-radius: 3px;
   border: 1px solid #d4c4a8;
   color: #2c1810;
+}
+
+.dark code {
+  background: #1a1410;
+  border-color: #4a3d2f;
+  color: #c4a57b;
 }
 
 /* 表格 */
@@ -211,6 +282,11 @@ table {
   box-shadow: 0 2px 8px rgba(139, 77, 15, 0.1);
 }
 
+.dark table {
+  background: #2a2520;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 th {
   background: #8a4d0f;
   color: #fffef0;
@@ -219,14 +295,28 @@ th {
   font-weight: 600;
 }
 
+.dark th {
+  background: #4a3d2f;
+  color: #d4c4a8;
+}
+
 td {
   padding: 12px 15px;
   border-bottom: 1px solid #d4c4a8;
   color: #2c1810;
 }
 
+.dark td {
+  border-bottom-color: #4a3d2f;
+  color: #d4c4a8;
+}
+
 tr:nth-child(even) {
   background: rgba(139, 77, 15, 0.03);
+}
+
+.dark tr:nth-child(even) {
+  background: rgba(196, 165, 123, 0.05);
 }
 
 /* 链接 */
@@ -237,9 +327,19 @@ a {
   transition: all 0.3s ease;
 }
 
+.dark a {
+  color: #c4a57b;
+  text-decoration-color: rgba(196, 165, 123, 0.5);
+}
+
 a:hover {
   color: #6b3a0c;
   text-decoration-color: #6b3a0c;
+}
+
+.dark a:hover {
+  color: #d4c4a8;
+  text-decoration-color: #d4c4a8;
 }
 
 /* 强调 */
@@ -248,9 +348,17 @@ strong {
   color: #2c1810;
 }
 
+.dark strong {
+  color: #d4c4a8;
+}
+
 em {
   font-style: italic;
   color: #3d2317;
+}
+
+.dark em {
+  color: #c4a57b;
 }
 
 /* 分割线 */
