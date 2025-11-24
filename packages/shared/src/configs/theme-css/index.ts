@@ -8,6 +8,7 @@ import baseCSS from './base.css?raw'
 import darkStellarCSS from './dark-stellar.css?raw'
 import defaultCSS from './default.css?raw'
 import graceCSS from './grace.css?raw'
+import oxygenCSS from './oxygen.css?raw'
 import popartCSS from './popart.css?raw'
 import rainbowCSS from './rainbow.css?raw'
 import simpleCSS from './simple.css?raw'
@@ -32,6 +33,7 @@ export const themeMap = {
   'technews': technewsCSS,
   'vintage-paper': vintagePaperCSS,
   'dark-stellar': darkStellarCSS,
+  'oxygen': oxygenCSS,
 } as const
 
 export type ThemeName = keyof typeof themeMap

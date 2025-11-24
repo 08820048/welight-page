@@ -5,13 +5,14 @@
  * 支持深色模式（深色背景 + 霓虹色彩）
  */
 
-/* 容器基础样式 */
+/* 容器基础样式：参考 rainbow，底色跟随全局 --background，网格负责主题感 */
 .md-container {
-  background-color: #ffff00;
+  background-color: hsl(var(--background));
   background-image:
-    linear-gradient(rgba(200, 200, 200, 0.3) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200, 200, 200, 0.3) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 0, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 0, 0.22) 1px, transparent 1px);
   background-size: 20px 20px;
+  background-position: 0 0;
   color: #000000;
   font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
   line-height: 1.6;
@@ -20,12 +21,13 @@
   box-shadow: 8px 8px 0px #000000;
 }
 
-/* 深色模式 - 深色背景 + 霓虹网格 */
+/* 深色模式 - 深色背景 + 霓虹网格，避免整片黄底 */
 .dark .md-container {
-  background-color: #1a1a1a !important;
+  background-color: hsl(var(--background));
+  /* 深色模式下的网格改为更弱的霓虹线条，参考 rainbow 的 0.08 透明度，避免一整片发光 */
   background-image:
-    linear-gradient(rgba(255, 20, 147, 0.2) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px) !important;
+    linear-gradient(rgba(255, 20, 147, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.08) 1px, transparent 1px);
   color: #ffffff;
   border-color: #00ffff;
   box-shadow: 8px 8px 0px #ff1493;

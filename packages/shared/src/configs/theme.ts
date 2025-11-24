@@ -50,6 +50,11 @@ export const themeOptionsMap = {
     value: `dark-stellar`,
     desc: `@Welight`,
   },
+  'oxygen': {
+    label: `轻氧职场`,
+    value: `oxygen`,
+    desc: `@Welight`,
+  },
 }
 
 export const themeOptions: IConfigOption<ThemeName>[] = [
@@ -96,6 +101,11 @@ export const themeOptions: IConfigOption<ThemeName>[] = [
   {
     label: `暗夜星辰`,
     value: `dark-stellar`,
+    desc: `@Welight`,
+  },
+  {
+    label: `轻氧职场`,
+    value: `oxygen`,
     desc: `@Welight`,
   },
 ]
