@@ -44,7 +44,7 @@ h1 {
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
-/* 二级标题：橙红色标签 + 右侧三角形过渡 + 延伸下划线（参考同类产品） */
+/* 二级标题：橙红色标签 + 右侧梯形阴影（参考同类产品） */
 h2 {
   font-size: 22px;
   font-weight: bold;
@@ -61,28 +61,20 @@ h2 {
   text-align: left;
 }
 
-/* h2 右侧的三角形过渡（通过 ::before 实现） */
-h2::before {
-  content: '';
-  position: absolute;
-  left: 100%;
-  bottom: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 2px 10px;
-  border-color: transparent transparent rgb(239, 112, 96) transparent;
-}
-
-/* h2 右侧延伸的下划线（通过 ::after 实现） */
+/* h2 右侧的梯形阴影（通过 ::after 实现，使用 border 技巧） */
 h2::after {
-  content: '';
-  position: absolute;
-  left: calc(100% + 10px);
-  width: 100vw;
-  bottom: 0;
-  height: 2px;
-  background-color: rgb(239, 112, 96);
+  content: ' ';
+  display: inline-block;
+  position: relative;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border-style: none solid solid none;
+  border-width: 1px 20px 36px 1px;
+  border-color: transparent transparent rgb(239, 235, 233) transparent;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .dark h2 {
@@ -90,12 +82,8 @@ h2::after {
   background-color: rgb(239, 112, 96);
 }
 
-.dark h2::before {
-  border-color: transparent transparent rgb(239, 112, 96) transparent;
-}
-
 .dark h2::after {
-  background-color: rgb(239, 112, 96);
+  border-color: transparent transparent rgba(239, 235, 233, 0.1) transparent;
 }
 
 /* 三级标题：简约下划线 */
