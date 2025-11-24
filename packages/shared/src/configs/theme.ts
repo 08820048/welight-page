@@ -5,107 +5,107 @@ import type { ThemeName } from './theme-css'
 export { baseCSSContent, themeMap, type ThemeName } from './theme-css'
 
 export const themeOptionsMap = {
-  'default': {
-    label: `经典`,
-    value: `default`,
+  W001: {
+    label: `W001`,
+    value: `W001`,
     desc: ``,
   },
-  'grace': {
-    label: `优雅`,
-    value: `grace`,
+  W002: {
+    label: `W002`,
+    value: `W002`,
     desc: `@brzhang`,
   },
-  'simple': {
-    label: `简洁`,
-    value: `simple`,
+  W003: {
+    label: `W003`,
+    value: `W003`,
     desc: `@okooo5km`,
   },
-  'rainbow': {
-    label: `童趣彩虹`,
-    value: `rainbow`,
+  W004: {
+    label: `W004`,
+    value: `W004`,
     desc: `@Welight`,
   },
-  'popart': {
-    label: `波普艺术`,
-    value: `popart`,
+  W005: {
+    label: `W005`,
+    value: `W005`,
     desc: `@Welight`,
   },
-  'academic': {
-    label: `学术报告`,
-    value: `academic`,
+  W006: {
+    label: `W006`,
+    value: `W006`,
     desc: `@Welight`,
   },
-  'technews': {
-    label: `数字浪潮`,
-    value: `technews`,
+  W007: {
+    label: `W007`,
+    value: `W007`,
     desc: `@Welight`,
   },
-  'vintage-paper': {
-    label: `泛黄纸张`,
-    value: `vintage-paper`,
+  W008: {
+    label: `W008`,
+    value: `W008`,
     desc: `@Welight`,
   },
-  'dark-stellar': {
-    label: `暗夜星辰`,
-    value: `dark-stellar`,
+  W009: {
+    label: `W009`,
+    value: `W009`,
     desc: `@Welight`,
   },
-  'oxygen': {
-    label: `轻氧职场`,
-    value: `oxygen`,
+  W010: {
+    label: `W010`,
+    value: `W010`,
     desc: `@Welight`,
   },
 }
 
 export const themeOptions: IConfigOption<ThemeName>[] = [
   {
-    label: `经典`,
-    value: `default`,
+    label: `W001`,
+    value: `W001`,
     desc: ``,
   },
   {
-    label: `优雅`,
-    value: `grace`,
+    label: `W002`,
+    value: `W002`,
     desc: `@brzhang`,
   },
   {
-    label: `简洁`,
-    value: `simple`,
+    label: `W003`,
+    value: `W003`,
     desc: `@okooo5km`,
   },
   {
-    label: `童趣彩虹`,
-    value: `rainbow`,
+    label: `W004`,
+    value: `W004`,
     desc: `@Welight`,
   },
   {
-    label: `波普艺术`,
-    value: `popart`,
+    label: `W005`,
+    value: `W005`,
     desc: `@Welight`,
   },
   {
-    label: `学术报告`,
-    value: `academic`,
+    label: `W006`,
+    value: `W006`,
     desc: `@Welight`,
   },
   {
-    label: `数字浪潮`,
-    value: `technews`,
+    label: `W007`,
+    value: `W007`,
     desc: `@Welight`,
   },
   {
-    label: `泛黄纸张`,
-    value: `vintage-paper`,
+    label: `W008`,
+    value: `W008`,
     desc: `@Welight`,
   },
   {
-    label: `暗夜星辰`,
-    value: `dark-stellar`,
+    label: `W009`,
+    value: `W009`,
     desc: `@Welight`,
   },
   {
-    label: `轻氧职场`,
-    value: `oxygen`,
+    label: `W010`,
+    value: `W010`,
     desc: `@Welight`,
   },
 ]

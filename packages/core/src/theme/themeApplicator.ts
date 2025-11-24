@@ -26,10 +26,10 @@ export async function applyTheme(config: ThemeConfig): Promise<void> {
   const variablesCSS = generateCSSVariables(config.variables)
 
   // 2. 构建主题 CSS（模拟旧系统的合并行为）
-  let themeCSS = themeMap.default // 默认主题作为基础
+  let themeCSS = themeMap.W001 // W001（经典）主题作为基础
 
-  // 3. 如果不是 default 主题，叠加主题特定样式
-  if (config.themeName !== `default`) {
+  // 3. 如果不是 W001 主题，叠加主题特定样式
+  if (config.themeName !== `W001`) {
     const specificThemeCSS = themeMap[config.themeName as ThemeName]
     if (specificThemeCSS) {
       themeCSS = `${themeCSS}\n\n${specificThemeCSS}`
