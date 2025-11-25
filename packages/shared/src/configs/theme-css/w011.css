@@ -50,10 +50,10 @@ h2 {
   border-width: 1px;
   border-radius: 0px;
   box-shadow:
-    0 -6px 0 0 #ffffff,
-    0 6px 0 0 #ffffff,
-    0 -7px 0 0 rgb(0, 0, 0),
-    0 7px 0 0 rgb(0, 0, 0);
+    -10px -6px 0 0 #ffffff,
+    10px 6px 0 0 #ffffff,
+    -10px -7px 0 0 rgb(0, 0, 0),
+    10px 7px 0 0 rgb(0, 0, 0);
   display: block;
   line-height: 1.1em;
   position: relative;
@@ -67,8 +67,8 @@ h2 {
 h2::before {
   content: '+';
   position: absolute;
-  left: 8px;
-  top: 8px;
+  left: 4px;
+  top: 2px;
   font-size: 18px;
   font-weight: bold;
   color: rgb(0, 0, 0);
@@ -79,8 +79,8 @@ h2::before {
 h2::after {
   content: '+';
   position: absolute;
-  right: 8px;
-  bottom: 8px;
+  right: 4px;
+  bottom: 2px;
   font-size: 18px;
   font-weight: bold;
   color: rgb(0, 0, 0);
@@ -91,10 +91,10 @@ h2::after {
   color: rgb(255, 255, 255);
   border-color: rgb(255, 255, 255);
   box-shadow:
-    0 -6px 0 0 hsl(var(--background)),
-    0 6px 0 0 hsl(var(--background)),
-    0 -7px 0 0 rgb(255, 255, 255),
-    0 7px 0 0 rgb(255, 255, 255);
+    -10px -6px 0 0 hsl(var(--background)),
+    10px 6px 0 0 hsl(var(--background)),
+    -10px -7px 0 0 rgb(255, 255, 255),
+    10px 7px 0 0 rgb(255, 255, 255);
 }
 
 .dark h2::before,
