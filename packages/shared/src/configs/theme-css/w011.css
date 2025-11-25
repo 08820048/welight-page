@@ -40,15 +40,23 @@ h1 {
 h2 {
   font-size: calc(var(--md-font-size) * 1.4);
   font-weight: 700;
-  color: #000000;
-  margin: 30px 0 20px;
-  padding: 12px 20px;
-  border: 2px solid #000000;
-  border-radius: 0;
-  text-align: center;
+  color: rgb(0, 0, 0);
+  border-color: rgb(0, 0, 0);
+  margin: 30px 30px 15px;
+  padding: 12px 0px;
+  background-color: unset;
+  background-image: none;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0px;
+  box-shadow: none;
   display: block;
+  line-height: 1.1em;
   position: relative;
-  background-color: transparent;
+  text-align: center;
+  text-shadow: none;
+  transform: none;
+  width: auto;
 }
 
 /* h2 四角装饰 - 左上角 */
@@ -60,7 +68,7 @@ h2::before {
   transform: translateY(-50%);
   font-size: 18px;
   font-weight: bold;
-  color: #000000;
+  color: rgb(0, 0, 0);
 }
 
 /* h2 四角装饰 - 右上角 */
@@ -72,17 +80,17 @@ h2::after {
   transform: translateY(-50%);
   font-size: 18px;
   font-weight: bold;
-  color: #000000;
+  color: rgb(0, 0, 0);
 }
 
 .dark h2 {
-  color: #ffffff;
-  border-color: #ffffff;
+  color: rgb(255, 255, 255);
+  border-color: rgb(255, 255, 255);
 }
 
 .dark h2::before,
 .dark h2::after {
-  color: #ffffff;
+  color: rgb(255, 255, 255);
 }
 
 /* 三级标题：简洁左对齐 */
