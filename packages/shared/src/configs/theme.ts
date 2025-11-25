@@ -55,6 +55,11 @@ export const themeOptionsMap = {
     value: `W010`,
     desc: `@Welight`,
   },
+  W011: {
+    label: `W011`,
+    value: `W011`,
+    desc: `@Welight`,
+  },
 }
 
 export const themeOptions: IConfigOption<ThemeName>[] = [
@@ -106,6 +111,11 @@ export const themeOptions: IConfigOption<ThemeName>[] = [
   {
     label: `W010`,
     value: `W010`,
+    desc: `@Welight`,
+  },
+  {
+    label: `W011`,
+    value: `W011`,
     desc: `@Welight`,
   },
 ]

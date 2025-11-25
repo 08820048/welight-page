@@ -1,0 +1,258 @@
+/**
+ * W011 主题 - 极简边框
+ * 特点：二级标题带边框和四角装饰
+ */
+
+/* 全局背景：纯色背景 */
+.md-container {
+  background-color: hsl(var(--background));
+}
+
+.dark .md-container {
+  background-color: hsl(var(--background));
+}
+
+/* 基础排版 */
+p {
+  line-height: 1.8;
+  color: hsl(var(--foreground));
+  font-size: calc(var(--md-font-size) * 1.02);
+}
+
+/* 一级标题：简洁居中 */
+h1 {
+  font-size: calc(var(--md-font-size) * 1.6);
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin: 40px 0 25px;
+  padding: 0;
+  border: none;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.dark h1 {
+  color: hsl(var(--foreground));
+}
+
+/* 二级标题：边框 + 四角装饰 */
+h2 {
+  font-size: calc(var(--md-font-size) * 1.4);
+  font-weight: 700;
+  color: #000000;
+  margin: 30px 0 20px;
+  padding: 12px 20px;
+  border: 2px solid #000000;
+  border-radius: 0;
+  text-align: center;
+  display: block;
+  position: relative;
+  background-color: transparent;
+}
+
+/* h2 四角装饰 - 左上角 */
+h2::before {
+  content: '+';
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+}
+
+/* h2 四角装饰 - 右上角 */
+h2::after {
+  content: '+';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.dark h2 {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.dark h2::before,
+.dark h2::after {
+  color: #ffffff;
+}
+
+/* 三级标题：简洁左对齐 */
+h3 {
+  font-size: calc(var(--md-font-size) * 1.2);
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 25px 0 15px;
+  padding: 0 0 8px 0;
+  border-bottom: 1px solid hsl(var(--foreground) / 0.2);
+}
+
+.dark h3 {
+  color: hsl(var(--foreground));
+  border-bottom-color: hsl(var(--foreground) / 0.2);
+}
+
+/* 四级标题 */
+h4 {
+  font-size: calc(var(--md-font-size) * 1.1);
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 20px 0 12px;
+}
+
+/* 五级标题 */
+h5 {
+  font-size: calc(var(--md-font-size) * 1.05);
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin: 18px 0 10px;
+}
+
+/* 六级标题 */
+h6 {
+  font-size: var(--md-font-size);
+  font-weight: 600;
+  color: hsl(var(--foreground) / 0.8);
+  margin: 15px 0 8px;
+}
+
+/* 链接 */
+a {
+  color: var(--md-primary-color);
+  text-decoration: none;
+  border-bottom: 1px solid var(--md-primary-color);
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* 强调 */
+strong {
+  font-weight: 700;
+  color: hsl(var(--foreground));
+}
+
+/* 斜体 */
+em {
+  font-style: italic;
+  color: hsl(var(--foreground) / 0.9);
+}
+
+/* 引用块 */
+blockquote {
+  margin: 20px 0;
+  padding: 15px 20px;
+  border-left: 4px solid hsl(var(--foreground) / 0.3);
+  background-color: hsl(var(--foreground) / 0.05);
+  color: hsl(var(--foreground) / 0.8);
+}
+
+.dark blockquote {
+  background-color: hsl(var(--foreground) / 0.1);
+  border-left-color: hsl(var(--foreground) / 0.3);
+}
+
+/* 行内代码 */
+code {
+  padding: 2px 6px;
+  background-color: hsl(var(--foreground) / 0.08);
+  color: var(--md-primary-color);
+  border-radius: 3px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.dark code {
+  background-color: hsl(var(--foreground) / 0.15);
+}
+
+/* 代码块 */
+pre.code__pre,
+.hljs.code__pre {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+pre.code__pre > code,
+.hljs.code__pre > code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* 列表 */
+ul,
+ol {
+  margin: 15px 0;
+  padding-left: 30px;
+}
+
+li {
+  margin: 8px 0;
+  line-height: 1.8;
+}
+
+/* 表格 */
+table {
+  width: 100%;
+  margin: 20px 0;
+  border-collapse: collapse;
+  border: 1px solid hsl(var(--foreground) / 0.2);
+}
+
+thead {
+  background-color: hsl(var(--foreground) / 0.05);
+}
+
+.dark thead {
+  background-color: hsl(var(--foreground) / 0.1);
+}
+
+th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  border: 1px solid hsl(var(--foreground) / 0.2);
+  color: hsl(var(--foreground));
+}
+
+td {
+  padding: 10px 15px;
+  border: 1px solid hsl(var(--foreground) / 0.2);
+  color: hsl(var(--foreground));
+}
+
+/* 图片 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 4px;
+}
+
+/* 分割线 */
+hr {
+  margin: 30px 0;
+  border: none;
+  border-top: 2px solid hsl(var(--foreground) / 0.2);
+}
+
+/* 图注 */
+figcaption {
+  text-align: center;
+  color: hsl(var(--foreground) / 0.6);
+  font-size: 0.9em;
+  margin-top: 8px;
+}

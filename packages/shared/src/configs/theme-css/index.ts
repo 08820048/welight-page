@@ -14,6 +14,7 @@ import w007CSS from './w007.css?raw'
 import w008CSS from './w008.css?raw'
 import w009CSS from './w009.css?raw'
 import w010CSS from './w010.css?raw'
+import w011CSS from './w011.css?raw'
 
 /**
  * 基础样式 CSS
@@ -32,6 +33,7 @@ export const baseCSSContent = baseCSS
  * W008: 泛黄纸张
  * W009: 暗夜星辰
  * W010: 轻氧职场
+ * W011: 极简边框
  */
 export const themeMap = {
   W001: w001CSS,
@@ -44,6 +46,7 @@ export const themeMap = {
   W008: w008CSS,
   W009: w009CSS,
   W010: w010CSS,
+  W011: w011CSS,
 } as const
 
 export type ThemeName = keyof typeof themeMap
