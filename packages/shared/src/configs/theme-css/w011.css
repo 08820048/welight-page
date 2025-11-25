@@ -1,6 +1,6 @@
 /**
- * W011 主题 - 极简边框
- * 特点：二级标题带边框和四角装饰
+ * W011 主题 - 极简双线边框
+ * 特点：二级标题带双线边框和四角十字装饰
  */
 
 /* 全局背景：纯色背景 */
@@ -19,126 +19,184 @@ p {
   font-size: calc(var(--md-font-size) * 1.02);
 }
 
-/* 一级标题：简洁居中 */
+/* 一级标题后面的段落每一行添加虚线 */
+h1 + p {
+  line-height: 1.8em;
+  background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='1.8em' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='1.8em' x2='100%25' y2='1.8em' stroke='rgba(0,0,0,0.15)' stroke-width='1' stroke-dasharray='4,4'/%3E%3C/svg%3E");
+  background-size: 100% 1.8em;
+  background-repeat: repeat;
+  background-position: 0 0;
+  padding-bottom: 0;
+  margin-bottom: 15px;
+}
+
+.dark h1 + p {
+  background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='1.8em' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='1.8em' x2='100%25' y2='1.8em' stroke='rgba(255,255,255,0.15)' stroke-width='1' stroke-dasharray='4,4'/%3E%3C/svg%3E");
+}
+
+/* 一级标题：加粗纯黑 + SVG 装饰背景 */
 h1 {
-  font-size: calc(var(--md-font-size) * 1.6);
-  font-weight: 700;
-  color: hsl(var(--foreground));
-  margin: 40px 0 25px;
-  padding: 0;
+  font-size: calc(var(--md-font-size) * 1.8);
+  font-weight: 900;
+  color: rgb(0, 0, 0);
+  margin: 40px auto 30px;
+  padding: 20px 40px;
   border: none;
   text-align: center;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
   display: block;
+  width: fit-content;
+  max-width: 90%;
+  position: relative;
+}
+
+h1 svg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .dark h1 {
-  color: hsl(var(--foreground));
+  color: rgb(255, 255, 255);
 }
 
-/* 二级标题：边框 + 四角装饰 + 上下短横线 */
+.dark h1 .md-h1-svg-path {
+  fill: rgb(255, 255, 255);
+}
+
+/* 二级标题：边框 + 四角加号 + 底部横线装饰 */
 h2 {
   font-size: calc(var(--md-font-size) * 1.4);
   font-weight: 700;
   color: rgb(0, 0, 0);
-  border-color: rgb(0, 0, 0);
-  margin: 30px 30px 15px;
-  padding: 12px 0px;
-  background-color: transparent;
-  background-image: none;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 0px;
-  box-shadow:
-    80px -7px 0 100px #ffffff,
-    -80px 7px 0 100px #ffffff,
-    -10px -7px 0 50px rgb(0, 0, 0),
-    10px 7px 0 50px rgb(0, 0, 0);
+  margin: 30px auto 30px;
+  padding: 12px 30px;
+  background-color: #ffffff;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 0;
   display: block;
-  line-height: 1.1em;
+  line-height: 1.3;
   position: relative;
   text-align: center;
-  text-shadow: none;
-  transform: none;
-  width: auto;
+  width: fit-content;
+  max-width: 90%;
 }
 
-/* h2 装饰 - 左上角 + 号 */
-h2::before {
-  content: '+';
-  position: absolute;
-  left: 4px;
-  top: 2px;
-  font-size: 18px;
-  font-weight: bold;
-  color: rgb(0, 0, 0);
-  line-height: 1;
-}
-
-/* h2 装饰 - 右下角 + 号 */
+/* 下方横线装饰 */
 h2::after {
-  content: '+';
+  content: '';
+  display: block;
   position: absolute;
-  right: 4px;
-  bottom: 2px;
-  font-size: 18px;
-  font-weight: bold;
-  color: rgb(0, 0, 0);
-  line-height: 1;
+  left: 40px;
+  bottom: -12px;
+  width: calc(100% - 40px);
+  height: 2px;
+  background-color: rgb(0, 0, 0);
+}
+
+/* 四角加号 */
+h2 {
+  background-image:
+    linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)), linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)),
+    linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0)), linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0));
+  background-size:
+    2px 10px,
+    10px 2px,
+    2px 10px,
+    10px 2px;
+  background-position:
+    6px 5px,
+    6px 5px,
+    calc(100% - 6px) calc(100% - 5px),
+    calc(100% - 6px) calc(100% - 5px);
+  background-repeat: no-repeat;
+  background-color: #ffffff;
 }
 
 .dark h2 {
   color: rgb(255, 255, 255);
   border-color: rgb(255, 255, 255);
-  box-shadow:
-    80px -7px 0 100px hsl(var(--background)),
-    -80px 7px 0 100px hsl(var(--background)),
-    -10px -7px 0 50px rgb(255, 255, 255),
-    10px 7px 0 50px rgb(255, 255, 255);
+  background-color: hsl(var(--background));
+  background-image:
+    linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255)), linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255)),
+    linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255)), linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255));
 }
 
-.dark h2::before,
 .dark h2::after {
-  color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
 }
 
-/* 三级标题：简洁左对齐 */
+/* 三级标题：底部渐隐横线装饰 */
 h3 {
   font-size: calc(var(--md-font-size) * 1.2);
-  font-weight: 600;
-  color: hsl(var(--foreground));
+  font-weight: 700;
+  color: rgb(0, 0, 0);
   margin: 25px 0 15px;
-  padding: 0 0 8px 0;
-  border-bottom: 1px solid hsl(var(--foreground) / 0.2);
+  padding: 0 0 10px 0;
+  padding-left: 0;
+  border-left: none;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 120%;
+  max-width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 70%, transparent 100%);
 }
 
 .dark h3 {
-  color: hsl(var(--foreground));
-  border-bottom-color: hsl(var(--foreground) / 0.2);
+  color: rgb(255, 255, 255);
 }
 
-/* 四级标题 */
+.dark h3::after {
+  background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 70%, transparent 100%);
+}
+
+/* 四级标题：纯黑文本 */
 h4 {
   font-size: calc(var(--md-font-size) * 1.1);
-  font-weight: 600;
-  color: hsl(var(--foreground));
+  font-weight: 700;
+  color: rgb(0, 0, 0);
   margin: 20px 0 12px;
 }
 
-/* 五级标题 */
+.dark h4 {
+  color: rgb(255, 255, 255);
+}
+
+/* 五级标题：纯黑文本 */
 h5 {
   font-size: calc(var(--md-font-size) * 1.05);
   font-weight: 600;
-  color: hsl(var(--foreground));
+  color: rgb(0, 0, 0);
   margin: 18px 0 10px;
 }
 
-/* 六级标题 */
+.dark h5 {
+  color: rgb(255, 255, 255);
+}
+
+/* 六级标题：纯黑文本 */
 h6 {
   font-size: var(--md-font-size);
   font-weight: 600;
-  color: hsl(var(--foreground) / 0.8);
+  color: rgb(0, 0, 0);
   margin: 15px 0 8px;
+}
+
+.dark h6 {
+  color: rgb(255, 255, 255);
 }
 
 /* 链接 */
@@ -164,18 +222,18 @@ em {
   color: hsl(var(--foreground) / 0.9);
 }
 
-/* 引用块 */
+/* 引用块：纯黑左边框 */
 blockquote {
   margin: 20px 0;
   padding: 15px 20px;
-  border-left: 4px solid hsl(var(--foreground) / 0.3);
+  border-left: 4px solid rgb(0, 0, 0);
   background-color: hsl(var(--foreground) / 0.05);
   color: hsl(var(--foreground) / 0.8);
 }
 
 .dark blockquote {
   background-color: hsl(var(--foreground) / 0.1);
-  border-left-color: hsl(var(--foreground) / 0.3);
+  border-left-color: rgb(255, 255, 255);
 }
 
 /* 行内代码 */
