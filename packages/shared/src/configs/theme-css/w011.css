@@ -44,37 +44,16 @@ h2 {
   border-color: rgb(0, 0, 0);
   margin: 30px 30px 15px;
   padding: 12px 0px;
-  background-color: #ffffff;
-  background-image:
-    linear-gradient(
-      to right,
-      transparent 0%,
-      transparent calc(50% - 150px),
-      rgb(0, 0, 0) calc(50% - 150px),
-      rgb(0, 0, 0) calc(50% + 150px),
-      transparent calc(50% + 150px),
-      transparent 100%
-    ),
-    linear-gradient(
-      to right,
-      transparent 0%,
-      transparent calc(50% - 150px),
-      rgb(0, 0, 0) calc(50% - 150px),
-      rgb(0, 0, 0) calc(50% + 150px),
-      transparent calc(50% + 150px),
-      transparent 100%
-    );
-  background-position:
-    center -5px,
-    center calc(100% + 5px);
-  background-repeat: no-repeat, no-repeat;
-  background-size:
-    100% 1px,
-    100% 1px;
+  background-color: transparent;
+  background-image: none;
   border-style: solid;
   border-width: 1px;
   border-radius: 0px;
-  box-shadow: none;
+  box-shadow:
+    0 -6px 0 0 #ffffff,
+    0 6px 0 0 #ffffff,
+    0 -7px 0 0 rgb(0, 0, 0),
+    0 7px 0 0 rgb(0, 0, 0);
   display: block;
   line-height: 1.1em;
   position: relative;
@@ -111,26 +90,11 @@ h2::after {
 .dark h2 {
   color: rgb(255, 255, 255);
   border-color: rgb(255, 255, 255);
-  background-color: hsl(var(--background));
-  background-image:
-    linear-gradient(
-      to right,
-      transparent 0%,
-      transparent calc(50% - 150px),
-      rgb(255, 255, 255) calc(50% - 150px),
-      rgb(255, 255, 255) calc(50% + 150px),
-      transparent calc(50% + 150px),
-      transparent 100%
-    ),
-    linear-gradient(
-      to right,
-      transparent 0%,
-      transparent calc(50% - 150px),
-      rgb(255, 255, 255) calc(50% - 150px),
-      rgb(255, 255, 255) calc(50% + 150px),
-      transparent calc(50% + 150px),
-      transparent 100%
-    );
+  box-shadow:
+    0 -6px 0 0 hsl(var(--background)),
+    0 6px 0 0 hsl(var(--background)),
+    0 -7px 0 0 rgb(255, 255, 255),
+    0 7px 0 0 rgb(255, 255, 255);
 }
 
 .dark h2::before,
